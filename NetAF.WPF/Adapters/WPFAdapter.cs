@@ -6,7 +6,8 @@ namespace NetAF.Adapters
     /// <summary>
     /// Provides an adapter for the WPF.
     /// </summary>
-    public sealed class WPFAdapter : IIOAdapter
+    /// <param name="presenter">The presenter to use for presenting frames.</param>
+    public sealed class WPFAdapter(IFramePresenter presenter) : IIOAdapter
     {
         #region Implementation of IIOAdapter
 

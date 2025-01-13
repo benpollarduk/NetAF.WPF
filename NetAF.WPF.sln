@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetAF.WPF.TestApp", "NetAF.WPF.TestApp\NetAF.WPF.TestApp.csproj", "{B610A42B-3BFC-4C19-B67F-76381373B604}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetAF.WPF", "NetAF.WPF\NetAF.WPF.csproj", "{65687051-5F63-4E05-93B1-87A73162EE9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetAF.WPF", "NetAF.WPF\NetAF.WPF.csproj", "{65687051-5F63-4E05-93B1-87A73162EE9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

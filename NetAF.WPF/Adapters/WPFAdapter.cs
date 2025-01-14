@@ -1,6 +1,5 @@
 ﻿using NetAF.Logic;
 using NetAF.Rendering;
-using NetAF.Rendering.WPF;
 using System.Windows;
 
 namespace NetAF.Adapters
@@ -9,7 +8,7 @@ namespace NetAF.Adapters
     /// Provides an adapter for WPF.
     /// </summary>
     /// <param name="presenter">The presenter to use for presenting frames.</param>
-    public sealed class WPFAdapter(IVisualFramePresenter presenter) : IIOAdapter
+    public sealed class WpfAdapter(IFramePresenter presenter) : IIOAdapter
     {
         #region Fields
 
@@ -78,7 +77,6 @@ namespace NetAF.Adapters
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                presenter.Clear();
                 frame.Render(presenter);
             });
         }

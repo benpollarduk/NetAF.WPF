@@ -55,6 +55,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\NetAF\NetAF\NetAF.csproj" />
+    <ProjectReference Include="..\NetAF.HTML\NetAF.HTML.csproj" />
   </ItemGroup>
 
 </Project>

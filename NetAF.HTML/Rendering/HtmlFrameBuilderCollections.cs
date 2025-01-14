@@ -4,9 +4,9 @@ using NetAF.Rendering.Console.FrameBuilders;
 namespace NetAF.Rendering.FrameBuilders
 {
     /// <summary>
-    /// Provides a container for WPF frame builder collections.
+    /// Provides a container for HTML frame builder collections.
     /// </summary>
-    public static partial class WPFFrameBuilderCollections
+    public static partial class HtmlFrameBuilderCollections
     {
         /// <summary>
         /// Get the default frame builder collection.
@@ -16,11 +16,11 @@ namespace NetAF.Rendering.FrameBuilders
             get
             {
                 var gridLayoutBuilder = new GridStringBuilder();
-                var textBuilder = new TextBuilder();
+                var htmlBuilder = new HtmlBuilder();
 
                 IFrameBuilder[] frameBuilders =
                 [
-                    new TextTitleFrameBuilder(textBuilder),
+                    new HtmlTitleFrameBuilder(htmlBuilder),
                     new ConsoleSceneFrameBuilder(gridLayoutBuilder, new ConsoleRoomMapBuilder(gridLayoutBuilder)),
                     new ConsoleRegionMapFrameBuilder(gridLayoutBuilder, new ConsoleRegionMapBuilder(gridLayoutBuilder)),
                     new ConsoleCommandListFrameBuilder(gridLayoutBuilder),

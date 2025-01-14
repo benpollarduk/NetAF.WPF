@@ -16,7 +16,7 @@ namespace NetAF.WPF.TestApp
         /// <summary>
         /// Get or set the WPF adapter.
         /// </summary>
-        private WPFAdapter WPFAdapter { get; set; }
+        private WpfAdapter WPFAdapter { get; set; }
 
         #endregion
 
@@ -29,7 +29,7 @@ namespace NetAF.WPF.TestApp
         {
             InitializeComponent();
 
-            WPFAdapter = new WPFAdapter(new TextBlockPresenter(OutputTextBlock));
+            WPFAdapter = new WpfAdapter(new WebBrowserPresenter(OutputWebBrowser));
             StartGame();
         }
 
@@ -44,7 +44,7 @@ namespace NetAF.WPF.TestApp
         {
             var threadStart = new ThreadStart(() =>
             {
-                var configuration = new WPFGameConfiguration(WPFAdapter, ExitMode.ReturnToTitleScreen);
+                var configuration = new WpfGameConfiguration(WPFAdapter, ExitMode.ReturnToTitleScreen);
                 Game.Execute(Example.Create(configuration));
             });
 

@@ -10,7 +10,7 @@ namespace NetAF.Logic.Configuration
     /// </summary>
     /// <param name="adapter">The I/O adapter.</param>
     /// <param name="exitMode">The exit mode.</param>
-    public sealed class WPFGameConfiguration(WPFAdapter adapter, ExitMode exitMode) : IGameConfiguration
+    public sealed class WpfGameConfiguration(WpfAdapter adapter, ExitMode exitMode) : IGameConfiguration
     {
         #region Implementation of IGameConfiguration
 
@@ -32,7 +32,7 @@ namespace NetAF.Logic.Configuration
         /// <summary>
         /// Get or set the collection of frame builders to use to render the game.
         /// </summary>
-        public FrameBuilderCollection FrameBuilders { get; set; } = WPFFrameBuilderCollections.Default;
+        public FrameBuilderCollection FrameBuilders { get; set; } = HtmlFrameBuilderCollections.Default;
 
         /// <summary>
         /// Get the I/O adapter.

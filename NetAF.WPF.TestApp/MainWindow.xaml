@@ -10,7 +10,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <TextBlock Name="OutputTextBlock" FontFamily="Courier New" Background="Black" Foreground="White" Grid.Row="0"/>
+        <WebBrowser Name="OutputWebBrowser" Grid.Row="0"/>
         <TextBox Name="InputTextBox" BorderBrush="Black" BorderThickness="1" Grid.Row="1" PreviewKeyUp="InputTextBox_PreviewKeyUp"/>
     </Grid>
 </Window>

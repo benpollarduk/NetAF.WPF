@@ -3,10 +3,10 @@
 namespace NetAF.Rendering.WPF
 {
     /// <summary>
-    /// Provides a grid based frame for displaying a command based interface.
+    /// Provides an HTML frame for displaying a command based interface.
     /// </summary>
     /// <param name="builder">The builder that creates the frame.</param>
-    public sealed class TextFrame(TextBuilder builder) : IFrame
+    public sealed class HtmlFrame(HtmlBuilder builder) : IFrame
     {
         #region Overrides of Object
 
@@ -29,7 +29,10 @@ namespace NetAF.Rendering.WPF
         /// <param name="presenter">The presenter.</param>
         public void Render(IFramePresenter presenter)
         {
-            presenter.Write(builder.ToString());
+            var open = @"<!DOCTYPE html><html lang=""en""><body><div>";
+            var close = @"</div></body></html>";
+
+            presenter.Write($"{open}{builder}{close}");
         }
 
         #endregion

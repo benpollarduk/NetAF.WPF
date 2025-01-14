@@ -1,7 +1,7 @@
-﻿using NetAF.Logic;
-using NetAF.WPF.Adapters;
-using NetAF.WPF.Logic.Configuration;
-using NetAF.WPF.Rendering;
+﻿using NetAF.Adapters;
+using NetAF.Logic;
+using NetAF.Logic.Configuration;
+using NetAF.Rendering.WPF;
 using System.Windows;
 
 namespace NetAF.WPF.TestApp

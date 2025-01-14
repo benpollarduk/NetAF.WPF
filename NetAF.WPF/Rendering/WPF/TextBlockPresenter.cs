@@ -1,12 +1,12 @@
 ﻿using System.Windows.Controls;
 
-namespace NetAF.WPF.Rendering
+namespace NetAF.Rendering.WPF
 {
     /// <summary>
-    /// Represents a presenter for Label.
+    /// Represents a presenter for TextBlock.
     /// </summary>
-    /// <param name="label">The label.</param>
-    public sealed class LabelPresenter(Label label) : IVisualFramePresenter
+    /// <param name="textBlock">The text block.</param>
+    public sealed class TextBlockPresenter(TextBlock textBlock) : IVisualFramePresenter
     {
         #region Overrides of Object
 
@@ -16,7 +16,7 @@ namespace NetAF.WPF.Rendering
         /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
-            return label.Content?.ToString() ?? string.Empty;
+            return textBlock.Text;
         }
 
         #endregion
@@ -28,7 +28,7 @@ namespace NetAF.WPF.Rendering
         /// </summary>
         public void Clear()
         {
-            label.Content = string.Empty;
+            textBlock.Text = string.Empty;
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace NetAF.WPF.Rendering
         /// <param name="value">The character to write.</param>
         public void Write(char value)
         {
-            Write(value.ToString());
+            textBlock.Text += value.ToString();
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace NetAF.WPF.Rendering
         /// <param name="value">The string to write.</param>
         public void Write(string value)
         {
-            label.Content += $"{label.Content}{value}";
+            textBlock.Text += value.ToString();
         }
 
         #endregion

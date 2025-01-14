@@ -1,10 +1,9 @@
-﻿using NetAF.Adapters;
-using NetAF.Logic;
+﻿using NetAF.Logic;
 using NetAF.Rendering;
-using NetAF.WPF.Rendering;
+using NetAF.Rendering.WPF;
 using System.Windows;
 
-namespace NetAF.WPF.Adapters
+namespace NetAF.Adapters
 {
     /// <summary>
     /// Provides an adapter for WPF.

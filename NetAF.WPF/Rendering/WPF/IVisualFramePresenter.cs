@@ -1,6 +1,4 @@
-﻿using NetAF.Rendering;
-
-namespace NetAF.WPF.Rendering
+﻿namespace NetAF.Rendering.WPF
 {
     /// <summary>
     /// Represents an object that can render a frame on a visual.

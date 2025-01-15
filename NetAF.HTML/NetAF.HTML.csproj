@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\NetAF\NetAF\NetAF.csproj" />
+    <PackageReference Include="NetAF" Version="2.9.17" />
   </ItemGroup>
 
 </Project>

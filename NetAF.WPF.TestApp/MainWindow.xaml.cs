@@ -1,7 +1,5 @@
-﻿using NetAF.Adapters;
-using NetAF.Logic;
-using NetAF.Logic.Configuration;
-using NetAF.Rendering.WPF;
+﻿using NetAF.Logic;
+using NetAF.Targets.WPF;
 using System.Windows;
 
 namespace NetAF.WPF.TestApp
@@ -42,15 +40,11 @@ namespace NetAF.WPF.TestApp
         /// </summary>
         private void StartGame()
         {
-            var threadStart = new ThreadStart(() =>
+            Task.Run(() =>
             {
                 var configuration = new WpfGameConfiguration(WPFAdapter, ExitMode.ReturnToTitleScreen);
-                Game.Execute(Example.Create(configuration));
+                Game.Execute(ExampleGame.Create(configuration));
             });
-
-            var t = new Thread(threadStart) { IsBackground = true };
-
-            t.Start();
         }
 
         #endregion

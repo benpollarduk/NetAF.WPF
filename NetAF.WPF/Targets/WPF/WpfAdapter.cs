@@ -2,7 +2,7 @@
 using NetAF.Rendering;
 using System.Windows;
 
-namespace NetAF.Adapters
+namespace NetAF.Targets.WPF
 {
     /// <summary>
     /// Provides an adapter for WPF.

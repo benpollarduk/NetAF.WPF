@@ -18,7 +18,7 @@
     <PackageReference Include="MSTest.TestAdapter" Version="3.0.4" />
     <PackageReference Include="MSTest.TestFramework" Version="3.0.4" />
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
-    <PackageReference Include="NetAF" Version="2.9.17" />
+    <PackageReference Include="NetAF" Version="2.10.1" />
   </ItemGroup>
 
 </Project>

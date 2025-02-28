@@ -1,9 +1,10 @@
-﻿using NetAF.Adapters;
-using NetAF.Assets;
+﻿using NetAF.Assets;
 using NetAF.Interpretation;
+using NetAF.Logic;
+using NetAF.Logic.Configuration;
 using NetAF.Rendering.FrameBuilders;
 
-namespace NetAF.Logic.Configuration
+namespace NetAF.Targets.WPF
 {
     /// <summary>
     /// Represents a configuration for a WPF game.
@@ -32,7 +33,7 @@ namespace NetAF.Logic.Configuration
         /// <summary>
         /// Get or set the collection of frame builders to use to render the game.
         /// </summary>
-        public FrameBuilderCollection FrameBuilders { get; set; } = HtmlFrameBuilderCollections.Default;
+        public FrameBuilderCollection FrameBuilders { get; set; } = FrameBuilderCollections.Html;
 
         /// <summary>
         /// Get the I/O adapter.

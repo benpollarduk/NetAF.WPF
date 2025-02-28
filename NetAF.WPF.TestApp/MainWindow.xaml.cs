@@ -9,15 +9,6 @@ namespace NetAF.WPF.TestApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        #region Properties
-
-        /// <summary>
-        /// Get or set the WPF adapter.
-        /// </summary>
-        private WpfAdapter WPFAdapter { get; set; }
-
-        #endregion
-
         #region Constructors
 
         /// <summary>
@@ -27,7 +18,6 @@ namespace NetAF.WPF.TestApp
         {
             InitializeComponent();
 
-            WPFAdapter = new WpfAdapter(new WebBrowserPresenter(OutputWebBrowser));
             StartGame();
         }
 
@@ -42,22 +32,9 @@ namespace NetAF.WPF.TestApp
         {
             Task.Run(() =>
             {
-                var configuration = new WpfGameConfiguration(WPFAdapter, ExitMode.ReturnToTitleScreen);
+                var configuration = new WpfGameConfiguration(NetAFControl.Adapter, ExitMode.ReturnToTitleScreen);
                 Game.Execute(ExampleGame.Create(configuration));
             });
-        }
-
-        #endregion
-
-        #region EventHandlers
-
-        private void InputTextBox_PreviewKeyUp(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key != System.Windows.Input.Key.Enter)
-                return;
-
-            WPFAdapter.InputReceived(InputTextBox.Text);
-            InputTextBox.Clear();
         }
 
         #endregion

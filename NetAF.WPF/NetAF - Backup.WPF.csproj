@@ -20,7 +20,6 @@
     <Title>$(AssemblyName)</Title>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
     
   <PropertyGroup>

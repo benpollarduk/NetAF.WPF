@@ -52,7 +52,13 @@
 
   <ItemGroup>
     <PackageReference Include="LoFiEffects.WPF" Version="1.3.0" />
-    <PackageReference Include="NetAF" Version="2.10.1" />
+    <PackageReference Include="NetAF" Version="3.3.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Targets\WPF\NetAFControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

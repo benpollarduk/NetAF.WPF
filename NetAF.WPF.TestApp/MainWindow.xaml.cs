@@ -1,5 +1,6 @@
 ﻿using NetAF.Logic;
-using NetAF.Targets.WPF;
+using NetAF.Rendering.FrameBuilders;
+using NetAF.Targets.Text;
 using System.Windows;
 
 namespace NetAF.WPF.TestApp
@@ -18,23 +19,8 @@ namespace NetAF.WPF.TestApp
         {
             InitializeComponent();
 
-            StartGame();
-        }
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// Start the game.
-        /// </summary>
-        private void StartGame()
-        {
-            Task.Run(() =>
-            {
-                var configuration = new WpfGameConfiguration(NetAFControl.Adapter, ExitMode.ReturnToTitleScreen);
-                Game.Execute(ExampleGame.Create(configuration));
-            });
+            GameConfiguration configuration = new(new TextAdapter(NetAFControl), FrameBuilderCollections.Console, new(80, 50));
+            GameExecutor.Execute(ExampleGame.Create(configuration));
         }
 
         #endregion

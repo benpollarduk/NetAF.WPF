@@ -1,6 +1,9 @@
-﻿using NetAF.Rendering;
+﻿using NetAF.Logic;
+using NetAF.Rendering;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 
 namespace NetAF.Targets.WPF
 {
@@ -12,9 +15,36 @@ namespace NetAF.Targets.WPF
         #region Properties
 
         /// <summary>
-        /// Get or set the adapter.
+        /// Get or set the styling to apply to the prompt. The base type to style is TextBox. This is a dependency property.
         /// </summary>
-        public WpfAdapter Adapter { get; set; }
+        public Style PromptStyle
+        {
+            get { return (Style)GetValue(PromptStyleProperty); }
+            set { SetValue(PromptStyleProperty, value); }
+        }
+
+        /// <summary>
+        /// Get or set the styling to apply to the terminal. The base type to style is TextBlock. This is a dependency property.
+        /// </summary>
+        public Style TerminalStyle
+        {
+            get { return (Style)GetValue(TerminalStyleProperty); }
+            set { SetValue(TerminalStyleProperty, value); }
+        }
+
+        #endregion
+
+        #region DependencyProperties
+
+        /// <summary>
+        /// Identifies the NetAFControl.PromptStyle property.
+        /// </summary>
+        public static readonly DependencyProperty PromptStyleProperty = DependencyProperty.Register(nameof(PromptStyle), typeof(Style), typeof(NetAFControl));
+
+        /// <summary>
+        /// Identifies the NetAFControl.TerminalStyle property.
+        /// </summary>
+        public static readonly DependencyProperty TerminalStyleProperty = DependencyProperty.Register(nameof(TerminalStyle), typeof(Style), typeof(NetAFControl));
 
         #endregion
 
@@ -26,8 +56,6 @@ namespace NetAF.Targets.WPF
         public NetAFControl()
         {
             InitializeComponent();
-
-            Adapter = new WpfAdapter(this);
         }
 
         #endregion
@@ -39,7 +67,7 @@ namespace NetAF.Targets.WPF
             if (e.Key != Key.Enter)
                 return;
 
-            Adapter.InputReceived(InputTextBox.Text);
+            GameExecutor.Update(InputTextBox.Text);
             InputTextBox.Clear();
         }
 
@@ -53,9 +81,24 @@ namespace NetAF.Targets.WPF
         /// <param name="frame">The frame to write, as a string.</param>
         public void Present(string frame)
         {
-            Browser.NavigateToString(frame);
-        }
+            var transitionIn = FindResource("TransitionIn") as Storyboard;
+            var transitionOut = FindResource("TransitionOut") as Storyboard;
 
+            if (string.IsNullOrEmpty(TextBlock.Text) || transitionOut == null)
+            {
+                TextBlock.Text = frame;
+                transitionIn?.Begin();
+            }
+            else
+            {
+                transitionOut.Completed += (s, e) =>
+                {
+                    TextBlock.Text = frame;
+                    transitionIn?.Begin();
+                };
+                transitionOut.Begin();
+            }
+        }
 
         #endregion
     }

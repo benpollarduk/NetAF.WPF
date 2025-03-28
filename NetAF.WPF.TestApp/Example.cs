@@ -2,15 +2,13 @@
 using NetAF.Assets.Characters;
 using NetAF.Assets.Locations;
 using NetAF.Logic;
-using NetAF.Logic.Callbacks;
-using NetAF.Logic.Configuration;
 using NetAF.Utilities;
 
 namespace NetAF.WPF.TestApp
 {
     internal class ExampleGame
     {
-        internal static GameCreationCallback Create(IGameConfiguration configuration)
+        internal static GameCreator Create(GameConfiguration configuration)
         {
             PlayableCharacter player = new("Dave", "A young boy on a quest to find the meaning of life.");
 

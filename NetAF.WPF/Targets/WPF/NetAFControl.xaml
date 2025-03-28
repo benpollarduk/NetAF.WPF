@@ -3,14 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:effects="clr-namespace:LoFiEffects.WPF.Effects;assembly=LoFiEffects.WPF"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <UserControl.Resources>
+        <Storyboard x:Key="TransitionOut">
+            <DoubleAnimation Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Effect.Intensity" From="0" To="0.1" Duration="0:0:0.2"/>
+        </Storyboard>
+        <Storyboard x:Key="TransitionIn">
+            <DoubleAnimation Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Effect.Intensity" From="0.1" To="0" Duration="0:0:0.2"/>
+        </Storyboard>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <WebBrowser Name="Browser" Grid.Row="0"/>
-        <TextBox Name="InputTextBox" BorderBrush="Black" BorderThickness="1" Grid.Row="1" PreviewKeyUp="InputTextBox_PreviewKeyUp"/>
+        <TextBlock Name="TextBlock" Style="{Binding Path=TerminalStyle, Mode=OneWay}" Grid.Row="0">
+            <TextBlock.Effect>
+                <effects:PixelateEffect Intensity="0"/>
+            </TextBlock.Effect>
+        </TextBlock>
+        <TextBox Name="InputTextBox" Style="{Binding Path=PromptStyle, Mode=OneWay}" Grid.Row="1" PreviewKeyUp="InputTextBox_PreviewKeyUp"/>
     </Grid>
 </UserControl>

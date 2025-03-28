@@ -6,5 +6,22 @@
         xmlns:wpf="clr-namespace:NetAF.Targets.WPF;assembly=NetAF.WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1000">
-    <wpf:NetAFControl x:Name="NetAFControl"/>
+    <wpf:NetAFControl x:Name="NetAFControl">
+        <wpf:NetAFControl.TerminalStyle>
+            <Style TargetType="TextBlock">
+                <Setter Property="Background" Value="Black"/>
+                <Setter Property="Foreground" Value="Lime"/>
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="FontFamily" Value="Courier New"/>
+            </Style>
+        </wpf:NetAFControl.TerminalStyle>
+        <wpf:NetAFControl.PromptStyle>
+            <Style TargetType="TextBox">
+                <Setter Property="Background" Value="DarkGray"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="FontFamily" Value="Courier New"/>
+            </Style>
+        </wpf:NetAFControl.PromptStyle>
+    </wpf:NetAFControl>
 </Window>

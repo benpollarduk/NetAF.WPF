@@ -14,12 +14,12 @@ namespace NetAF.WPF.TestApp
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class.
-        /// </summary>
+        /// </summary>5
         public MainWindow()
         {
             InitializeComponent();
 
-            GameConfiguration configuration = new(new TextAdapter(NetAFControl), FrameBuilderCollections.Console, new(80, 50));
+            GameConfiguration configuration = new(new TextAdapter(NetAFTerminal), FrameBuilderCollections.Console, new(80, 50));
             GameExecutor.Execute(ExampleGame.Create(configuration));
         }
 

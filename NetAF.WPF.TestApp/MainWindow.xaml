@@ -11,25 +11,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <wpf:NetAFTerminal x:Name="NetAFTerminal" Grid.Row="0">
-            <wpf:NetAFTerminal.TerminalStyle>
-                <Style TargetType="TextBlock">
-                    <Setter Property="Background" Value="Black"/>
-                    <Setter Property="Foreground" Value="Lime"/>
-                    <Setter Property="FontSize" Value="13"/>
-                    <Setter Property="FontFamily" Value="Courier New"/>
-                </Style>
-            </wpf:NetAFTerminal.TerminalStyle>
-        </wpf:NetAFTerminal>
-        <wpf:NetAFPrompt Grid.Row="1">
-            <wpf:NetAFPrompt.PromptStyle>
-                <Style TargetType="TextBox">
-                    <Setter Property="Background" Value="DarkGray"/>
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="FontSize" Value="13"/>
-                    <Setter Property="FontFamily" Value="Courier New"/>
-                </Style>
-            </wpf:NetAFPrompt.PromptStyle>
-        </wpf:NetAFPrompt>
+        <wpf:NetAFTerminal x:Name="NetAFTerminal" Grid.Row="0"/>
+        <wpf:NetAFPrompt Grid.Row="1"/>
     </Grid>
 </Window>

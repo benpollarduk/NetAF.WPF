@@ -10,28 +10,6 @@ namespace NetAF.Targets.WPF
     /// </summary>
     public partial class NetAFTerminal : UserControl, IFramePresenter
     {
-        #region Properties
-
-        /// <summary>
-        /// Get or set the styling to apply to the terminal. The base type to style is TextBlock. This is a dependency property.
-        /// </summary>
-        public Style TerminalStyle
-        {
-            get { return (Style)GetValue(TerminalStyleProperty); }
-            set { SetValue(TerminalStyleProperty, value); }
-        }
-
-        #endregion
-
-        #region DependencyProperties
-
-        /// <summary>
-        /// Identifies the NetAFControl.TerminalStyle property.
-        /// </summary>
-        public static readonly DependencyProperty TerminalStyleProperty = DependencyProperty.Register(nameof(TerminalStyle), typeof(Style), typeof(NetAFTerminal));
-
-        #endregion
-
         #region Constructors
 
         /// <summary>

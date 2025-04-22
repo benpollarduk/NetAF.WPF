@@ -1,9 +1,8 @@
 ﻿using NetAF.Rendering;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
-namespace NetAF.Targets.WPF
+namespace NetAF.Targets.Wpf.Controls
 {
     /// <summary>
     /// Interaction logic for NetAFTerminal.xaml

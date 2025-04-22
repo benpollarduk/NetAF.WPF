@@ -19,7 +19,7 @@ namespace NetAF.WPF.TestApp
         {
             InitializeComponent();
 
-            GameConfiguration configuration = new(new TextAdapter(NetAFTerminal), FrameBuilderCollections.Console, new(80, 50));
+            GameConfiguration configuration = new(new TextAdapter(NetAFTerminal), FrameBuilderCollections.Text, new(80, 50));
             GameExecutor.Execute(ExampleGame.Create(configuration));
         }
 

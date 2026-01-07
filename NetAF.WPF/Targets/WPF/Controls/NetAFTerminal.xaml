@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:effects="clr-namespace:LoFiEffects.WPF.Effects;assembly=LoFiEffects.WPF"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" DataContext="{Binding RelativeSource={RelativeSource Self}}" Background="Black" Foreground="Lime" FontSize="13" FontFamily="Consolas">
+             d:DesignHeight="450" d:DesignWidth="800" DataContext="{Binding RelativeSource={RelativeSource Self}}" Background="Black" Foreground="Lime" FontSize="13" FontFamily="Cascadia Mono">
     <UserControl.Resources>
         <Storyboard x:Key="TransitionOut">
             <DoubleAnimation Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Effect.Intensity" From="0" To="0.1" Duration="0:0:0.2"/>

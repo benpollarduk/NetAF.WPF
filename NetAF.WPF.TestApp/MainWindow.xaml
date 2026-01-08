@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:wpf="clr-namespace:NetAF.Targets.Wpf.Controls;assembly=NetAF.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Background="DarkGray" Height="800" Width="1000">
+        Title="NetAF.WPF.TestApp" Background="DarkGray" Height="800" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

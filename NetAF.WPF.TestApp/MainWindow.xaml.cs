@@ -24,7 +24,11 @@ namespace NetAF.WPF.TestApp
             NetAFPrompt.Focus();
             
             var adapter = new WPFAdapter(NetAFTerminal);
-            adapter.FrameRendered += (_, _) => NetAFCommandPicker.Update(GameExecutor.ExecutingGame);
+            adapter.FrameRendered += (_, _) =>
+            {
+                NetAFCommandPicker.Update(GameExecutor.ExecutingGame);
+                NetAFMovementCommandPicker.Update(GameExecutor.ExecutingGame);
+            };
             GameConfiguration configuration = new(adapter, FrameBuilderCollections.Text, Assets.Size.Dynamic);
             GameExecutor.Execute(ExampleGame.Create(configuration));
         }

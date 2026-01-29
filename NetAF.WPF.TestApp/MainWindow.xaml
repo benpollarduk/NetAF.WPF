@@ -11,9 +11,11 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <wpf:NetAFTerminal x:Name="NetAFTerminal" Margin="10,10,10,0" Padding="10" Grid.Row="0"/>
-        <wpf:NetAFCommandPicker x:Name="NetAFCommandPicker" ShowPersistenceCommands="False" ShowExecutionCommands="False" HorizontalAlignment="Left" Margin="10,10,10,0" Padding="10" Grid.Row="1"/>
-        <wpf:NetAFPrompt x:Name="NetAFPrompt" Margin="10" Grid.Row="2"/>
+        <wpf:NetAFMovementCommandPicker x:Name="NetAFMovementCommandPicker" Grid.Row="1"/>
+        <wpf:NetAFCommandPicker x:Name="NetAFCommandPicker" ShowPersistenceCommands="False" ShowExecutionCommands="False" ShowMovementCommands="False" HorizontalAlignment="Left" Grid.Row="2"/>
+        <wpf:NetAFPrompt x:Name="NetAFPrompt" Margin="10" Grid.Row="3"/>
     </Grid>
 </Window>

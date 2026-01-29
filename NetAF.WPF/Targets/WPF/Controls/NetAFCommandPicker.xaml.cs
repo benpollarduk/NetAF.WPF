@@ -485,8 +485,8 @@ namespace NetAF.Targets.WPF.Controls
             SelectedCommand = null;
             AvailableCommands = [];
 
-            var showCommands = GameExecutor.ExecutingGame?.Mode?.Type == GameModeType.Interactive;
-            var showAcknowledge = ShowAcknowledgeButton && (GameExecutor.ExecutingGame?.Mode?.Type is GameModeType.SingleFrameInformation or GameModeType.MultipleFrameInformation);
+            var showCommands = game?.Mode?.Type == GameModeType.Interactive;
+            var showAcknowledge = ShowAcknowledgeButton && (game?.Mode?.Type is GameModeType.SingleFrameInformation or GameModeType.MultipleFrameInformation);
 
             if (showCommands)
                 AvailableCommands = game?.GetContextualCommands() ?? [];

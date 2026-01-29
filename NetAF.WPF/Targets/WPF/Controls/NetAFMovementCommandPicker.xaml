@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="NetAF.Targets.WPF.Controls.NetAFMovementCommandPicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NetAF.Targets.WPF.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <UserControl.Resources>
+        <Style x:Key="DirectionButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+        </Style>
+        <Style x:Key="DefaultNorthButtonStyle" TargetType="Button" BasedOn="{StaticResource DirectionButtonStyle}">
+            <Setter Property="Content" Value="North"/>
+        </Style>
+        <Style x:Key="DefaultEastButtonStyle" TargetType="Button" BasedOn="{StaticResource DirectionButtonStyle}">
+            <Setter Property="Content" Value="East"/>
+        </Style>
+        <Style x:Key="DefaultSouthButtonStyle" TargetType="Button" BasedOn="{StaticResource DirectionButtonStyle}">
+            <Setter Property="Content" Value="South"/>
+        </Style>
+        <Style x:Key="DefaultWestButtonStyle" TargetType="Button" BasedOn="{StaticResource DirectionButtonStyle}">
+            <Setter Property="Content" Value="West"/>
+        </Style>
+        <Style x:Key="DefaultUpButtonStyle" TargetType="Button" BasedOn="{StaticResource DirectionButtonStyle}">
+            <Setter Property="Content" Value="Up"/>
+        </Style>
+        <Style x:Key="DefaultDownButtonStyle" TargetType="Button" BasedOn="{StaticResource DirectionButtonStyle}">
+            <Setter Property="Content" Value="Down"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="NorthButton" Style="{Binding Path=NorthButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.Column="1" Click="NorthButton_Click"/>
+        <Button x:Name="EastButton" Style="{Binding Path=EastButtonStyle, Mode=OneWay}" Grid.Row="1" Grid.Column="2" Click="EastButton_Click"/>
+        <Button x:Name="SouthButton" Style="{Binding Path=SouthButtonStyle, Mode=OneWay}" Grid.Row="2" Grid.Column="1" Click="SouthButton_Click"/>
+        <Button x:Name="WestButton" Style="{Binding Path=WestButtonStyle, Mode=OneWay}" Grid.Row="1" Grid.Column="0" Click="WestButton_Click"/>
+        <Button x:Name="UpButton" Style="{Binding Path=UpButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.Column="4" Click="UpButton_Click"/>
+        <Button x:Name="DownButton" Style="{Binding Path=DownButtonStyle, Mode=OneWay}" Grid.Row="2" Grid.Column="4" Click="DownButton_Click"/>
+    </Grid>
+</UserControl>

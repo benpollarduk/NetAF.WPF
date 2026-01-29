@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace NetAF.Targets.Wpf.Controls
+namespace NetAF.Targets.WPF.Controls
 {
     /// <summary>
     /// Interaction logic for NetAFPrompt.xaml

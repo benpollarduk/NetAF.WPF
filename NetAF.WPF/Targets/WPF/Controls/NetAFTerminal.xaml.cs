@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-namespace NetAF.Targets.Wpf.Controls
+namespace NetAF.Targets.WPF.Controls
 {
     /// <summary>
     /// Interaction logic for NetAFTerminal.xaml

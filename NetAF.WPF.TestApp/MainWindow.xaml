@@ -3,15 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:wpf="clr-namespace:NetAF.Targets.Wpf.Controls;assembly=NetAF.WPF"
+        xmlns:wpf="clr-namespace:NetAF.Targets.WPF.Controls;assembly=NetAF.WPF"
         mc:Ignorable="d"
         Title="NetAF.WPF.TestApp" Background="DarkGray" Height="800" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <wpf:NetAFTerminal x:Name="NetAFTerminal" Margin="10,10,10,0" Padding="10" Grid.Row="0"/>
-        <wpf:NetAFPrompt Margin="10" Grid.Row="1"/>
+        <wpf:NetAFCommandPicker x:Name="NetAFCommandPicker" ShowPersistenceCommands="False" ShowExecutionCommands="False" HorizontalAlignment="Left" Margin="10,10,10,0" Padding="10" Grid.Row="1"/>
+        <wpf:NetAFPrompt x:Name="NetAFPrompt" Margin="10" Grid.Row="2"/>
     </Grid>
 </Window>

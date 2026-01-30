@@ -26,6 +26,8 @@ namespace NetAF.Targets.WPF.Layouts
         public BasicLayout()
         {
             InitializeComponent();
+
+            EventBus.Subscribe<GameUpdated>(GameUpdated);
         }
 
         #endregion
@@ -37,21 +39,6 @@ namespace NetAF.Targets.WPF.Layouts
             generalCommandPicker.Update(update.Game);
             sceneCommandPicker.Update(update.Game);
             movementCommandPicker.Update(update.Game);
-        }
-
-        #endregion
-
-        #region EventHandlers
-
-        private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
-        {
-            prompt.Focus();
-            EventBus.Subscribe<GameUpdated>(GameUpdated);
-        }
-
-        private void UserControl_Unloaded(object sender, System.Windows.RoutedEventArgs e)
-        {
-            EventBus.Unsubscribe<GameUpdated>(GameUpdated);
         }
 
         #endregion

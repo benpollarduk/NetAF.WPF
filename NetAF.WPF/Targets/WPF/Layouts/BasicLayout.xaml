@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:NetAF.Targets.WPF.Layouts"
              xmlns:wpf="clr-namespace:NetAF.Targets.WPF.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
+             d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <Style x:Key="LargeCommandButtonStyle" TargetType="Button">
             <Setter Property="MinWidth" Value="80"/>
@@ -60,6 +60,7 @@
                      InformationCommandButtonStyle="{StaticResource SmallCommandButtonStyle}"
                      FrameCommandButtonStyle="{StaticResource SmallCommandButtonStyle}"
                      GlobalCommandButtonStyle="{StaticResource SmallCommandButtonStyle}"
+                     PromptButtonStyle="{StaticResource SmallCommandButtonStyle}"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
                      Grid.Row="0"

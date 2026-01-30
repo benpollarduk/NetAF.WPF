@@ -1,7 +1,7 @@
-﻿using NetAF.Logic;
+﻿using NetAF.Logging.Events;
+using NetAF.Logic;
 using NetAF.Rendering.FrameBuilders;
 using NetAF.Targets.Text;
-using NetAF.Targets.WPF;
 using NetAF.Targets.WPF.Controls;
 using System.Windows;
 
@@ -21,15 +21,9 @@ namespace NetAF.WPF.TestApp
         {
             InitializeComponent();
 
-            NetAFPrompt.Focus();
-            
-            var adapter = new WPFAdapter(NetAFTerminal);
-            adapter.FrameRendered += (_, _) =>
-            {
-                NetAFCommandPicker.Update(GameExecutor.ExecutingGame);
-                NetAFMovementCommandPicker.Update(GameExecutor.ExecutingGame);
-            };
-            GameConfiguration configuration = new(adapter, FrameBuilderCollections.Text, Assets.Size.Dynamic);
+            EventBus.Subscribe<GameStarted>(x => Title = x.Game.Info.Name);
+
+            GameConfiguration configuration = new(new TextAdapter(Layout.Terminal), FrameBuilderCollections.Text, Assets.Size.Dynamic);
             GameExecutor.Execute(ExampleGame.Create(configuration));
         }
 

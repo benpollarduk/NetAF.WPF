@@ -22,7 +22,7 @@
             <DoubleAnimation Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Effect.Intensity" From="0.1" To="0" Duration="0:0:0.2"/>
         </Storyboard>
     </UserControl.Resources>
-    <TextBlock Name="TextBlock" Grid.Row="0">
+    <TextBlock Name="TextBlock" TextWrapping="Wrap" Grid.Row="0">
         <TextBlock.Effect>
             <effects:PixelateEffect Intensity="0"/>
         </TextBlock.Effect>

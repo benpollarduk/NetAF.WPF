@@ -3,16 +3,16 @@
 namespace NetAF.Targets.WPF.Layouts
 {
     /// <summary>
-    /// Interaction logic for CombinationLayout.xaml
+    /// Interaction logic for PromptOnlyLayout.xaml
     /// </summary>
-    public partial class CombinationLayout : UserControl
+    public partial class PromptOnlyLayout : UserControl
     {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the CombinationLayout class.
+        /// Initializes a new instance of the PromptOnlyLayout class.
         /// </summary>
-        public CombinationLayout()
+        public PromptOnlyLayout()
         {
             InitializeComponent();
         }

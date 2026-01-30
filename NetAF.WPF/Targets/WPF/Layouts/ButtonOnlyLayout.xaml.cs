@@ -1,24 +1,21 @@
 ﻿using NetAF.Logging.Events;
-using NetAF.Rendering;
 using System.Windows.Controls;
 
 namespace NetAF.Targets.WPF.Layouts
 {
     /// <summary>
-    /// Interaction logic for ButtonBasedLayout.xaml
+    /// Interaction logic for ButtonOnlyLayout.xaml
     /// </summary>
-    public partial class ButtonBasedLayout : UserControl, INetAFLayout
+    public partial class ButtonOnlyLayout : UserControl
     {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the ButtonBasedLayout class.
+        /// Initializes a new instance of the ButtonOnlyLayout class.
         /// </summary>
-        public ButtonBasedLayout()
+        public ButtonOnlyLayout()
         {
             InitializeComponent();
-
-            EventBus.Subscribe<GameUpdated>(GameUpdated);
         }
 
         #endregion
@@ -34,12 +31,17 @@ namespace NetAF.Targets.WPF.Layouts
 
         #endregion
 
-        #region Implementation of INetAFLayout
+        #region EventHandlers
 
-        /// <summary>
-        /// Get the presenter.
-        /// </summary>
-        public IFramePresenter Presenter => Terminal;
+        private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            EventBus.Subscribe<GameUpdated>(GameUpdated);
+        }
+
+        private void UserControl_Unloaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            EventBus.Unsubscribe<GameUpdated>(GameUpdated);
+        }
 
         #endregion
     }

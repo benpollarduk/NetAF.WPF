@@ -2,7 +2,7 @@
 using NetAF.Logic;
 using NetAF.Rendering.FrameBuilders;
 using NetAF.Targets.Text;
-using NetAF.Targets.WPF.Controls;
+using NetAF.Targets.WPF.Layouts;
 using System.Windows;
 
 namespace NetAF.WPF.TestApp
@@ -23,8 +23,39 @@ namespace NetAF.WPF.TestApp
 
             EventBus.Subscribe<GameStarted>(x => Title = x.Game.Info.Name);
 
-            GameConfiguration configuration = new(new TextAdapter(Layout.Presenter), FrameBuilderCollections.Text, Assets.Size.Dynamic);
+            GameConfiguration configuration = new(new TextAdapter(Terminal), FrameBuilderCollections.Text, Assets.Size.Dynamic);
             GameExecutor.Execute(ExampleGame.Create(configuration));
+        }
+
+        #endregion
+
+        #region Methods
+
+        private void SetInputControl(UIElement inputControl)
+        {
+            if (!IsInitialized)
+                return;
+
+            InputControl.Content = inputControl;
+        }
+
+        #endregion
+
+        #region EventHandlers
+
+        private void PromptRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            SetInputControl(new PromptOnlyLayout());
+        }
+
+        private void ButtonsRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            SetInputControl(new ButtonOnlyLayout());
+        }
+
+        private void CombinationRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            SetInputControl(new CombinationLayout());
         }
 
         #endregion

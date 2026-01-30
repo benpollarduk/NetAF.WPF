@@ -65,10 +65,13 @@
     <Compile Update="Targets\Wpf\Controls\NetAFPrompt.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Targets\WPF\Layouts\PromptOnlyLayout.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Targets\WPF\Layouts\CombinationLayout.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Targets\WPF\Layouts\ButtonBasedLayout.xaml.cs">
+    <Compile Update="Targets\WPF\Layouts\ButtonOnlyLayout.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

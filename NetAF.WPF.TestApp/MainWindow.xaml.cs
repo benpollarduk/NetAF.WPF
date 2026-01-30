@@ -23,7 +23,7 @@ namespace NetAF.WPF.TestApp
 
             EventBus.Subscribe<GameStarted>(x => Title = x.Game.Info.Name);
 
-            GameConfiguration configuration = new(new TextAdapter(Layout.Terminal), FrameBuilderCollections.Text, Assets.Size.Dynamic);
+            GameConfiguration configuration = new(new TextAdapter(Layout.Presenter), FrameBuilderCollections.Text, Assets.Size.Dynamic);
             GameExecutor.Execute(ExampleGame.Create(configuration));
         }
 

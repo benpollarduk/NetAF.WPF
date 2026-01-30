@@ -6,5 +6,5 @@
         xmlns:layouts="clr-namespace:NetAF.Targets.WPF.Layouts;assembly=NetAF.WPF"
         mc:Ignorable="d"
         Title="NetAF.WPF.TestApp" Background="DarkGray" Height="800" Width="1000">
-    <layouts:BasicLayout x:Name="Layout"/>
+    <layouts:ButtonBasedLayout x:Name="Layout"/>
 </Window>

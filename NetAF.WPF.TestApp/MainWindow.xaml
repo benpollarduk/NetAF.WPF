@@ -31,6 +31,36 @@
             <Setter Property="Margin" Value="0,0,4,4"/>
             <Setter Property="FontSize" Value="11"/>
         </Style>
+        <Style x:Key="CommandPickerStyle" TargetType="controls:NetAFCommandPicker">
+            <Setter Property="SceneCommandButtonStyle" Value="{StaticResource LargeCommandButtonStyle}"/>
+            <Setter Property="ConversationCommandButtonStyle" Value="{StaticResource LargeCommandButtonStyle}"/>
+            <Setter Property="RegionMapCommandButtonStyle" Value="{StaticResource LargeCommandButtonStyle}"/>
+            <Setter Property="AcknowledgeButtonStyle" Value="{StaticResource LargeCommandButtonStyle}"/>
+            <Setter Property="PromptButtonStyle" Value="{StaticResource LargeCommandButtonStyle}"/>
+            <Setter Property="ClearButtonStyle" Value="{StaticResource LargeCommandButtonStyle}"/>
+            <Setter Property="InformationCommandButtonStyle" Value="{StaticResource SmallCommandButtonStyle}"/>
+            <Setter Property="FrameCommandButtonStyle" Value="{StaticResource SmallCommandButtonStyle}"/>
+            <Setter Property="GlobalCommandButtonStyle" Value="{StaticResource SmallCommandButtonStyle}"/>
+            <Setter Property="PromptButtonStyle" Value="{StaticResource LargeCommandButtonStyle}"/>
+            <Setter Property="ClearButtonStyle" Value="{StaticResource SmallCommandButtonStyle}"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Margin" Value="10,0,0,0"/>
+        </Style>
+        <Style x:Key="MovementCommandPickerStyle" TargetType="controls:NetAFMovementCommandPicker">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style x:Key="ButtonOnlyLayoutStyle" TargetType="layouts:ButtonOnlyLayout">
+            <Setter Property="GeneralCommandPickerStyle" Value="{StaticResource CommandPickerStyle}"/>
+            <Setter Property="SceneCommandPickerStyle">
+                <Setter.Value>
+                    <Style TargetType="controls:NetAFCommandPicker" BasedOn="{StaticResource CommandPickerStyle}">
+                        <Setter Property="AcknowledgeButtonStyle" Value="{StaticResource GiganticCommandButtonStyle}"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="MovementCommandPickerStyle" Value="{StaticResource MovementCommandPickerStyle}"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -55,25 +85,15 @@
             <RadioButton Name="CombinationRadioButton" Content="Combination" VerticalContentAlignment="Center" Grid.Column="6" Checked="CombinationRadioButton_Checked"/>
         </Grid>
         <ContentControl Name="InputControl" Margin="10,0,10,10" Grid.Row="2">
+            <ContentControl.Content>
+                <layouts:ButtonOnlyLayout/>
+            </ContentControl.Content>
             <ContentControl.Resources>
-                <Style TargetType="controls:NetAFCommandPicker">
-                    <Setter Property="SceneCommandButtonStyle" Value="{StaticResource LargeCommandButtonStyle}"/>
-                    <Setter Property="ConversationCommandButtonStyle" Value="{StaticResource LargeCommandButtonStyle}"/>
-                    <Setter Property="RegionMapCommandButtonStyle" Value="{StaticResource LargeCommandButtonStyle}"/>
-                    <Setter Property="AcknowledgeButtonStyle" Value="{StaticResource GiganticCommandButtonStyle}"/>
-                    <Setter Property="PromptButtonStyle" Value="{StaticResource LargeCommandButtonStyle}"/>
-                    <Setter Property="ClearButtonStyle" Value="{StaticResource LargeCommandButtonStyle}"/>
-                    <Setter Property="InformationCommandButtonStyle" Value="{StaticResource SmallCommandButtonStyle}"/>
-                    <Setter Property="FrameCommandButtonStyle" Value="{StaticResource SmallCommandButtonStyle}"/>
-                    <Setter Property="GlobalCommandButtonStyle" Value="{StaticResource SmallCommandButtonStyle}"/>
-                    <Setter Property="PromptButtonStyle" Value="{StaticResource LargeCommandButtonStyle}"/>
-                    <Setter Property="ClearButtonStyle" Value="{StaticResource SmallCommandButtonStyle}"/>
-                    <Setter Property="HorizontalAlignment" Value="Left"/>
-                    <Setter Property="VerticalAlignment" Value="Top"/>
-                    <Setter Property="Margin" Value="10,0,0,0"/>
+                <Style TargetType="layouts:CombinationLayout">
+                    <Setter Property="ButtonOnlyLayoutStyle" Value="{StaticResource ButtonOnlyLayoutStyle}"/>
                 </Style>
+                <Style TargetType="layouts:ButtonOnlyLayout" BasedOn="{StaticResource ButtonOnlyLayoutStyle}"/>
             </ContentControl.Resources>
-            <layouts:ButtonOnlyLayout/>
         </ContentControl>
     </Grid>
 </Window>

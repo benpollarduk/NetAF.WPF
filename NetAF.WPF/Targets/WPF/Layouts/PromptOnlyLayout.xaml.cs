@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace NetAF.Targets.WPF.Layouts
 {
@@ -7,6 +8,28 @@ namespace NetAF.Targets.WPF.Layouts
     /// </summary>
     public partial class PromptOnlyLayout : UserControl
     {
+        #region Properties
+
+        /// <summary>
+        /// Get or set the prompt style. This is a dependency property.
+        /// </summary>
+        public Style PromptStyle
+        {
+            get { return (Style)GetValue(PromptStyleProperty); }
+            set { SetValue(PromptStyleProperty, value); }
+        }
+
+        #endregion
+
+        #region DependencyProperties
+
+        /// <summary>
+        /// Identifies the PromptOnlyLayout.PromptStyle property.
+        /// </summary>
+        public static readonly DependencyProperty PromptStyleProperty = DependencyProperty.Register("PromptStyle", typeof(Style), typeof(PromptOnlyLayout));
+
+        #endregion
+
         #region Constructors
 
         /// <summary>

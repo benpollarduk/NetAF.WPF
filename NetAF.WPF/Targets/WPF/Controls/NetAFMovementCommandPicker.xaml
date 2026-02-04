@@ -7,6 +7,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <UserControl.Resources>
+        <RoutedCommand x:Key="NorthSelectedCommand"/>
+        <RoutedCommand x:Key="EastSelectedCommand"/>
+        <RoutedCommand x:Key="SouthSelectedCommand"/>
+        <RoutedCommand x:Key="WestSelectedCommand"/>
+        <RoutedCommand x:Key="UpSelectedCommand"/>
+        <RoutedCommand x:Key="DownSelectedCommand"/>
         <Style x:Key="DirectionButtonStyle" TargetType="Button">
             <Setter Property="Width" Value="50"/>
             <Setter Property="Height" Value="50"/>
@@ -30,6 +36,14 @@
             <Setter Property="Content" Value="Down"/>
         </Style>
     </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding x:Name="NorthSelectedCommandBinding" Command="{StaticResource NorthSelectedCommand}" Executed="NorthSelectedCommandBinding_Executed"/>
+        <CommandBinding x:Name="EastSelectedCommandBinding" Command="{StaticResource EastSelectedCommand}" Executed="EastSelectedCommandBinding_Executed"/>
+        <CommandBinding x:Name="SouthSelectedCommandBinding" Command="{StaticResource SouthSelectedCommand}" Executed="SouthSelectedCommandBinding_Executed"/>
+        <CommandBinding x:Name="WestSelectedCommandBinding" Command="{StaticResource WestSelectedCommand}" Executed="WestSelectedCommandBinding_Executed"/>
+        <CommandBinding x:Name="UpSelectedCommandBinding" Command="{StaticResource UpSelectedCommand}" Executed="UpSelectedCommandBinding_Executed"/>
+        <CommandBinding x:Name="DownSelectedCommandBinding" Command="{StaticResource DownSelectedCommand}" Executed="DownSelectedCommandBinding_Executed"/>
+    </UserControl.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -43,11 +57,11 @@
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="NorthButton" Style="{Binding Path=NorthButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.Column="1" Click="NorthButton_Click"/>
-        <Button x:Name="EastButton" Style="{Binding Path=EastButtonStyle, Mode=OneWay}" Grid.Row="1" Grid.Column="2" Click="EastButton_Click"/>
-        <Button x:Name="SouthButton" Style="{Binding Path=SouthButtonStyle, Mode=OneWay}" Grid.Row="2" Grid.Column="1" Click="SouthButton_Click"/>
-        <Button x:Name="WestButton" Style="{Binding Path=WestButtonStyle, Mode=OneWay}" Grid.Row="1" Grid.Column="0" Click="WestButton_Click"/>
-        <Button x:Name="UpButton" Style="{Binding Path=UpButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.Column="4" Click="UpButton_Click"/>
-        <Button x:Name="DownButton" Style="{Binding Path=DownButtonStyle, Mode=OneWay}" Grid.Row="2" Grid.Column="4" Click="DownButton_Click"/>
+        <Button x:Name="NorthButton" Command="{StaticResource NorthSelectedCommand}" Style="{Binding Path=NorthButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.Column="1"/>
+        <Button x:Name="EastButton" Command="{StaticResource EastSelectedCommand}" Style="{Binding Path=EastButtonStyle, Mode=OneWay}" Grid.Row="1" Grid.Column="2"/>
+        <Button x:Name="SouthButton" Command="{StaticResource SouthSelectedCommand}" Style="{Binding Path=SouthButtonStyle, Mode=OneWay}" Grid.Row="2" Grid.Column="1"/>
+        <Button x:Name="WestButton" Command="{StaticResource WestSelectedCommand}" Style="{Binding Path=WestButtonStyle, Mode=OneWay}" Grid.Row="1" Grid.Column="0"/>
+        <Button x:Name="UpButton" Command="{StaticResource UpSelectedCommand}" Style="{Binding Path=UpButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.Column="4"/>
+        <Button x:Name="DownButton" Command="{StaticResource DownSelectedCommand}" Style="{Binding Path=DownButtonStyle, Mode=OneWay}" Grid.Row="2" Grid.Column="4"/>
     </Grid>
 </UserControl>

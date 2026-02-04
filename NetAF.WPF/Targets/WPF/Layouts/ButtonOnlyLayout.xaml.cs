@@ -1,5 +1,6 @@
 ﻿using NetAF.Logging.Events;
-using NetAF.Targets.WPF.Controls;
+using NetAF.Logic;
+using NetAF.Logic.Modes;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -19,6 +20,15 @@ namespace NetAF.Targets.WPF.Layouts
         {
             get { return (Style)GetValue(MovementCommandPickerStyleProperty); }
             set { SetValue(MovementCommandPickerStyleProperty, value); }
+        }
+
+        /// <summary>
+        /// Get or set the style to use for the region map command picker. This is a dependency property.
+        /// </summary>
+        public Style RegionMapCommandPickerStyle
+        {
+            get { return (Style)GetValue(RegionMapCommandPickerStyleProperty); }
+            set { SetValue(RegionMapCommandPickerStyleProperty, value); }
         }
 
         /// <summary>
@@ -49,6 +59,11 @@ namespace NetAF.Targets.WPF.Layouts
         public static readonly DependencyProperty MovementCommandPickerStyleProperty = DependencyProperty.Register("MovementCommandPickerStyle", typeof(Style), typeof(ButtonOnlyLayout));
 
         /// <summary>
+        /// Identifies the ButtonOnlyLayout.RegionMapCommandPickerStyle property.
+        /// </summary>
+        public static readonly DependencyProperty RegionMapCommandPickerStyleProperty = DependencyProperty.Register("RegionMapCommandPickerStyle", typeof(Style), typeof(ButtonOnlyLayout));
+
+        /// <summary>
         /// Identifies the ButtonOnlyLayout.GeneralCommandPickerStyle property.
         /// </summary>
         public static readonly DependencyProperty GeneralCommandPickerStyleProperty = DependencyProperty.Register("GeneralCommandPickerStyle", typeof(Style), typeof(ButtonOnlyLayout));
@@ -68,31 +83,36 @@ namespace NetAF.Targets.WPF.Layouts
         public ButtonOnlyLayout()
         {
             InitializeComponent();
+
+            EventBus.Subscribe<GameStarted>(GameStarted);
+            EventBus.Subscribe<GameUpdated>(GameUpdated);
         }
 
         #endregion
 
         #region Methods
 
+        private void GameStarted(GameStarted update)
+        {
+            Update(update.Game);
+        }
+
         private void GameUpdated(GameUpdated update)
         {
-            GeneralCommandPicker.Update(update.Game);
-            SceneCommandPicker.Update(update.Game);
-            MovementCommandPicker.Update(update.Game);
+            Update(update.Game);
         }
 
-        #endregion
-
-        #region EventHandlers
-
-        private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        private void Update(Game game)
         {
-            EventBus.Subscribe<GameUpdated>(GameUpdated);
-        }
+            GeneralCommandPicker.Update(game);
+            SceneCommandPicker.Update(game);
+            MovementCommandPicker.Update(game);
+            RegionMapCommandPicker.Update(game);
 
-        private void UserControl_Unloaded(object sender, System.Windows.RoutedEventArgs e)
-        {
-            EventBus.Unsubscribe<GameUpdated>(GameUpdated);
+            var inMapMode = game.Mode is RegionMapMode;
+
+            MovementCommandPicker.Visibility = inMapMode ? Visibility.Collapsed : Visibility.Visible;
+            RegionMapCommandPicker.Visibility = inMapMode ? Visibility.Visible : Visibility.Collapsed;
         }
 
         #endregion

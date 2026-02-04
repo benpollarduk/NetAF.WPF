@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="NetAF.Targets.WPF.Controls.NetAFRegionMapCommandPicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NetAF.Targets.WPF.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <UserControl.Resources>
+        <RoutedCommand x:Key="PanNorthSelectedCommand"/>
+        <RoutedCommand x:Key="PanEastSelectedCommand"/>
+        <RoutedCommand x:Key="PanSouthSelectedCommand"/>
+        <RoutedCommand x:Key="PanWestSelectedCommand"/>
+        <RoutedCommand x:Key="PanUpSelectedCommand"/>
+        <RoutedCommand x:Key="PanDownSelectedCommand"/>
+        <RoutedCommand x:Key="ZoomInSelectedCommand"/>
+        <RoutedCommand x:Key="ZoomOutSelectedCommand"/>
+        <RoutedCommand x:Key="PanResetSelectedCommand"/>
+        <RoutedCommand x:Key="EndSelectedCommand"/>
+        <Style x:Key="DirectionButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+        </Style>
+        <Style x:Key="DefaultPanNorthButtonStyle" TargetType="Button" BasedOn="{StaticResource DirectionButtonStyle}">
+            <Setter Property="Content" Value="North"/>
+        </Style>
+        <Style x:Key="DefaultPanEastButtonStyle" TargetType="Button" BasedOn="{StaticResource DirectionButtonStyle}">
+            <Setter Property="Content" Value="East"/>
+        </Style>
+        <Style x:Key="DefaultPanSouthButtonStyle" TargetType="Button" BasedOn="{StaticResource DirectionButtonStyle}">
+            <Setter Property="Content" Value="South"/>
+        </Style>
+        <Style x:Key="DefaultPanWestButtonStyle" TargetType="Button" BasedOn="{StaticResource DirectionButtonStyle}">
+            <Setter Property="Content" Value="West"/>
+        </Style>
+        <Style x:Key="DefaultPanUpButtonStyle" TargetType="Button" BasedOn="{StaticResource DirectionButtonStyle}">
+            <Setter Property="Content" Value="Up"/>
+        </Style>
+        <Style x:Key="DefaultPanDownButtonStyle" TargetType="Button" BasedOn="{StaticResource DirectionButtonStyle}">
+            <Setter Property="Content" Value="Down"/>
+        </Style>
+        <Style x:Key="DefaultZoomInButtonStyle" TargetType="Button" BasedOn="{StaticResource DirectionButtonStyle}">
+            <Setter Property="Content" Value="In"/>
+        </Style>
+        <Style x:Key="DefaultZoomOutButtonStyle" TargetType="Button" BasedOn="{StaticResource DirectionButtonStyle}">
+            <Setter Property="Content" Value="Out"/>
+        </Style>
+        <Style x:Key="DefaultPanResetButtonStyle" TargetType="Button" BasedOn="{StaticResource DirectionButtonStyle}">
+            <Setter Property="Content" Value="Reset"/>
+        </Style>
+        <Style x:Key="DefaultEndButtonStyle" TargetType="Button" BasedOn="{StaticResource DirectionButtonStyle}">
+            <Setter Property="Content" Value="End"/>
+        </Style>
+    </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding x:Name="PanNorthSelectedCommandBinding" Command="{StaticResource PanNorthSelectedCommand}" Executed="PanNorthSelectedCommandBinding_Executed"/>
+        <CommandBinding x:Name="PanEastSelectedCommandBinding" Command="{StaticResource PanEastSelectedCommand}" Executed="PanEastSelectedCommandBinding_Executed"/>
+        <CommandBinding x:Name="PanSouthSelectedCommandBinding" Command="{StaticResource PanSouthSelectedCommand}" Executed="PanSouthSelectedCommandBinding_Executed"/>
+        <CommandBinding x:Name="PanWestSelectedCommandBinding" Command="{StaticResource PanWestSelectedCommand}" Executed="PanWestSelectedCommandBinding_Executed"/>
+        <CommandBinding x:Name="PanUpSelectedCommandBinding" Command="{StaticResource PanUpSelectedCommand}" Executed="PanUpSelectedCommandBinding_Executed"/>
+        <CommandBinding x:Name="PanDownSelectedCommandBinding" Command="{StaticResource PanDownSelectedCommand}" Executed="PanDownSelectedCommandBinding_Executed"/>
+        <CommandBinding x:Name="ZoomInSelectedCommandBinding" Command="{StaticResource ZoomInSelectedCommand}" Executed="ZoomInSelectedCommandBinding_Executed"/>
+        <CommandBinding x:Name="ZoomOutSelectedCommandBinding" Command="{StaticResource ZoomOutSelectedCommand}" Executed="ZoomOutSelectedCommandBinding_Executed"/>
+        <CommandBinding x:Name="PanResetSelectedCommandBinding" Command="{StaticResource PanResetSelectedCommand}" Executed="PanResetSelectedCommandBinding_Executed"/>
+        <CommandBinding x:Name="EndSelectedCommandBinding" Command="{StaticResource EndSelectedCommand}" Executed="EndSelectedCommandBinding_Executed"/>
+    </UserControl.CommandBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="PanNorthButton" Command="{StaticResource PanNorthSelectedCommand}" Style="{Binding Path=PanNorthButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.Column="1"/>
+        <Button x:Name="PanEastButton" Command="{StaticResource PanEastSelectedCommand}" Style="{Binding Path=PanEastButtonStyle, Mode=OneWay}" Grid.Row="1" Grid.Column="2"/>
+        <Button x:Name="PanSouthButton" Command="{StaticResource PanSouthSelectedCommand}" Style="{Binding Path=PanSouthButtonStyle, Mode=OneWay}" Grid.Row="2" Grid.Column="1"/>
+        <Button x:Name="PanWestButton" Command="{StaticResource PanWestSelectedCommand}" Style="{Binding Path=PanWestButtonStyle, Mode=OneWay}" Grid.Row="1" Grid.Column="0"/>
+        <Button x:Name="PanUpButton" Command="{StaticResource PanUpSelectedCommand}" Style="{Binding Path=PanUpButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.Column="4"/>
+        <Button x:Name="PanDownButton" Command="{StaticResource PanDownSelectedCommand}" Style="{Binding Path=PanDownButtonStyle, Mode=OneWay}" Grid.Row="2" Grid.Column="4"/>
+        <Button x:Name="ZoomInButton" Command="{StaticResource ZoomInSelectedCommand}" Style="{Binding Path=ZoomInButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.Column="6"/>
+        <Button x:Name="PanResetButton" Command="{StaticResource PanResetSelectedCommand}" Style="{Binding Path=PanResetButtonStyle, Mode=OneWay}" Grid.Row="1" Grid.Column="6"/>
+        <Button x:Name="ZoomOutButton" Command="{StaticResource ZoomOutSelectedCommand}" Style="{Binding Path=ZoomOutButtonStyle, Mode=OneWay}" Grid.Row="2" Grid.Column="6"/>
+        <Button x:Name="EndButton" Command="{StaticResource EndSelectedCommand}" Style="{Binding Path=EndButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.RowSpan="3" Grid.Column="8"/>
+    </Grid>
+</UserControl>

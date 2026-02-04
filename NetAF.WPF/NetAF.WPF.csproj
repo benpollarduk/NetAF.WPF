@@ -56,6 +56,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Targets\WPF\Controls\NetAFRegionMapCommandPicker.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Targets\WPF\Controls\NetAFMovementCommandPicker.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

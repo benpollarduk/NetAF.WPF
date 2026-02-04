@@ -1,12 +1,9 @@
-﻿using NetAF.Commands;
-using NetAF.Commands.Scene;
+﻿using NetAF.Commands.Scene;
 using NetAF.Logic;
 using NetAF.Logic.Modes;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace NetAF.Targets.WPF.Controls
 {
@@ -160,32 +157,32 @@ namespace NetAF.Targets.WPF.Controls
 
         #region EventHandlers
 
-        private void NorthButton_Click(object sender, RoutedEventArgs e)
+        private void NorthSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             GameExecutor.Update(Move.NorthCommandHelp.Command);
         }
 
-        private void EastButton_Click(object sender, RoutedEventArgs e)
+        private void EastSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             GameExecutor.Update(Move.EastCommandHelp.Command);
         }
 
-        private void SouthButton_Click(object sender, RoutedEventArgs e)
+        private void SouthSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             GameExecutor.Update(Move.SouthCommandHelp.Command);
         }
 
-        private void WestButton_Click(object sender, RoutedEventArgs e)
+        private void WestSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             GameExecutor.Update(Move.WestCommandHelp.Command);
         }
 
-        private void UpButton_Click(object sender, RoutedEventArgs e)
+        private void UpSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             GameExecutor.Update(Move.UpCommandHelp.Command);
         }
 
-        private void DownButton_Click(object sender, RoutedEventArgs e)
+        private void DownSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             GameExecutor.Update(Move.DownCommandHelp.Command);
         }

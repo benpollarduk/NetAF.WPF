@@ -34,6 +34,30 @@ namespace NetAF.Targets.WPF.Controls
 
         #endregion
 
+        #region Fields
+
+        /// <summary>
+        /// Get the command for when a command is selected.
+        /// </summary>
+        private readonly RoutedUICommand CommandSelectedCommand = new RoutedUICommand();
+
+        /// <summary>
+        /// Get the command for when a prompt is selected.
+        /// </summary>
+        private readonly RoutedUICommand PromptSelectedCommand = new RoutedUICommand();
+
+        /// <summary>
+        /// Get the command for when a clear is selected.
+        /// </summary>
+        private readonly RoutedUICommand ClearSelectedCommand = new RoutedUICommand();
+
+        /// <summary>
+        /// Get the command for when acknowledge is selected.
+        /// </summary>
+        private readonly RoutedUICommand AcknowledgeSelectedCommand = new RoutedUICommand();
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -470,6 +494,8 @@ namespace NetAF.Targets.WPF.Controls
         public NetAFCommandPicker()
         {
             InitializeComponent();
+
+            SetupCommandBindings();
         }
 
         #endregion
@@ -494,6 +520,14 @@ namespace NetAF.Targets.WPF.Controls
                 GenerateAcknowledgeButton();
         }
 
+        private void SetupCommandBindings()
+        {
+            CommandBindings.Add(new CommandBinding(CommandSelectedCommand, CommandSelectedCommand_Executed));
+            CommandBindings.Add(new CommandBinding(PromptSelectedCommand, PromptSelectedCommand_Executed));
+            CommandBindings.Add(new CommandBinding(ClearSelectedCommand, ClearSelectedCommand_Executed));
+            CommandBindings.Add(new CommandBinding(AcknowledgeSelectedCommand, AcknowledgeSelectedCommand_Executed));
+        }
+
         private void ClearButtons()
         {
             ButtonWrapPanel.Children.Clear();
@@ -513,10 +547,12 @@ namespace NetAF.Targets.WPF.Controls
                     var styleKey = GetCategoryButtonStyleKey(category);
                     var shownKey = GetCategoryButtonShownKey(category);
 
+                    button.Command = CommandSelectedCommand;
+                    button.CommandParameter = command;
+
                     BindingOperations.SetBinding(button, StyleProperty, GetButtonStyleBinding(styleKey));
                     BindingOperations.SetBinding(button, VisibilityProperty, GetButtonVisibilityBinding(shownKey));
 
-                    button.Click += (_, _) => SelectedCommand = command;
                     ButtonWrapPanel.Children.Add(button);
                 }
             }
@@ -528,11 +564,8 @@ namespace NetAF.Targets.WPF.Controls
 
             var acknowledgeButton = new Button { Content = "Ok" };
             BindingOperations.SetBinding(acknowledgeButton, StyleProperty, GetButtonStyleBinding(nameof(AcknowledgeButtonStyle)));
-            acknowledgeButton.Click += (_, _) =>
-            {
-                GameExecutor.Update();
-                SelectedCommand = null;
-            };
+            
+            acknowledgeButton.Command = AcknowledgeSelectedCommand;
 
             ButtonWrapPanel.Children.Add(acknowledgeButton);
         }
@@ -543,20 +576,18 @@ namespace NetAF.Targets.WPF.Controls
 
             var clearButton = new Button { Content = "Clear" };
             BindingOperations.SetBinding(clearButton, StyleProperty, GetButtonStyleBinding(nameof(ClearButtonStyle)));
-            clearButton.Click += (_, _) => Update(GameExecutor.ExecutingGame);
+
+            clearButton.Command = ClearSelectedCommand;
 
             ButtonWrapPanel.Children.Add(clearButton);
 
-            foreach (var prompt in AvailablePrompts.Select(x => x.Entry))
+            foreach (var prompt in AvailablePrompts)
             {
-                var button = new Button { Content = prompt };
+                var button = new Button { Content = prompt.Entry };
                 BindingOperations.SetBinding(button, StyleProperty, GetButtonStyleBinding(nameof(PromptButtonStyle)));
 
-                button.Click += (_, _) =>
-                {
-                    GameExecutor.Update($"{SelectedCommand?.Command ?? string.Empty} {prompt}");
-                    SelectedCommand = null;
-                };
+                button.Command = PromptSelectedCommand;
+                button.CommandParameter = prompt;
 
                 ButtonWrapPanel.Children.Add(button);
             }
@@ -685,6 +716,32 @@ namespace NetAF.Targets.WPF.Controls
         {
             var control = sender as NetAFCommandPicker;
             control?.GeneratePromptButtons();
+        }
+
+        #endregion
+
+        #region CommandCallbacks
+
+        private void CommandSelectedCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            SelectedCommand = e.Parameter as CommandHelp;
+        }
+
+        private void PromptSelectedCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            GameExecutor.Update($"{SelectedCommand?.Command ?? string.Empty} {(e.Parameter as Prompt)?.Entry}");
+            SelectedCommand = null;
+        }
+
+        private void ClearSelectedCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Update(GameExecutor.ExecutingGame);
+        }
+
+        private void AcknowledgeSelectedCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            GameExecutor.Update();
+            SelectedCommand = null;
         }
 
         #endregion

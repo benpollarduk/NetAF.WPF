@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:NetAF.Targets.WPF.Layouts"
              xmlns:wpf="clr-namespace:NetAF.Targets.WPF.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" DataContext="{Binding RelativeSource={RelativeSource Self}}" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
+             d:DesignHeight="450" d:DesignWidth="800" DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -19,6 +19,11 @@
         </Grid.ColumnDefinitions>
         <wpf:NetAFMovementCommandPicker x:Name="MovementCommandPicker"
             Style="{Binding Path=MovementCommandPickerStyle, Mode=OneWay}"
+            Grid.Row="0" 
+            Grid.Column="0" 
+            Grid.RowSpan="2"/>
+        <wpf:NetAFRegionMapCommandPicker x:Name="RegionMapCommandPicker"
+            Style="{Binding Path=RegionMapCommandPickerStyle, Mode=OneWay}"
             Grid.Row="0" 
             Grid.Column="0" 
             Grid.RowSpan="2"/>
@@ -43,6 +48,7 @@
              ShowGlobalCommands="False"
              ShowInformationCommands="False"
              ShowUncategorizedCommands="False"
+             ShowRegionMapCommands="False"
              Grid.Row="1"
              Grid.Column="2">
         </wpf:NetAFCommandPicker>

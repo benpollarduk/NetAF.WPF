@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NetAF.Targets.WPF.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+             d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <RoutedCommand x:Key="PanNorthSelectedCommand"/>
         <RoutedCommand x:Key="PanEastSelectedCommand"/>
@@ -81,15 +81,15 @@
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="PanNorthButton" Command="{StaticResource PanNorthSelectedCommand}" Style="{Binding Path=PanNorthButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.Column="1"/>
-        <Button x:Name="PanEastButton" Command="{StaticResource PanEastSelectedCommand}" Style="{Binding Path=PanEastButtonStyle, Mode=OneWay}" Grid.Row="1" Grid.Column="2"/>
-        <Button x:Name="PanSouthButton" Command="{StaticResource PanSouthSelectedCommand}" Style="{Binding Path=PanSouthButtonStyle, Mode=OneWay}" Grid.Row="2" Grid.Column="1"/>
-        <Button x:Name="PanWestButton" Command="{StaticResource PanWestSelectedCommand}" Style="{Binding Path=PanWestButtonStyle, Mode=OneWay}" Grid.Row="1" Grid.Column="0"/>
-        <Button x:Name="PanUpButton" Command="{StaticResource PanUpSelectedCommand}" Style="{Binding Path=PanUpButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.Column="4"/>
-        <Button x:Name="PanDownButton" Command="{StaticResource PanDownSelectedCommand}" Style="{Binding Path=PanDownButtonStyle, Mode=OneWay}" Grid.Row="2" Grid.Column="4"/>
-        <Button x:Name="ZoomInButton" Command="{StaticResource ZoomInSelectedCommand}" Style="{Binding Path=ZoomInButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.Column="6"/>
-        <Button x:Name="PanResetButton" Command="{StaticResource PanResetSelectedCommand}" Style="{Binding Path=PanResetButtonStyle, Mode=OneWay}" Grid.Row="1" Grid.Column="6"/>
-        <Button x:Name="ZoomOutButton" Command="{StaticResource ZoomOutSelectedCommand}" Style="{Binding Path=ZoomOutButtonStyle, Mode=OneWay}" Grid.Row="2" Grid.Column="6"/>
-        <Button x:Name="EndButton" Command="{StaticResource EndSelectedCommand}" Style="{Binding Path=EndButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.RowSpan="3" Grid.Column="8"/>
+        <Button x:Name="PanNorthButton" Command="{StaticResource PanNorthSelectedCommand}" Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFRegionMapCommandPicker}, Path=PanNorthButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.Column="1"/>
+        <Button x:Name="PanEastButton" Command="{StaticResource PanEastSelectedCommand}" Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFRegionMapCommandPicker}, Path=PanEastButtonStyle, Mode=OneWay}" Grid.Row="1" Grid.Column="2"/>
+        <Button x:Name="PanSouthButton" Command="{StaticResource PanSouthSelectedCommand}" Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFRegionMapCommandPicker}, Path=PanSouthButtonStyle, Mode=OneWay}" Grid.Row="2" Grid.Column="1"/>
+        <Button x:Name="PanWestButton" Command="{StaticResource PanWestSelectedCommand}" Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFRegionMapCommandPicker}, Path=PanWestButtonStyle, Mode=OneWay}" Grid.Row="1" Grid.Column="0"/>
+        <Button x:Name="PanUpButton" Command="{StaticResource PanUpSelectedCommand}" Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFRegionMapCommandPicker}, Path=PanUpButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.Column="4"/>
+        <Button x:Name="PanDownButton" Command="{StaticResource PanDownSelectedCommand}" Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFRegionMapCommandPicker}, Path=PanDownButtonStyle, Mode=OneWay}" Grid.Row="2" Grid.Column="4"/>
+        <Button x:Name="ZoomInButton" Command="{StaticResource ZoomInSelectedCommand}" Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFRegionMapCommandPicker}, Path=ZoomInButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.Column="6"/>
+        <Button x:Name="PanResetButton" Command="{StaticResource PanResetSelectedCommand}" Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFRegionMapCommandPicker}, Path=PanResetButtonStyle, Mode=OneWay}" Grid.Row="1" Grid.Column="6"/>
+        <Button x:Name="ZoomOutButton" Command="{StaticResource ZoomOutSelectedCommand}" Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFRegionMapCommandPicker}, Path=ZoomOutButtonStyle, Mode=OneWay}" Grid.Row="2" Grid.Column="6"/>
+        <Button x:Name="EndButton" Command="{StaticResource EndSelectedCommand}" Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFRegionMapCommandPicker}, Path=EndButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.RowSpan="3" Grid.Column="8"/>
     </Grid>
 </UserControl>

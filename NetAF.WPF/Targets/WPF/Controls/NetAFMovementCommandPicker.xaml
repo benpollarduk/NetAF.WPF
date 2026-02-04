@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NetAF.Targets.WPF.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+             d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <RoutedCommand x:Key="NorthSelectedCommand"/>
         <RoutedCommand x:Key="EastSelectedCommand"/>
@@ -57,11 +57,11 @@
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="NorthButton" Command="{StaticResource NorthSelectedCommand}" Style="{Binding Path=NorthButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.Column="1"/>
-        <Button x:Name="EastButton" Command="{StaticResource EastSelectedCommand}" Style="{Binding Path=EastButtonStyle, Mode=OneWay}" Grid.Row="1" Grid.Column="2"/>
-        <Button x:Name="SouthButton" Command="{StaticResource SouthSelectedCommand}" Style="{Binding Path=SouthButtonStyle, Mode=OneWay}" Grid.Row="2" Grid.Column="1"/>
-        <Button x:Name="WestButton" Command="{StaticResource WestSelectedCommand}" Style="{Binding Path=WestButtonStyle, Mode=OneWay}" Grid.Row="1" Grid.Column="0"/>
-        <Button x:Name="UpButton" Command="{StaticResource UpSelectedCommand}" Style="{Binding Path=UpButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.Column="4"/>
-        <Button x:Name="DownButton" Command="{StaticResource DownSelectedCommand}" Style="{Binding Path=DownButtonStyle, Mode=OneWay}" Grid.Row="2" Grid.Column="4"/>
+        <Button x:Name="NorthButton" Command="{StaticResource NorthSelectedCommand}" Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFMovementCommandPicker}, Path=NorthButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.Column="1"/>
+        <Button x:Name="EastButton" Command="{StaticResource EastSelectedCommand}" Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFMovementCommandPicker}, Path=EastButtonStyle, Mode=OneWay}" Grid.Row="1" Grid.Column="2"/>
+        <Button x:Name="SouthButton" Command="{StaticResource SouthSelectedCommand}" Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFMovementCommandPicker}, Path=SouthButtonStyle, Mode=OneWay}" Grid.Row="2" Grid.Column="1"/>
+        <Button x:Name="WestButton" Command="{StaticResource WestSelectedCommand}" Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFMovementCommandPicker}, Path=WestButtonStyle, Mode=OneWay}" Grid.Row="1" Grid.Column="0"/>
+        <Button x:Name="UpButton" Command="{StaticResource UpSelectedCommand}" Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFMovementCommandPicker}, Path=UpButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.Column="4"/>
+        <Button x:Name="DownButton" Command="{StaticResource DownSelectedCommand}" Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFMovementCommandPicker}, Path=DownButtonStyle, Mode=OneWay}" Grid.Row="2" Grid.Column="4"/>
     </Grid>
 </UserControl>

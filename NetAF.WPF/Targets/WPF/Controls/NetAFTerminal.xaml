@@ -4,25 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:effects="clr-namespace:LoFiEffects.WPF.Effects;assembly=LoFiEffects.WPF"
+             xmlns:local="clr-namespace:NetAF.Targets.WPF.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" DataContext="{Binding RelativeSource={RelativeSource Self}}" Background="Black" FontSize="13" FontFamily="Cascadia Mono">
-    <UserControl.Foreground>
-        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <LinearGradientBrush.GradientStops>
-                <GradientStop Color="Lime" Offset="0"/>
-                <GradientStop Color="LimeGreen" Offset="1"/>
-            </LinearGradientBrush.GradientStops>
-        </LinearGradientBrush>
-    </UserControl.Foreground>
+             d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <Storyboard x:Key="TransitionOut">
-            <DoubleAnimation Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Effect.Intensity" From="0" To="0.1" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Effect.Intensity" From="0" To="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFTerminal}, Path=TransitionStrength, Mode=OneWay}" Duration="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFTerminal}, Path=TransitionDuration, Mode=OneWay}"/>
         </Storyboard>
         <Storyboard x:Key="TransitionIn">
-            <DoubleAnimation Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Effect.Intensity" From="0.1" To="0" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Effect.Intensity" From="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFTerminal}, Path=TransitionStrength, Mode=OneWay}" To="0" Duration="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFTerminal}, Path=TransitionDuration, Mode=OneWay}"/>
         </Storyboard>
     </UserControl.Resources>
-    <TextBlock Name="TextBlock" Padding="{Binding Path=Padding, Mode=OneWay}" TextWrapping="Wrap" Grid.Row="0">
+    <TextBlock Name="TextBlock" Foreground="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFTerminal}, Path=Foreground, Mode=OneWay}" Padding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFTerminal}, Path=Padding, Mode=OneWay}" TextWrapping="Wrap">
         <TextBlock.Effect>
             <effects:PixelateEffect Intensity="0"/>
         </TextBlock.Effect>

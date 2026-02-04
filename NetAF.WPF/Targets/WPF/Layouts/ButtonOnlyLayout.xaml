@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:NetAF.Targets.WPF.Layouts"
              xmlns:wpf="clr-namespace:NetAF.Targets.WPF.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+             d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -18,17 +18,17 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <wpf:NetAFMovementCommandPicker x:Name="MovementCommandPicker"
-            Style="{Binding Path=MovementCommandPickerStyle, Mode=OneWay}"
+            Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonOnlyLayout}, Path=MovementCommandPickerStyle, Mode=OneWay}"
             Grid.Row="0" 
             Grid.Column="0" 
             Grid.RowSpan="2"/>
         <wpf:NetAFRegionMapCommandPicker x:Name="RegionMapCommandPicker"
-            Style="{Binding Path=RegionMapCommandPickerStyle, Mode=OneWay}"
+            Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonOnlyLayout}, Path=RegionMapCommandPickerStyle, Mode=OneWay}"
             Grid.Row="0" 
             Grid.Column="0" 
             Grid.RowSpan="2"/>
         <wpf:NetAFCommandPicker x:Name="GeneralCommandPicker"
-             Style="{Binding Path=GeneralCommandPickerStyle, Mode=OneWay}"
+             Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonOnlyLayout}, Path=GeneralCommandPickerStyle, Mode=OneWay}"
              ShowPersistenceCommands="False" 
              ShowExecutionCommands="False" 
              ShowMovementCommands="False" 
@@ -40,7 +40,7 @@
              Grid.Column="2">
         </wpf:NetAFCommandPicker>
         <wpf:NetAFCommandPicker x:Name="SceneCommandPicker"
-             Style="{Binding Path=SceneCommandPickerStyle, Mode=OneWay}"
+             Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonOnlyLayout}, Path=SceneCommandPickerStyle, Mode=OneWay}"
              ShowPersistenceCommands="False" 
              ShowExecutionCommands="False" 
              ShowMovementCommands="False"

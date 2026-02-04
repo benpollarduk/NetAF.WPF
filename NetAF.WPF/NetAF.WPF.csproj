@@ -62,6 +62,9 @@
     <Compile Update="Targets\WPF\Controls\NetAFMovementCommandPicker.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Targets\WPF\Controls\NetAFHTMLTerminal.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Targets\Wpf\Controls\NetAFTerminal.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

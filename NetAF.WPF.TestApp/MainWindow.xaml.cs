@@ -1,6 +1,7 @@
 ﻿using NetAF.Logging.Events;
 using NetAF.Logic;
 using NetAF.Rendering.FrameBuilders;
+using NetAF.Targets.Html;
 using NetAF.Targets.Text;
 using NetAF.Targets.WPF.Layouts;
 using System.Windows;

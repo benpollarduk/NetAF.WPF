@@ -5,13 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NetAF.Targets.WPF.Layouts"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+             d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <local:PromptOnlyLayout Style="{Binding Path=PromptOnlyLayoutStyle, Mode=OneWay}" Grid.Row="0"/>
-        <local:ButtonOnlyLayout Style="{Binding Path=ButtonOnlyLayoutStyle, Mode=OneWay}" Grid.Row="1"/>
+        <local:PromptOnlyLayout Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:CombinationLayout}, Path=PromptOnlyLayoutStyle, Mode=OneWay}" Grid.Row="0"/>
+        <local:ButtonOnlyLayout Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:CombinationLayout}, Path=ButtonOnlyLayoutStyle, Mode=OneWay}" Grid.Row="1"/>
     </Grid>
 </UserControl>

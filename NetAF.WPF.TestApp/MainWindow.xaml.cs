@@ -2,6 +2,7 @@
 using NetAF.Logic;
 using NetAF.Rendering.FrameBuilders;
 using NetAF.Targets.Html;
+using NetAF.Targets.Markup;
 using NetAF.Targets.Text;
 using NetAF.Targets.WPF.Layouts;
 using System.Windows;
@@ -24,7 +25,7 @@ namespace NetAF.WPF.TestApp
 
             EventBus.Subscribe<GameStarted>(x => Title = x.Game.Info.Name);
 
-            GameConfiguration configuration = new(new TextAdapter(Terminal), FrameBuilderCollections.Text, Assets.Size.Dynamic);
+            var configuration = new GameConfiguration(new MarkupAdapter(Terminal), FrameBuilderCollections.Markup, Assets.Size.Dynamic);
             GameExecutor.Execute(ExampleGame.Create(configuration));
         }
 

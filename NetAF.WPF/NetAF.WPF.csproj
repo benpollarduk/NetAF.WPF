@@ -52,7 +52,10 @@
 
   <ItemGroup>
     <PackageReference Include="LoFiEffects.WPF" Version="1.3.0" />
-    <PackageReference Include="NetAF" Version="3.10.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\NetAF\NetAF\NetAF.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -62,7 +65,7 @@
     <Compile Update="Targets\WPF\Controls\NetAFMovementCommandPicker.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Targets\WPF\Controls\NetAFHTMLTerminal.xaml.cs">
+    <Compile Update="Targets\WPF\Controls\NetAFMarkupTerminal.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Targets\Wpf\Controls\NetAFTerminal.xaml.cs">

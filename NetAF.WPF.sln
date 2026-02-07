@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetAF.WPF.TestApp", "NetAF.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetAF.WPF", "NetAF.WPF\NetAF.WPF.csproj", "{65687051-5F63-4E05-93B1-87A73162EE9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetAF", "..\NetAF\NetAF\NetAF.csproj", "{B6C74A38-FF67-059C-5C59-A55275051FEB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{65687051-5F63-4E05-93B1-87A73162EE9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65687051-5F63-4E05-93B1-87A73162EE9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65687051-5F63-4E05-93B1-87A73162EE9F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B6C74A38-FF67-059C-5C59-A55275051FEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B6C74A38-FF67-059C-5C59-A55275051FEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B6C74A38-FF67-059C-5C59-A55275051FEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B6C74A38-FF67-059C-5C59-A55275051FEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -55,10 +55,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\NetAF\NetAF\NetAF.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Targets\WPF\Controls\NetAFRegionMapCommandPicker.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -68,7 +64,7 @@
     <Compile Update="Targets\WPF\Controls\NetAFMarkupTerminal.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Targets\Wpf\Controls\NetAFTerminal.xaml.cs">
+    <Compile Update="Targets\Wpf\Controls\NetAFTextTerminal.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Targets\Wpf\Controls\NetAFPrompt.xaml.cs">
@@ -86,7 +82,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Targets\Wpf\Controls\NetAFTerminal.xaml">
+    <Page Update="Targets\Wpf\Controls\NetAFTextTerminal.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

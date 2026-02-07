@@ -8,9 +8,9 @@ using System.Windows.Media.Animation;
 namespace NetAF.Targets.WPF.Controls
 {
     /// <summary>
-    /// Interaction logic for NetAFTerminal.xaml
+    /// Interaction logic for NetAFTextTerminal.xaml
     /// </summary>
-    public partial class NetAFTerminal : UserControl, IFramePresenter
+    public partial class NetAFTextTerminal : UserControl, IFramePresenter
     {
         #region Properties
 
@@ -46,28 +46,28 @@ namespace NetAF.Targets.WPF.Controls
         #region DependencyProperties
 
         /// <summary>
-        /// Identifies the NetAFTerminal.UseTransitions property.
+        /// Identifies the NetAFTextTerminal.UseTransitions property.
         /// </summary>
-        public static readonly DependencyProperty UseTransitionsProperty = DependencyProperty.Register("UseTransitions", typeof(bool), typeof(NetAFTerminal), new PropertyMetadata(true));
+        public static readonly DependencyProperty UseTransitionsProperty = DependencyProperty.Register("UseTransitions", typeof(bool), typeof(NetAFTextTerminal), new PropertyMetadata(true));
 
         /// <summary>
-        /// Identifies the NetAFTerminal.TransitionStrength property.
+        /// Identifies the NetAFTextTerminal.TransitionStrength property.
         /// </summary>
-        public static readonly DependencyProperty TransitionStrengthProperty = DependencyProperty.Register("TransitionStrength", typeof(double), typeof(NetAFTerminal), new PropertyMetadata(0.1d));
+        public static readonly DependencyProperty TransitionStrengthProperty = DependencyProperty.Register("TransitionStrength", typeof(double), typeof(NetAFTextTerminal), new PropertyMetadata(0.1d));
 
         /// <summary>
-        /// Identifies the NetAFTerminal.TransitionDuration property.
+        /// Identifies the NetAFTextTerminal.TransitionDuration property.
         /// </summary>
-        public static readonly DependencyProperty TransitionDurationProperty = DependencyProperty.Register("TransitionDuration", typeof(Duration), typeof(NetAFTerminal), new PropertyMetadata(new Duration(TimeSpan.FromMilliseconds(200))));
+        public static readonly DependencyProperty TransitionDurationProperty = DependencyProperty.Register("TransitionDuration", typeof(Duration), typeof(NetAFTextTerminal), new PropertyMetadata(new Duration(TimeSpan.FromMilliseconds(200))));
 
         #endregion
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the NetAFTerminal class.
+        /// Initializes a new instance of the NetAFTextTerminal class.
         /// </summary>
-        public NetAFTerminal()
+        public NetAFTextTerminal()
         {
             InitializeComponent();
         }

@@ -1,4 +1,4 @@
-﻿using NetAF.Logging.Events;
+﻿using NetAF.Events;
 using NetAF.Logic;
 using NetAF.Logic.Modes;
 using System.Windows;

@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\NetAF\NetAF\NetAF.csproj" />
     <ProjectReference Include="..\NetAF.WPF\NetAF.WPF.csproj" />
   </ItemGroup>
 

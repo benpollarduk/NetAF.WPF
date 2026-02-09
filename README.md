@@ -1,7 +1,7 @@
 <div align="center">
 
 # NetAF.WPF
-A WPF wrapper for NetAF.
+An extension library for NetAF targeting WPF and providing controls to allow NetAF to be easily integrated into WPF applications.
 
 ![icon](.nuget/Icon.bmp)
 

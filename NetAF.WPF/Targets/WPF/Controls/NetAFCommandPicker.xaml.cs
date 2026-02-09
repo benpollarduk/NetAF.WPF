@@ -39,22 +39,22 @@ namespace NetAF.Targets.WPF.Controls
         /// <summary>
         /// Get the command for when a command is selected.
         /// </summary>
-        private readonly RoutedUICommand CommandSelectedCommand = new RoutedUICommand();
+        private readonly RoutedUICommand CommandSelectedCommand = new();
 
         /// <summary>
         /// Get the command for when a prompt is selected.
         /// </summary>
-        private readonly RoutedUICommand PromptSelectedCommand = new RoutedUICommand();
+        private readonly RoutedUICommand PromptSelectedCommand = new();
 
         /// <summary>
         /// Get the command for when a clear is selected.
         /// </summary>
-        private readonly RoutedUICommand ClearSelectedCommand = new RoutedUICommand();
+        private readonly RoutedUICommand ClearSelectedCommand = new();
 
         /// <summary>
         /// Get the command for when acknowledge is selected.
         /// </summary>
-        private readonly RoutedUICommand AcknowledgeSelectedCommand = new RoutedUICommand();
+        private readonly RoutedUICommand AcknowledgeSelectedCommand = new();
 
         #endregion
 

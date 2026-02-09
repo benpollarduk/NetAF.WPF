@@ -1,5 +1,4 @@
 ﻿using NetAF.Rendering;
-using NetAF.Targets.WPF.Classes;
 using NetAF.Targets.WPF.Themes;
 using System.Globalization;
 using System.Windows;

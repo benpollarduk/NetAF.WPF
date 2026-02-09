@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
 
-namespace NetAF.Targets.WPF.Classes
+namespace NetAF.Targets.WPF
 {
     /// <summary>
     /// Provides a renderer for rendering FlowDocuments from markup.
@@ -78,8 +78,7 @@ namespace NetAF.Targets.WPF.Classes
             p.FontStyle = fontTheme.FontStyle;
             p.Foreground = fontTheme.Foreground;
             p.Background = fontTheme.Background;
-
-            p.Margin = new Thickness(0, 12, 0, 6);
+            p.Margin = fontTheme.Margin;
 
             return p;
         }
@@ -88,11 +87,11 @@ namespace NetAF.Targets.WPF.Classes
         {
             var para = new Paragraph
             {
-                Margin = new Thickness(4),
                 FontFamily = theme.Paragraph.FontFamily,
                 FontSize = theme.Paragraph.FontSize,
                 Foreground = theme.Paragraph.Foreground,
-                Background = theme.Paragraph.Background
+                Background = theme.Paragraph.Background,
+                Margin = theme.Paragraph.Margin
             };
 
             foreach (var inline in p.Inlines)
@@ -105,10 +104,15 @@ namespace NetAF.Targets.WPF.Classes
         {
             return inline switch
             {
-                TextNode t => new Run(t.Text),
+                TextNode t => CreateRun(t.Text),
                 StyleSpanNode s => RenderStyleSpan(s, theme),
                 _ => new Run()
             };
+        }
+
+        private static Run CreateRun(string text)
+        {
+            return new Run(text);
         }
 
         private static Span RenderStyleSpan(StyleSpanNode s, FlowDocumentTheme theme)
@@ -131,13 +135,6 @@ namespace NetAF.Targets.WPF.Classes
                 span.FontSize = theme.Monospace.FontSize;
                 span.Foreground = theme.Monospace.Foreground;
                 span.Background = theme.Monospace.Background;
-            }
-            else
-            {
-                span.FontFamily = theme.Paragraph.FontFamily;
-                span.FontSize = theme.Paragraph.FontSize;
-                span.Foreground = theme.Paragraph.Foreground;
-                span.Background = theme.Paragraph.Background;
             }
 
             if (style.Foreground != null)

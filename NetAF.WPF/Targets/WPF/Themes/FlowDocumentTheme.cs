@@ -9,7 +9,7 @@
     /// <param name="heading4">The H4 theme.</param>
     /// <param name="paragraph">The paragraph theme.</param>
     /// <param name="monospace">The monospace theme.</param>
-    public class FlowDocumentTheme(HeaderFontTheme heading1, HeaderFontTheme heading2, HeaderFontTheme heading3, HeaderFontTheme heading4, FontTheme paragraph, FontTheme monospace)
+    public class FlowDocumentTheme(HeaderFontTheme heading1, HeaderFontTheme heading2, HeaderFontTheme heading3, HeaderFontTheme heading4, ParagraphFontTheme paragraph, FontTheme monospace)
     {
         #region Properties
 
@@ -36,7 +36,7 @@
         /// <summary>
         /// Get or set the paragraph theme.
         /// </summary>
-        public FontTheme Paragraph { get; set; } = paragraph;
+        public ParagraphFontTheme Paragraph { get; set; } = paragraph;
 
         /// <summary>
         /// Get or set the monospace theme.

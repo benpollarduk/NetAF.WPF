@@ -7,9 +7,9 @@ using System.Windows.Controls;
 namespace NetAF.Targets.WPF.Layouts
 {
     /// <summary>
-    /// Interaction logic for ButtonOnlyLayout.xaml
+    /// Interaction logic for ButtonLayout.xaml
     /// </summary>
-    public partial class ButtonOnlyLayout : UserControl
+    public partial class ButtonLayout : UserControl
     {
         #region Properties
 
@@ -54,33 +54,33 @@ namespace NetAF.Targets.WPF.Layouts
         #region DependencyProperties
 
         /// <summary>
-        /// Identifies the ButtonOnlyLayout.MovementCommandPickerStyle property.
+        /// Identifies the ButtonLayout.MovementCommandPickerStyle property.
         /// </summary>
-        public static readonly DependencyProperty MovementCommandPickerStyleProperty = DependencyProperty.Register("MovementCommandPickerStyle", typeof(Style), typeof(ButtonOnlyLayout));
+        public static readonly DependencyProperty MovementCommandPickerStyleProperty = DependencyProperty.Register("MovementCommandPickerStyle", typeof(Style), typeof(ButtonLayout));
 
         /// <summary>
-        /// Identifies the ButtonOnlyLayout.RegionMapCommandPickerStyle property.
+        /// Identifies the ButtonLayout.RegionMapCommandPickerStyle property.
         /// </summary>
-        public static readonly DependencyProperty RegionMapCommandPickerStyleProperty = DependencyProperty.Register("RegionMapCommandPickerStyle", typeof(Style), typeof(ButtonOnlyLayout));
+        public static readonly DependencyProperty RegionMapCommandPickerStyleProperty = DependencyProperty.Register("RegionMapCommandPickerStyle", typeof(Style), typeof(ButtonLayout));
 
         /// <summary>
-        /// Identifies the ButtonOnlyLayout.GeneralCommandPickerStyle property.
+        /// Identifies the ButtonLayout.GeneralCommandPickerStyle property.
         /// </summary>
-        public static readonly DependencyProperty GeneralCommandPickerStyleProperty = DependencyProperty.Register("GeneralCommandPickerStyle", typeof(Style), typeof(ButtonOnlyLayout));
+        public static readonly DependencyProperty GeneralCommandPickerStyleProperty = DependencyProperty.Register("GeneralCommandPickerStyle", typeof(Style), typeof(ButtonLayout));
 
         /// <summary>
-        /// Identifies the ButtonOnlyLayout.SceneCommandPickerStyle property.
+        /// Identifies the ButtonLayout.SceneCommandPickerStyle property.
         /// </summary>
-        public static readonly DependencyProperty SceneCommandPickerStyleProperty = DependencyProperty.Register("SceneCommandPickerStyle", typeof(Style), typeof(ButtonOnlyLayout));
+        public static readonly DependencyProperty SceneCommandPickerStyleProperty = DependencyProperty.Register("SceneCommandPickerStyle", typeof(Style), typeof(ButtonLayout));
 
         #endregion
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the ButtonOnlyLayout class.
+        /// Initializes a new instance of the ButtonLayout class.
         /// </summary>
-        public ButtonOnlyLayout()
+        public ButtonLayout()
         {
             InitializeComponent();
 

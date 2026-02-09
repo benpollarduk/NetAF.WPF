@@ -4,7 +4,7 @@ using System.Windows.Media;
 namespace NetAF.Targets.WPF.Themes
 {
     /// <summary>
-    /// Provides a theme for a font.
+    /// Provides a theme for a header font.
     /// </summary>
     /// <param name="foreground">The foreground brush.</param>
     /// <param name="background">The background brush.</param>
@@ -12,7 +12,8 @@ namespace NetAF.Targets.WPF.Themes
     /// <param name="fontFamily">The font family.</param>
     /// <param name="fontWeight">The font weight.</param>
     /// <param name="fontStyle">The font style.</param>
-    public class HeaderFontTheme(Brush foreground, Brush background, double fontSize, FontFamily fontFamily, FontWeight fontWeight, FontStyle fontStyle) : FontTheme(foreground, background, fontSize, fontFamily)
+    /// <param name="margin">The margin.</param>
+    public class HeaderFontTheme(Brush foreground, Brush background, double fontSize, FontFamily fontFamily, FontWeight fontWeight, FontStyle fontStyle, Thickness margin) : FontTheme(foreground, background, fontSize, fontFamily)
     {
         #region Properties
 
@@ -25,6 +26,11 @@ namespace NetAF.Targets.WPF.Themes
         /// Get or set the font style.
         /// </summary>
         public FontStyle FontStyle { get; set; } = fontStyle;
+
+        /// <summary>
+        /// Get or set the margin.
+        /// </summary>
+        public Thickness Margin { get; set; } = margin;
 
         #endregion
     }

@@ -2,7 +2,6 @@
 using NetAF.Logic;
 using NetAF.Rendering.FrameBuilders;
 using NetAF.Targets.Markup;
-using NetAF.Targets.WPF.Layouts;
 using System.Windows;
 
 namespace NetAF.WPF.TestApp
@@ -25,37 +24,6 @@ namespace NetAF.WPF.TestApp
 
             var configuration = new GameConfiguration(new MarkupAdapter(Terminal), FrameBuilderCollections.Markup, Assets.Size.Dynamic);
             GameExecutor.Execute(ExampleGame.Create(configuration));
-        }
-
-        #endregion
-
-        #region Methods
-
-        private void SetInputControl(UIElement inputControl)
-        {
-            if (!IsInitialized)
-                return;
-
-            InputControl.Content = inputControl;
-        }
-
-        #endregion
-
-        #region EventHandlers
-
-        private void PromptRadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-            SetInputControl(new PromptOnlyLayout());
-        }
-
-        private void ButtonsRadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-            SetInputControl(new ButtonOnlyLayout());
-        }
-
-        private void CombinationRadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-            SetInputControl(new CombinationLayout());
         }
 
         #endregion

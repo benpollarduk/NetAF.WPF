@@ -51,9 +51,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NetAF" Version="3.11.6" />
     <PackageReference Include="LoFiEffects.WPF" Version="1.3.0" />
-    <PackageReference Include="NetAF" Version="3.11.7" />
+    <PackageReference Include="NetAF" Version="3.11.10" />
   </ItemGroup>
 
   <ItemGroup>
@@ -72,13 +71,7 @@
     <Compile Update="Targets\Wpf\Controls\NetAFPrompt.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Targets\WPF\Layouts\PromptOnlyLayout.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Targets\WPF\Layouts\CombinationLayout.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Targets\WPF\Layouts\ButtonOnlyLayout.xaml.cs">
+    <Compile Update="Targets\WPF\Layouts\ButtonLayout.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

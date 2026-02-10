@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:NetAF.Targets.WPF.Controls"
+             xmlns:local="clr-namespace:NetAF.Targets.WPF.Controls" xmlns:converters="clr-namespace:NetAF.Targets.WPF.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -35,6 +35,7 @@
         <Style x:Key="DefaultDownButtonStyle" TargetType="Button" BasedOn="{StaticResource DirectionButtonStyle}">
             <Setter Property="Content" Value="Down"/>
         </Style>
+        <converters:DoubleToGridLengthConverter x:Key="DoubleToGridLengthConverter"/>
     </UserControl.Resources>
     <UserControl.CommandBindings>
         <CommandBinding x:Name="NorthSelectedCommandBinding" Command="{StaticResource NorthSelectedCommand}" Executed="NorthSelectedCommandBinding_Executed"/>
@@ -44,6 +45,16 @@
         <CommandBinding x:Name="UpSelectedCommandBinding" Command="{StaticResource UpSelectedCommand}" Executed="UpSelectedCommandBinding_Executed"/>
         <CommandBinding x:Name="DownSelectedCommandBinding" Command="{StaticResource DownSelectedCommand}" Executed="DownSelectedCommandBinding_Executed"/>
     </UserControl.CommandBindings>
+    <UserControl.Style>
+        <Style TargetType="{x:Type local:NetAFMovementCommandPicker}">
+            <Setter Property="NorthButtonStyle" Value="{StaticResource DefaultNorthButtonStyle}"/>
+            <Setter Property="EastButtonStyle" Value="{StaticResource DefaultEastButtonStyle}"/>
+            <Setter Property="SouthButtonStyle" Value="{StaticResource DefaultSouthButtonStyle}"/>
+            <Setter Property="WestButtonStyle" Value="{StaticResource DefaultWestButtonStyle}"/>
+            <Setter Property="UpButtonStyle" Value="{StaticResource DefaultUpButtonStyle}"/>
+            <Setter Property="DownButtonStyle" Value="{StaticResource DefaultDownButtonStyle}"/>
+        </Style>
+    </UserControl.Style>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -54,7 +65,7 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFMovementCommandPicker}, Path=SectionSpacing, Mode=OneWay, Converter={StaticResource DoubleToGridLengthConverter}}"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Button x:Name="NorthButton" Command="{StaticResource NorthSelectedCommand}" Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFMovementCommandPicker}, Path=NorthButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.Column="1"/>

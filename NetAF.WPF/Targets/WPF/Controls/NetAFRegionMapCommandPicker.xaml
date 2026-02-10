@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NetAF.Targets.WPF.Controls"
+             xmlns:converters="clr-namespace:NetAF.Targets.WPF.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -51,6 +52,7 @@
         <Style x:Key="DefaultEndButtonStyle" TargetType="Button" BasedOn="{StaticResource DirectionButtonStyle}">
             <Setter Property="Content" Value="End"/>
         </Style>
+        <converters:DoubleToGridLengthConverter x:Key="DoubleToGridLengthConverter"/>
     </UserControl.Resources>
     <UserControl.CommandBindings>
         <CommandBinding x:Name="PanNorthSelectedCommandBinding" Command="{StaticResource PanNorthSelectedCommand}" Executed="PanNorthSelectedCommandBinding_Executed"/>
@@ -64,6 +66,20 @@
         <CommandBinding x:Name="PanResetSelectedCommandBinding" Command="{StaticResource PanResetSelectedCommand}" Executed="PanResetSelectedCommandBinding_Executed"/>
         <CommandBinding x:Name="EndSelectedCommandBinding" Command="{StaticResource EndSelectedCommand}" Executed="EndSelectedCommandBinding_Executed"/>
     </UserControl.CommandBindings>
+    <UserControl.Style>
+        <Style TargetType="{x:Type local:NetAFRegionMapCommandPicker}">
+            <Setter Property="PanNorthButtonStyle" Value="{StaticResource DefaultPanNorthButtonStyle}"/>
+            <Setter Property="PanEastButtonStyle" Value="{StaticResource DefaultPanEastButtonStyle}"/>
+            <Setter Property="PanSouthButtonStyle" Value="{StaticResource DefaultPanSouthButtonStyle}"/>
+            <Setter Property="PanWestButtonStyle" Value="{StaticResource DefaultPanWestButtonStyle}"/>
+            <Setter Property="PanUpButtonStyle" Value="{StaticResource DefaultPanUpButtonStyle}"/>
+            <Setter Property="PanDownButtonStyle" Value="{StaticResource DefaultPanDownButtonStyle}"/>
+            <Setter Property="PanResetButtonStyle" Value="{StaticResource DefaultPanResetButtonStyle}"/>
+            <Setter Property="ZoomInButtonStyle" Value="{StaticResource DefaultZoomInButtonStyle}"/>
+            <Setter Property="ZoomOutButtonStyle" Value="{StaticResource DefaultZoomOutButtonStyle}"/>
+            <Setter Property="EndButtonStyle" Value="{StaticResource DefaultEndButtonStyle}"/>
+        </Style>
+    </UserControl.Style>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -74,11 +90,11 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFRegionMapCommandPicker}, Path=SectionSpacing, Mode=OneWay, Converter={StaticResource DoubleToGridLengthConverter}}"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFRegionMapCommandPicker}, Path=SectionSpacing, Mode=OneWay, Converter={StaticResource DoubleToGridLengthConverter}}"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFRegionMapCommandPicker}, Path=SectionSpacing, Mode=OneWay, Converter={StaticResource DoubleToGridLengthConverter}}"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Button x:Name="PanNorthButton" Command="{StaticResource PanNorthSelectedCommand}" Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFRegionMapCommandPicker}, Path=PanNorthButtonStyle, Mode=OneWay}" Grid.Row="0" Grid.Column="1"/>

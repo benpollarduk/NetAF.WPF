@@ -1,6 +1,7 @@
 ﻿using NetAF.Events;
 using NetAF.Logic;
 using NetAF.Logic.Modes;
+using NetAF.Targets.WPF.Controls;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -49,6 +50,15 @@ namespace NetAF.Targets.WPF.Layouts
             set { SetValue(SceneCommandPickerStyleProperty, value); }
         }
 
+        /// <summary>
+        /// Get or set the spacing to use between sections. This is a dependency property.
+        /// </summary>
+        public double SectionSpacing
+        {
+            get { return (double)GetValue(SectionSpacingProperty); }
+            set { SetValue(SectionSpacingProperty, value); }
+        }
+
         #endregion
 
         #region DependencyProperties
@@ -72,6 +82,11 @@ namespace NetAF.Targets.WPF.Layouts
         /// Identifies the ButtonLayout.SceneCommandPickerStyle property.
         /// </summary>
         public static readonly DependencyProperty SceneCommandPickerStyleProperty = DependencyProperty.Register("SceneCommandPickerStyle", typeof(Style), typeof(ButtonLayout));
+
+        /// <summary>
+        /// Identifies the ButtonLayout.SectionSpacing property.
+        /// </summary>
+        public static readonly DependencyProperty SectionSpacingProperty = DependencyProperty.Register("SectionSpacing", typeof(double), typeof(ButtonLayout), new PropertyMetadata(50d));
 
         #endregion
 

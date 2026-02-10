@@ -6,11 +6,11 @@
         xmlns:layouts="clr-namespace:NetAF.Targets.WPF.Layouts;assembly=NetAF.WPF"
         xmlns:controls="clr-namespace:NetAF.Targets.WPF.Controls;assembly=NetAF.WPF"
         mc:Ignorable="d"
-        Title="NetAF.WPF.TestApp" Background="DarkGray" Height="850" Width="1000">
+        Title="NetAF.WPF.TestApp" Background="#FF505050" Height="850" Width="1000">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/NetAF.WPF;component/Targets/WPF/Styles/DefaultStyles.xaml"/>
+                <ResourceDictionary Source="/NetAF.WPF;component/Targets/WPF/Styles/DarkStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
         <!--<controls:NetAFTextTerminal x:Name="Terminal" Foreground="YellowGreen" Background="Black" FontSize="16" FontFamily="Cascadia Mono" Margin="10" Padding="4" Grid.Row="0"/>-->
         <controls:NetAFMarkupTerminal x:Name="Terminal" Background="Black" Margin="10" Padding="4" Grid.Row="0"/>
-        <controls:NetAFPrompt Margin="10,0,10,10" Style="{StaticResource PromptStyle}" Grid.Row="1"/>
-        <layouts:ButtonLayout x:Name="ButtonLayout" Margin="10,0,10,10" Style="{StaticResource ButtonLayoutStyle}" Grid.Row="2"/>
+        <controls:NetAFPrompt Margin="10,0,10,10" Style="{StaticResource DarkPromptStyle}" Grid.Row="1"/>
+        <layouts:ButtonLayout x:Name="ButtonLayout" Margin="10,0,10,10" Style="{StaticResource DarkButtonLayoutStyle}" Grid.Row="2"/>
     </Grid>
 </Window>

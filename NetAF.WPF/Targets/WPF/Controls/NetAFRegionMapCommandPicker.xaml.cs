@@ -105,6 +105,15 @@ namespace NetAF.Targets.WPF.Controls
             set { SetValue(EndButtonStyleProperty, value); }
         }
 
+        /// <summary>
+        /// Get or set the spacing to use between sections. This is a dependency property.
+        /// </summary>
+        public double SectionSpacing
+        {
+            get { return (double)GetValue(SectionSpacingProperty); }
+            set { SetValue(SectionSpacingProperty, value); }
+        }
+
         #endregion
 
         #region DependencyProperties
@@ -159,6 +168,11 @@ namespace NetAF.Targets.WPF.Controls
         /// </summary>
         public static readonly DependencyProperty EndButtonStyleProperty = DependencyProperty.Register("EndButtonStyle", typeof(Style), typeof(NetAFRegionMapCommandPicker));
 
+        /// <summary>
+        /// Identifies the NetAFRegionMapCommandPicker.SectionSpacing property.
+        /// </summary>
+        public static readonly DependencyProperty SectionSpacingProperty = DependencyProperty.Register("SectionSpacing", typeof(double), typeof(NetAFRegionMapCommandPicker), new PropertyMetadata(50d));
+        
         #endregion
 
         #region Constructors
@@ -169,17 +183,6 @@ namespace NetAF.Targets.WPF.Controls
         public NetAFRegionMapCommandPicker()
         {
             InitializeComponent();
-
-            PanNorthButtonStyle = TryFindResource("DefaultPanNorthButtonStyle") as Style ?? new Style();
-            PanEastButtonStyle = TryFindResource("DefaultPanEastButtonStyle") as Style ?? new Style();
-            PanSouthButtonStyle = TryFindResource("DefaultPanSouthButtonStyle") as Style ?? new Style();
-            PanWestButtonStyle = TryFindResource("DefaultPanWestButtonStyle") as Style ?? new Style();
-            PanUpButtonStyle = TryFindResource("DefaultPanUpButtonStyle") as Style ?? new Style();
-            PanDownButtonStyle = TryFindResource("DefaultPanDownButtonStyle") as Style ?? new Style();
-            ZoomInButtonStyle = TryFindResource("DefaultZoomInButtonStyle") as Style ?? new Style();
-            ZoomOutButtonStyle = TryFindResource("DefaultZoomOutButtonStyle") as Style ?? new Style();
-            PanResetButtonStyle = TryFindResource("DefaultPanResetButtonStyle") as Style ?? new Style();
-            EndButtonStyle = TryFindResource("DefaultEndButtonStyle") as Style ?? new Style();
         }
 
         #endregion

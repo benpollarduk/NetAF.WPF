@@ -68,6 +68,15 @@ namespace NetAF.Targets.WPF.Controls
             set { SetValue(DownButtonStyleProperty, value); }
         }
 
+        /// <summary>
+        /// Get or set the spacing to use between sections. This is a dependency property.
+        /// </summary>
+        public double SectionSpacing
+        {
+            get { return (double)GetValue(SectionSpacingProperty); }
+            set { SetValue(SectionSpacingProperty, value); }
+        }
+
         #endregion
 
         #region DependencyProperties
@@ -102,6 +111,11 @@ namespace NetAF.Targets.WPF.Controls
         /// </summary>
         public static readonly DependencyProperty DownButtonStyleProperty = DependencyProperty.Register("DownButtonStyle", typeof(Style), typeof(NetAFMovementCommandPicker));
 
+        /// <summary>
+        /// Identifies the NetAFMovementCommandPicker.SectionSpacing property.
+        /// </summary>
+        public static readonly DependencyProperty SectionSpacingProperty = DependencyProperty.Register("SectionSpacing", typeof(double), typeof(NetAFMovementCommandPicker), new PropertyMetadata(50d));
+
         #endregion
 
         #region Constructors
@@ -112,13 +126,6 @@ namespace NetAF.Targets.WPF.Controls
         public NetAFMovementCommandPicker()
         {
             InitializeComponent();
-
-            NorthButtonStyle = TryFindResource("DefaultNorthButtonStyle") as Style ?? new Style();
-            EastButtonStyle = TryFindResource("DefaultEastButtonStyle") as Style ?? new Style();
-            SouthButtonStyle = TryFindResource("DefaultSouthButtonStyle") as Style ?? new Style();
-            WestButtonStyle = TryFindResource("DefaultWestButtonStyle") as Style ?? new Style();
-            UpButtonStyle = TryFindResource("DefaultUpButtonStyle") as Style ?? new Style();
-            DownButtonStyle = TryFindResource("DefaultDownButtonStyle") as Style ?? new Style();
         }
 
         #endregion

@@ -6,5 +6,5 @@
              xmlns:local="clr-namespace:NetAF.Targets.WPF.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <WrapPanel Name="ButtonWrapPanel" Orientation="Horizontal"/>
+    <WrapPanel Name="ButtonWrapPanel" Orientation="Horizontal" Grid.Column="0"/>
 </UserControl>

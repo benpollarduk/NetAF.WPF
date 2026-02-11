@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="NetAF.Targets.WPF.OutputLayouts.SplitMapLayout"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:NetAF.Targets.WPF.OutputLayouts"
+             xmlns:wpf="clr-namespace:NetAF.Targets.WPF.Controls"
+             xmlns:converters="clr-namespace:NetAF.Targets.WPF.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:DoubleToGridLengthConverter x:Key="DoubleToGridLengthConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SplitMapLayout}, Path=SectionSpacing, Mode=OneWay, Converter={StaticResource DoubleToGridLengthConverter}}"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <wpf:NetAFMarkupTerminal x:Name="TerminalControl"
+                                 Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SplitMapLayout}, Path=TerminalStyle, Mode=OneWay}"
+                                 Grid.Column="0"/>
+        <wpf:NetAFMarkupRoomMap x:Name="MapControl"  
+                                 Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SplitMapLayout}, Path=RoomMapStyle, Mode=OneWay}"
+                                 Grid.Column="2"/>
+    </Grid>
+</UserControl>

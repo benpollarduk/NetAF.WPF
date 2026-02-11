@@ -1,5 +1,6 @@
 ﻿using NetAF.Commands.Global;
 using NetAF.Commands.RegionMap;
+using NetAF.Commands.Scene;
 using NetAF.Logic;
 using NetAF.Logic.Modes;
 using System.Windows;
@@ -11,7 +12,7 @@ namespace NetAF.Targets.WPF.Controls
     /// <summary>
     /// Interaction logic for NetAFRegionMapCommandPicker.xaml
     /// </summary>
-    public partial class NetAFRegionMapCommandPicker : UserControl
+    public partial class NetAFRegionMapCommandPicker : UserControl, IUpdatable
     {
         #region Properties
 
@@ -187,46 +188,6 @@ namespace NetAF.Targets.WPF.Controls
 
         #endregion
 
-        #region Methods
-
-        /// <summary>
-        /// PanUpdate the control to match an executing game state.
-        /// </summary>
-        /// <param name="game">The game to update based on.</param>
-        public void Update(Game game)
-        {
-            if (game?.Mode is not RegionMapMode)
-            {
-                PanNorthButton.IsEnabled = false;
-                PanEastButton.IsEnabled = false;
-                PanSouthButton.IsEnabled = false;
-                PanWestButton.IsEnabled = false;
-                PanUpButton.IsEnabled = false;
-                PanDownButton.IsEnabled = false;
-                ZoomInButton.IsEnabled = false;
-                ZoomOutButton.IsEnabled = false;
-                PanResetButton.IsEnabled = false;
-                EndButton.IsEnabled = false;
-            }
-            else
-            {
-                var availableCommands = game?.GetContextualCommands() ?? [];
-
-                PanNorthButton.IsEnabled = availableCommands.Contains(Pan.NorthCommandHelp);
-                PanEastButton.IsEnabled = availableCommands.Contains(Pan.EastCommandHelp);
-                PanSouthButton.IsEnabled = availableCommands.Contains(Pan.SouthCommandHelp);
-                PanWestButton.IsEnabled = availableCommands.Contains(Pan.WestCommandHelp);
-                PanUpButton.IsEnabled = availableCommands.Contains(Pan.UpCommandHelp);
-                PanDownButton.IsEnabled = availableCommands.Contains(Pan.DownCommandHelp);
-                ZoomInButton.IsEnabled = availableCommands.Contains(ZoomIn.CommandHelp);
-                ZoomOutButton.IsEnabled = availableCommands.Contains(ZoomOut.CommandHelp);
-                PanResetButton.IsEnabled = availableCommands.Contains(PanReset.CommandHelp);
-                EndButton.IsEnabled = true;
-            }
-        }
-
-        #endregion
-
         #region EventHandlers
 
         private void PanNorthSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -277,6 +238,46 @@ namespace NetAF.Targets.WPF.Controls
         private void EndSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             GameExecutor.Update(End.CommandHelp.Command);
+        }
+
+        #endregion
+
+        #region Implementation of IUpdatable
+
+        /// <summary>
+        /// Update the component.
+        /// </summary>
+        /// <param name="game">The game to update based on.</param>
+        public void Update(Game game)
+        {
+            if (game?.Mode is not RegionMapMode)
+            {
+                PanNorthButton.IsEnabled = false;
+                PanEastButton.IsEnabled = false;
+                PanSouthButton.IsEnabled = false;
+                PanWestButton.IsEnabled = false;
+                PanUpButton.IsEnabled = false;
+                PanDownButton.IsEnabled = false;
+                ZoomInButton.IsEnabled = false;
+                ZoomOutButton.IsEnabled = false;
+                PanResetButton.IsEnabled = false;
+                EndButton.IsEnabled = false;
+            }
+            else
+            {
+                var availableCommands = game?.GetContextualCommands() ?? [];
+
+                PanNorthButton.IsEnabled = availableCommands.Contains(Pan.NorthCommandHelp);
+                PanEastButton.IsEnabled = availableCommands.Contains(Pan.EastCommandHelp);
+                PanSouthButton.IsEnabled = availableCommands.Contains(Pan.SouthCommandHelp);
+                PanWestButton.IsEnabled = availableCommands.Contains(Pan.WestCommandHelp);
+                PanUpButton.IsEnabled = availableCommands.Contains(Pan.UpCommandHelp);
+                PanDownButton.IsEnabled = availableCommands.Contains(Pan.DownCommandHelp);
+                ZoomInButton.IsEnabled = availableCommands.Contains(ZoomIn.CommandHelp);
+                ZoomOutButton.IsEnabled = availableCommands.Contains(ZoomOut.CommandHelp);
+                PanResetButton.IsEnabled = availableCommands.Contains(PanReset.CommandHelp);
+                EndButton.IsEnabled = true;
+            }
         }
 
         #endregion

@@ -1,8 +1,13 @@
-﻿using NetAF.Events;
+﻿using NetAF.Assets.Locations;
+using NetAF.Events;
 using NetAF.Logic;
+using NetAF.Rendering;
 using NetAF.Rendering.FrameBuilders;
 using NetAF.Targets.Markup;
+using NetAF.Targets.Markup.Rendering;
+using NetAF.Targets.Markup.Rendering.FrameBuilders;
 using System.Windows;
+using System.Windows.Input;
 
 namespace NetAF.WPF.TestApp
 {
@@ -22,7 +27,11 @@ namespace NetAF.WPF.TestApp
 
             EventBus.Subscribe<GameStarted>(x => Title = x.Game.Info.Name);
 
-            var configuration = new GameConfiguration(new MarkupAdapter(Terminal), FrameBuilderCollections.Markup, Assets.Size.Dynamic);
+            // remove map from the scene frame builder
+            var frameBuilders = FrameBuilderCollections.Markup;
+            frameBuilders.SetFrameBuilder(new MarkupSceneFrameBuilder(new MarkupBuilder(), null));
+
+            var configuration = new GameConfiguration(new MarkupAdapter(OutputLayout.Terminal), frameBuilders, Assets.Size.Dynamic);
             GameExecutor.Execute(ExampleGame.Create(configuration));
         }
 

@@ -1,16 +1,22 @@
-﻿using NetAF.Commands.Scene;
+﻿using NetAF.Assets.Locations;
+using NetAF.Commands.Scene;
 using NetAF.Logic;
 using NetAF.Logic.Modes;
+using NetAF.Rendering;
+using NetAF.Targets.Markup.Rendering;
+using NetAF.Targets.Markup.Rendering.FrameBuilders;
+using NetAF.Targets.WPF.Themes;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 
 namespace NetAF.Targets.WPF.Controls
 {
     /// <summary>
     /// Interaction logic for NetAFMovementCommandPicker.xaml
     /// </summary>
-    public partial class NetAFMovementCommandPicker : UserControl
+    public partial class NetAFMovementCommandPicker : UserControl, IUpdatable
     {
         #region Properties
 
@@ -130,38 +136,6 @@ namespace NetAF.Targets.WPF.Controls
 
         #endregion
 
-        #region Methods
-
-        /// <summary>
-        /// Update the control to match an executing game state.
-        /// </summary>
-        /// <param name="game">The game to update based on.</param>
-        public void Update(Game game)
-        {
-            if (game?.Mode is not SceneMode)
-            {
-                NorthButton.IsEnabled = false;
-                EastButton.IsEnabled = false;
-                SouthButton.IsEnabled = false;
-                WestButton.IsEnabled = false;
-                UpButton.IsEnabled = false;
-                DownButton.IsEnabled = false;
-            }
-            else
-            {
-                var availableCommands = game?.GetContextualCommands() ?? [];
-
-                NorthButton.IsEnabled = availableCommands.Contains(Move.NorthCommandHelp);
-                EastButton.IsEnabled = availableCommands.Contains(Move.EastCommandHelp);
-                SouthButton.IsEnabled = availableCommands.Contains(Move.SouthCommandHelp);
-                WestButton.IsEnabled = availableCommands.Contains(Move.WestCommandHelp);
-                UpButton.IsEnabled = availableCommands.Contains(Move.UpCommandHelp);
-                DownButton.IsEnabled = availableCommands.Contains(Move.DownCommandHelp);
-            }
-        }
-
-        #endregion
-
         #region EventHandlers
 
         private void NorthSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -192,6 +166,38 @@ namespace NetAF.Targets.WPF.Controls
         private void DownSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             GameExecutor.Update(Move.DownCommandHelp.Command);
+        }
+
+        #endregion
+
+        #region Implementation of IUpdatable
+
+        /// <summary>
+        /// Update the component.
+        /// </summary>
+        /// <param name="game">The game to update based on.</param>
+        public void Update(Game game)
+        {
+            if (game?.Mode is not SceneMode)
+            {
+                NorthButton.IsEnabled = false;
+                EastButton.IsEnabled = false;
+                SouthButton.IsEnabled = false;
+                WestButton.IsEnabled = false;
+                UpButton.IsEnabled = false;
+                DownButton.IsEnabled = false;
+            }
+            else
+            {
+                var availableCommands = game?.GetContextualCommands() ?? [];
+
+                NorthButton.IsEnabled = availableCommands.Contains(Move.NorthCommandHelp);
+                EastButton.IsEnabled = availableCommands.Contains(Move.EastCommandHelp);
+                SouthButton.IsEnabled = availableCommands.Contains(Move.SouthCommandHelp);
+                WestButton.IsEnabled = availableCommands.Contains(Move.WestCommandHelp);
+                UpButton.IsEnabled = availableCommands.Contains(Move.UpCommandHelp);
+                DownButton.IsEnabled = availableCommands.Contains(Move.DownCommandHelp);
+            }
         }
 
         #endregion

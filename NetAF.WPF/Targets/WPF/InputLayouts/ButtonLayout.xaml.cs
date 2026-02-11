@@ -1,16 +1,15 @@
 ﻿using NetAF.Events;
 using NetAF.Logic;
 using NetAF.Logic.Modes;
-using NetAF.Targets.WPF.Controls;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace NetAF.Targets.WPF.Layouts
+namespace NetAF.Targets.WPF.InputLayouts
 {
     /// <summary>
     /// Interaction logic for ButtonLayout.xaml
     /// </summary>
-    public partial class ButtonLayout : UserControl
+    public partial class ButtonLayout : UserControl, IUpdatable
     {
         #region Properties
 
@@ -117,7 +116,15 @@ namespace NetAF.Targets.WPF.Layouts
             Update(update.Game);
         }
 
-        private void Update(Game game)
+        #endregion
+
+        #region Implementation of IUpdatable
+
+        /// <summary>
+        /// Update the component.
+        /// </summary>
+        /// <param name="game">The game to update based on.</param>
+        public void Update(Game game)
         {
             GeneralCommandPicker.Update(game);
             SceneCommandPicker.Update(game);

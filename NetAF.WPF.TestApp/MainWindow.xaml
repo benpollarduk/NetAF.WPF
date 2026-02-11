@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:layouts="clr-namespace:NetAF.Targets.WPF.Layouts;assembly=NetAF.WPF"
+        xmlns:layouts="clr-namespace:NetAF.Targets.WPF.InputLayouts;assembly=NetAF.WPF"
         xmlns:controls="clr-namespace:NetAF.Targets.WPF.Controls;assembly=NetAF.WPF"
+        xmlns:outputlayouts="clr-namespace:NetAF.Targets.WPF.OutputLayouts;assembly=NetAF.WPF"
         mc:Ignorable="d"
         Title="NetAF.WPF.TestApp" Background="#FF505050" Height="850" Width="1000">
     <Window.Resources>
@@ -18,10 +19,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="180"/>
         </Grid.RowDefinitions>
-        <!--<controls:NetAFTextTerminal x:Name="Terminal" Foreground="YellowGreen" Background="Black" FontSize="16" FontFamily="Cascadia Mono" Margin="10" Padding="4" Grid.Row="0"/>-->
-        <controls:NetAFMarkupTerminal x:Name="Terminal" Background="Black" Margin="10" Padding="4" Grid.Row="0"/>
+        <!--<controls:NetAFMarkupTerminal x:Name="Terminal" Background="Black" Margin="10" Padding="4" Grid.Row="0"/>-->
+        <outputlayouts:SplitMapLayout x:Name="OutputLayout" Style="{StaticResource DarkSplitMapLayoutStyle}" Margin="10" Grid.Row="0"/>
         <controls:NetAFPrompt Margin="10,0,10,10" Style="{StaticResource DarkPromptStyle}" Grid.Row="1"/>
         <layouts:ButtonLayout x:Name="ButtonLayout" Margin="10,0,10,10" Style="{StaticResource DarkButtonLayoutStyle}" Grid.Row="2"/>
     </Grid>

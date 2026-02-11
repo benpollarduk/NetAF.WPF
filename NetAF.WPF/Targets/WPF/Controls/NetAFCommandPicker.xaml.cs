@@ -12,7 +12,7 @@ namespace NetAF.Targets.WPF.Controls
     /// <summary>
     /// Interaction logic for NetAFCommandPicker.xaml
     /// </summary>
-    public partial class NetAFCommandPicker : UserControl
+    public partial class NetAFCommandPicker : UserControl, IUpdatable
     {
         #region StaticProperties
 
@@ -502,24 +502,6 @@ namespace NetAF.Targets.WPF.Controls
 
         #region Methods
 
-        /// <summary>
-        /// Update the control to match an executing game state.
-        /// </summary>
-        /// <param name="game">The game to update based on.</param>
-        public void Update(Game game)
-        {
-            SelectedCommand = null;
-            AvailableCommands = [];
-
-            var showCommands = game?.Mode?.Type == GameModeType.Interactive;
-            var showAcknowledge = ShowAcknowledgeButton && (game?.Mode?.Type is GameModeType.SingleFrameInformation or GameModeType.MultipleFrameInformation);
-
-            if (showCommands)
-                AvailableCommands = game?.GetContextualCommands() ?? [];
-            else if (showAcknowledge)
-                GenerateAcknowledgeButton();
-        }
-
         private void SetupCommandBindings()
         {
             CommandBindings.Add(new CommandBinding(CommandSelectedCommand, CommandSelectedCommand_Executed));
@@ -742,6 +724,28 @@ namespace NetAF.Targets.WPF.Controls
         {
             GameExecutor.Update();
             SelectedCommand = null;
+        }
+
+        #endregion
+
+        #region Implementation of IUpdatable
+
+        /// <summary>
+        /// Update the component.
+        /// </summary>
+        /// <param name="game">The game to update based on.</param>
+        public void Update(Game game)
+        {
+            SelectedCommand = null;
+            AvailableCommands = [];
+
+            var showCommands = game?.Mode?.Type == GameModeType.Interactive;
+            var showAcknowledge = ShowAcknowledgeButton && (game?.Mode?.Type is GameModeType.SingleFrameInformation or GameModeType.MultipleFrameInformation);
+
+            if (showCommands)
+                AvailableCommands = game?.GetContextualCommands() ?? [];
+            else if (showAcknowledge)
+                GenerateAcknowledgeButton();
         }
 
         #endregion

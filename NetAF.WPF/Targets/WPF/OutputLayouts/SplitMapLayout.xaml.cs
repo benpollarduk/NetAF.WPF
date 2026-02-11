@@ -1,5 +1,6 @@
 ﻿using NetAF.Events;
 using NetAF.Logic;
+using NetAF.Rendering;
 using NetAF.Targets.WPF.Controls;
 using System.Windows;
 using System.Windows.Controls;
@@ -74,6 +75,9 @@ namespace NetAF.Targets.WPF.OutputLayouts
         public SplitMapLayout()
         {
             InitializeComponent();
+
+            // remove map from the scene frame builder
+            FrameProperties.ShowMapInScenes = false;
 
             EventBus.Subscribe<GameStarted>(GameStarted);
             EventBus.Subscribe<GameUpdated>(GameUpdated);

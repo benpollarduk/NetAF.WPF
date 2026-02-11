@@ -58,6 +58,11 @@ namespace NetAF.Targets.WPF.InputLayouts
             set { SetValue(SectionSpacingProperty, value); }
         }
 
+        /// <summary>
+        /// Get an array of all updatable components.
+        /// </summary>
+        protected IUpdatable[] UpdatableComponents => [GeneralCommandPicker, SceneCommandPicker, MovementCommandPicker, RegionMapCommandPicker];
+
         #endregion
 
         #region DependencyProperties
@@ -126,10 +131,8 @@ namespace NetAF.Targets.WPF.InputLayouts
         /// <param name="game">The game to update based on.</param>
         public void Update(Game game)
         {
-            GeneralCommandPicker.Update(game);
-            SceneCommandPicker.Update(game);
-            MovementCommandPicker.Update(game);
-            RegionMapCommandPicker.Update(game);
+            foreach (var updatable in UpdatableComponents)
+                updatable.Update(game);
 
             var inMapMode = game.Mode is RegionMapMode;
 

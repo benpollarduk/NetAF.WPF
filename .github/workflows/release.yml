@@ -36,18 +36,27 @@ jobs:
       run: dotnet restore
 
     - name: Update version and release notes in csproj file
+      shell: pwsh  # Use PowerShell for the step
       run: |
         echo "Version: ${{ inputs.ver }}"
         echo "Release notes: ${{ inputs.release-notes }}"
+
+        # Update the .csproj file with the input version
+        $csprojPath = "NetAF.WPF/NetAF.WPF.csproj"
         
-        # update the .csproj file with the input version
-        sed -i "s/<Version>.*<\/Version>/<Version>${{ inputs.ver }}<\/Version>/" NetAF.WPF/NetAF.WPF.csproj
-        sed -i "s/<AssemblyVersion>.*<\/AssemblyVersion>/<AssemblyVersion>${{ inputs.ver }}.0<\/AssemblyVersion>/" NetAF.WPF/NetAF.WPF.csproj
-        sed -i "s/<FileVersion>.*<\/FileVersion>/<FileVersion>${{ inputs.ver }}<\/FileVersion>/" NetAF.WPF/NetAF.WPF.csproj
-
-        # update the .csproj file with the release notes
-        sed -i "s/<PackageReleaseNotes>.*<\/PackageReleaseNotes>/<PackageReleaseNotes>${{ inputs.release-notes }}<\/PackageReleaseNotes>/" NetAF.WPF/NetAF.WPF.csproj
-
+        (Get-Content $csprojPath) -replace '<Version>.*</Version>', "<Version>${{ inputs.ver }}</Version>" |
+            Set-Content $csprojPath
+            
+        (Get-Content $csprojPath) -replace '<AssemblyVersion>.*</AssemblyVersion>', "<AssemblyVersion>${{ inputs.ver }}.0</AssemblyVersion>" |
+            Set-Content $csprojPath
+            
+        (Get-Content $csprojPath) -replace '<FileVersion>.*</FileVersion>', "<FileVersion>${{ inputs.ver }}</FileVersion>" |
+            Set-Content $csprojPath
+            
+        # Update the .csproj file with the release notes
+        (Get-Content $csprojPath) -replace '<PackageReleaseNotes>.*</PackageReleaseNotes>', "<PackageReleaseNotes>${{ inputs.release-notes }}</PackageReleaseNotes>" |
+            Set-Content $csprojPath
+            
     - name: Build
       run: dotnet build -c Release
 

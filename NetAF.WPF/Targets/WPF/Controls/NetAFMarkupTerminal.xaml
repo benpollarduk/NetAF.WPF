@@ -15,7 +15,11 @@
             <DoubleAnimation Storyboard.TargetName="Viewer" Storyboard.TargetProperty="Effect.Intensity" From="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFMarkupTerminal}, Path=TransitionStrength, Mode=OneWay}" To="0" Duration="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFMarkupTerminal}, Path=TransitionDuration, Mode=OneWay}"/>
         </Storyboard>
     </UserControl.Resources>
-    <FlowDocumentScrollViewer Name="Viewer" Padding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFMarkupTerminal}, Path=Padding, Mode=OneWay}" IsToolBarVisible="False" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+    <FlowDocumentScrollViewer Name="Viewer" 
+                              Padding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFMarkupTerminal}, Path=Padding, Mode=OneWay}" 
+                              IsToolBarVisible="False" 
+                              VerticalScrollBarVisibility="Auto" 
+                              HorizontalScrollBarVisibility="Auto">
         <FlowDocumentScrollViewer.Effect>
             <effects:PixelateEffect Intensity="0"/>
         </FlowDocumentScrollViewer.Effect>

@@ -1,6 +1,5 @@
 ﻿using NetAF.Commands.Global;
 using NetAF.Commands.RegionMap;
-using NetAF.Commands.Scene;
 using NetAF.Logic;
 using NetAF.Logic.Modes;
 using System.Windows;

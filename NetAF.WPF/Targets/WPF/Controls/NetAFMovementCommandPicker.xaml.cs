@@ -1,15 +1,9 @@
-﻿using NetAF.Assets.Locations;
-using NetAF.Commands.Scene;
+﻿using NetAF.Commands.Scene;
 using NetAF.Logic;
 using NetAF.Logic.Modes;
-using NetAF.Rendering;
-using NetAF.Targets.Markup.Rendering;
-using NetAF.Targets.Markup.Rendering.FrameBuilders;
-using NetAF.Targets.WPF.Themes;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Animation;
 
 namespace NetAF.Targets.WPF.Controls
 {

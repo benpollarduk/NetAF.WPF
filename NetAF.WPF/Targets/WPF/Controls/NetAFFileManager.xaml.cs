@@ -3,7 +3,6 @@ using NetAF.Logic;
 using NetAF.Logic.Modes;
 using NetAF.Persistence;
 using NetAF.Persistence.Json;
-using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
@@ -78,6 +77,60 @@ namespace NetAF.Targets.WPF.Controls
             set { SetValue(FileExtensionProperty, value); }
         }
 
+        /// <summary>
+        /// Get or set the style to use for the new button. This is a dependency property.
+        /// </summary>
+        public Style NewButtonStyle
+        {
+            get { return (Style)GetValue(NewButtonStyleProperty); }
+            set { SetValue(NewButtonStyleProperty, value); }
+        }
+
+        /// <summary>
+        /// Get or set the style to use for the delete button. This is a dependency property.
+        /// </summary>
+        public Style DeleteButtonStyle
+        {
+            get { return (Style)GetValue(DeleteButtonStyleProperty); }
+            set { SetValue(DeleteButtonStyleProperty, value); }
+        }
+
+        /// <summary>
+        /// Get or set the style to use for the save button. This is a dependency property.
+        /// </summary>
+        public Style SaveButtonStyle
+        {
+            get { return (Style)GetValue(SaveButtonStyleProperty); }
+            set { SetValue(SaveButtonStyleProperty, value); }
+        }
+
+        /// <summary>
+        /// Get or set the style to use for the load button. This is a dependency property.
+        /// </summary>
+        public Style LoadButtonStyle
+        {
+            get { return (Style)GetValue(LoadButtonStyleProperty); }
+            set { SetValue(LoadButtonStyleProperty, value); }
+        }
+
+        /// <summary>
+        /// Get or set the style to use for the status label. This is a dependency property.
+        /// </summary>
+        public Style StatusLabelStyle
+        {
+            get { return (Style)GetValue(StatusLabelStyleProperty); }
+            set { SetValue(StatusLabelStyleProperty, value); }
+        }
+
+        /// <summary>
+        /// Get or set the style to use for the available restore point list box. This is a dependency property.
+        /// </summary>
+        public Style AvailableRestorePointsListBoxStyle
+        {
+            get { return (Style)GetValue(AvailableRestorePointsListBoxStyleProperty); }
+            set { SetValue(AvailableRestorePointsListBoxStyleProperty, value); }
+        }
+
         #endregion
 
         #region DependencyProperties
@@ -85,7 +138,7 @@ namespace NetAF.Targets.WPF.Controls
         /// <summary>
         /// Identifies the NetAFFileManager.SelectedDirectoryPath property.
         /// </summary>
-        public static readonly DependencyProperty SelectedDirectoryPathProperty = DependencyProperty.Register("SelectedDirectoryPath", typeof(string), typeof(NetAFFileManager), new PropertyMetadata(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)), new PropertyChangedCallback(OnSelectedDirectoryPathPropertyChanged)));
+        public static readonly DependencyProperty SelectedDirectoryPathProperty = DependencyProperty.Register("SelectedDirectoryPath", typeof(string), typeof(NetAFFileManager), new PropertyMetadata(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "NetAF"), new PropertyChangedCallback(OnSelectedDirectoryPathPropertyChanged)));
 
         /// <summary>
         /// Identifies the NetAFFileManager.GameDirectoryPath property.
@@ -111,6 +164,36 @@ namespace NetAF.Targets.WPF.Controls
         /// Identifies the NetAFFileManager.FileExtension property.
         /// </summary>
         public static readonly DependencyProperty FileExtensionProperty = DependencyProperty.Register("FileExtension", typeof(string), typeof(NetAFFileManager), new PropertyMetadata("netaf", OnFileExtensionPropertyChanged));
+
+        /// <summary>
+        /// Identifies the NetAFFileManager.NewButtonStyle property.
+        /// </summary>
+        public static readonly DependencyProperty NewButtonStyleProperty = DependencyProperty.Register("NewButtonStyle", typeof(Style), typeof(NetAFFileManager));
+
+        /// <summary>
+        /// Identifies the NetAFFileManager.DeleteButtonStyle property.
+        /// </summary>
+        public static readonly DependencyProperty DeleteButtonStyleProperty = DependencyProperty.Register("DeleteButtonStyle", typeof(Style), typeof(NetAFFileManager));
+
+        /// <summary>
+        /// Identifies the NetAFFileManager.SaveButtonStyle property.
+        /// </summary>
+        public static readonly DependencyProperty SaveButtonStyleProperty = DependencyProperty.Register("SaveButtonStyle", typeof(Style), typeof(NetAFFileManager));
+
+        /// <summary>
+        /// Identifies the NetAFFileManager.LoadButtonStyle property.
+        /// </summary>
+        public static readonly DependencyProperty LoadButtonStyleProperty = DependencyProperty.Register("LoadButtonStyle", typeof(Style), typeof(NetAFFileManager));
+
+        /// <summary>
+        /// Identifies the NetAFFileManager.AvailableRestorePointListBoxStyle property.
+        /// </summary>
+        public static readonly DependencyProperty StatusLabelStyleProperty = DependencyProperty.Register("StatusLabelStyle", typeof(Style), typeof(NetAFFileManager));
+
+        /// <summary>
+        /// Identifies the NetAFFileManager.AvailableRestorePointsListBoxStyle property.
+        /// </summary>
+        public static readonly DependencyProperty AvailableRestorePointsListBoxStyleProperty = DependencyProperty.Register("AvailableRestorePointsListBoxStyle", typeof(Style), typeof(NetAFFileManager));
 
         #endregion
 
@@ -192,6 +275,15 @@ namespace NetAF.Targets.WPF.Controls
 
         #endregion
 
+        #region StaticMethods
+
+        private static string GetFileName(DateTime dateTime)
+        {
+            return $"{dateTime.Year:D4}_{dateTime.Month:D2}_{dateTime.Day:D2}_{dateTime.Hour:D2}_{dateTime.Minute:D2}_{dateTime.Second:D2}_{dateTime.Millisecond:D3}";
+        }
+
+        #endregion
+
         #region PropertyChangedCallbacks
 
         private static void OnSelectedDirectoryPathPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
@@ -245,21 +337,25 @@ namespace NetAF.Targets.WPF.Controls
             var restorePoint = e.Parameter as RestorePointPath;
 
             var index = AvailableRestorePoints?.ToList()?.IndexOf(restorePoint) ?? AvailableRestorePoints?.IndexOf(null) ?? 0;
-            var existingFileName = !string.IsNullOrEmpty(restorePoint?.Path) ? Path.GetFileName(restorePoint.Path) : string.Empty;
-            var name = !string.IsNullOrEmpty(existingFileName) ? existingFileName : game.Overworld?.CurrentRegion?.CurrentRoom?.Identifier.Name ?? "New restore point";
+            var name = !string.IsNullOrEmpty(restorePoint?.RestorePoint.Name) ? restorePoint.RestorePoint.Name : game.Overworld?.CurrentRegion?.CurrentRoom?.Identifier.Name ?? "New restore point";
             var newRestorePoint = RestorePoint.Create(name, game);
             var extension = FileExtension;
             
             if (!extension.StartsWith('.'))
                 extension = $".{extension}";
 
-            var path = !string.IsNullOrEmpty(restorePoint?.Path) ? restorePoint?.Path : Path.Combine(GameDirectoryPath, $"{name}{extension}");
+            var path = !string.IsNullOrEmpty(restorePoint?.Path) ? restorePoint?.Path : Path.Combine(GameDirectoryPath, $"{GetFileName(DateTime.Now)}{extension}");
             var newRestorePointPath = new RestorePointPath(newRestorePoint, path ?? string.Empty);
 
             if (JsonSave.ToFile(newRestorePointPath.Path, newRestorePointPath.RestorePoint, out var message) && AvailableRestorePoints != null)
+            {
                 AvailableRestorePoints[index] = newRestorePointPath;
-
-            Status = message;
+                Status = $"Saved {newRestorePoint.Name}.";
+            }
+            else
+            {
+                Status = message;
+            }
         }
 
         private void LoadCommandBinding_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
@@ -276,6 +372,9 @@ namespace NetAF.Targets.WPF.Controls
             {
                 game.RestoreFrom(restorePoint.RestorePoint.Game);
                 Status = $"Loaded: {restorePoint.RestorePoint.Name}.";
+
+                // update to force frae redraw
+                GameExecutor.Update();
             }
             catch (Exception ex)
             {
@@ -292,13 +391,18 @@ namespace NetAF.Targets.WPF.Controls
             if (!extension.StartsWith('.'))
                 extension = $".{extension}";
 
-            var path = Path.Combine(GameDirectoryPath, $"{name}{extension}");
+            var path = Path.Combine(GameDirectoryPath, $"{GetFileName(DateTime.Now)}{extension}");
             var newRestorePointPath = new RestorePointPath(newRestorePoint, path ?? string.Empty);
 
             if (JsonSave.ToFile(newRestorePointPath.Path, newRestorePointPath.RestorePoint, out var message) && AvailableRestorePoints != null)
+            {
                 AvailableRestorePoints.Insert(0, newRestorePointPath);
-
-            Status = message;
+                Status = $"Created {newRestorePoint.Name}.";
+            }
+            else
+            {
+                Status = message;
+            }
         }
 
         private void DeleteCommandBinding_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)

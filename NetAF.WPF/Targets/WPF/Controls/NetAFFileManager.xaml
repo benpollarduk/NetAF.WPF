@@ -13,6 +13,18 @@
         <RoutedUICommand x:Key="LoadCommand"/>
         <RoutedUICommand x:Key="NewCommand"/>
         <RoutedUICommand x:Key="DeleteCommand"/>
+        <Style x:Key="DefaultNewButtonStyle" TargetType="Button">
+            <Setter Property="Content" Value="New"/>
+        </Style>
+        <Style x:Key="DefaultDeleteButtonStyle" TargetType="Button">
+            <Setter Property="Content" Value="Delete"/>
+        </Style>
+        <Style x:Key="DefaultSaveButtonStyle" TargetType="Button">
+            <Setter Property="Content" Value="Save"/>
+        </Style>
+        <Style x:Key="DefaultLoadButtonStyle" TargetType="Button">
+            <Setter Property="Content" Value="Load"/>
+        </Style>
         <converters:ObjectNotNullToBooleanConverter x:Key="ObjectNotNullToBooleanConverter"/>
     </UserControl.Resources>
     <UserControl.CommandBindings>
@@ -21,32 +33,33 @@
         <CommandBinding x:Name="NewCommandBinding" Command="{StaticResource NewCommand}" Executed="NewCommandBinding_Executed"/>
         <CommandBinding x:Name="DeleteCommandBinding" Command="{StaticResource DeleteCommand}" Executed="DeleteCommandBinding_Executed"/>
     </UserControl.CommandBindings>
+    <UserControl.Style>
+        <Style TargetType="{x:Type local:NetAFFileManager}">
+            <Setter Property="NewButtonStyle" Value="{StaticResource DefaultNewButtonStyle}"/>
+            <Setter Property="DeleteButtonStyle" Value="{StaticResource DefaultDeleteButtonStyle}"/>
+            <Setter Property="SaveButtonStyle" Value="{StaticResource DefaultSaveButtonStyle}"/>
+            <Setter Property="LoadButtonStyle" Value="{StaticResource DefaultLoadButtonStyle}"/>
+        </Style>
+    </UserControl.Style>
     <Grid IsEnabled="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFFileManager}, Path=IsSaveOrLoadAvailable, Mode=OneWay}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListBox Name="RestorePointsListBox" ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFFileManager}, Path=AvailableRestorePoints, Mode=OneWay}" Grid.Row="0">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Vertical"/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
+        <ListBox Name="RestorePointsListBox" 
+                 ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFFileManager}, Path=AvailableRestorePoints, Mode=OneWay}" 
+                 Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFFileManager}, Path=AvailableRestorePointsListBoxStyle, Mode=OneWay}" 
+                 Grid.Row="0">
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type wpf:RestorePointPath}">
                     <Border>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="200"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Label Content="Name:" Grid.Column="0"/>
-                            <Label Content="{Binding Path=RestorePoint.Name, Mode=OneWay}" Grid.Column="1"/>
-                            <Label Content="Creation Time:" Grid.Column="2"/>
-                            <Label Content="{Binding Path=RestorePoint.CreationTime, Mode=OneWay}" Grid.Column="3"/>
+                            <Label Content="{Binding Path=RestorePoint.Name, Mode=OneWay}" Grid.Column="0"/>
+                            <Label Content="{Binding Path=RestorePoint.CreationTime, Mode=OneWay}" Grid.Column="1"/>
                         </Grid>
                     </Border>
                 </DataTemplate>
@@ -55,36 +68,40 @@
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
+            <Label Content="Status:" 
+                   Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFFileManager}, Path=StatusLabelStyle, Mode=OneWay}" 
+                   Grid.Column="0"/>
+            <Label Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFFileManager}, Path=Status, Mode=OneWay}" 
+                   Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFFileManager}, Path=StatusLabelStyle, Mode=OneWay}" 
+                   Grid.Column="1"/>
             <Button Content="New" 
                     Command="{StaticResource NewCommand}"
-                    Grid.Column="0"/>
+                    Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFFileManager}, Path=NewButtonStyle, Mode=OneWay}" 
+                    Grid.Column="2"/>
             <Button Content="Delete" 
                     Command="{StaticResource DeleteCommand}"
-                    CommandParameter="{Binding ElementName=RestorePointsListBox, Path=SelectedItem, Mode=OneWay}" 
-                    IsEnabled="{Binding ElementName=RestorePointsListBox, Path=SelectedItem, Mode=OneWay, Converter={StaticResource ObjectNotNullToBooleanConverter}}" 
-                    Grid.Column="1"/>
-            <Button Content="Save" 
-                    Command="{StaticResource SaveCommand}" 
-                    CommandParameter="{Binding ElementName=RestorePointsListBox, Path=SelectedItem, Mode=OneWay}" 
-                    IsEnabled="{Binding ElementName=RestorePointsListBox, Path=SelectedItem, Mode=OneWay, Converter={StaticResource ObjectNotNullToBooleanConverter}}" 
-                    Grid.Column="2"/>
-            <Button Content="Load" 
-                    Command="{StaticResource LoadCommand}"
+                    Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFFileManager}, Path=DeleteButtonStyle, Mode=OneWay}" 
                     CommandParameter="{Binding ElementName=RestorePointsListBox, Path=SelectedItem, Mode=OneWay}" 
                     IsEnabled="{Binding ElementName=RestorePointsListBox, Path=SelectedItem, Mode=OneWay, Converter={StaticResource ObjectNotNullToBooleanConverter}}" 
                     Grid.Column="3"/>
-        </Grid>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Label Content="Status:" Grid.Column="0"/>
-            <Label Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFFileManager}, Path=Status, Mode=OneWay}" Grid.Column="1"/>
+            <Button Content="Save" 
+                    Command="{StaticResource SaveCommand}"
+                    Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFFileManager}, Path=SaveButtonStyle, Mode=OneWay}" 
+                    CommandParameter="{Binding ElementName=RestorePointsListBox, Path=SelectedItem, Mode=OneWay}" 
+                    IsEnabled="{Binding ElementName=RestorePointsListBox, Path=SelectedItem, Mode=OneWay, Converter={StaticResource ObjectNotNullToBooleanConverter}}" 
+                    Grid.Column="4"/>
+            <Button Content="Load" 
+                    Command="{StaticResource LoadCommand}"
+                    Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFFileManager}, Path=LoadButtonStyle, Mode=OneWay}" 
+                    CommandParameter="{Binding ElementName=RestorePointsListBox, Path=SelectedItem, Mode=OneWay}" 
+                    IsEnabled="{Binding ElementName=RestorePointsListBox, Path=SelectedItem, Mode=OneWay, Converter={StaticResource ObjectNotNullToBooleanConverter}}" 
+                    Grid.Column="5"/>
         </Grid>
     </Grid>
 </UserControl>

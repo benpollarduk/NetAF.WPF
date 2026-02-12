@@ -7,6 +7,9 @@
     <!--button background brush-->
     <SolidColorBrush x:Key="MainControlBackgroundBrush" Color="Transparent"/>
     <SolidColorBrush x:Key="MainControlForegroundBrush" Color="LightGreen"/>
+    <SolidColorBrush x:Key="MainControlBackgroundDisabledBrush" Color="Transparent"/>
+    <SolidColorBrush x:Key="MainControlForegroundDisabledBrush" Color="#FF3A3A3A"/>
+    <SolidColorBrush x:Key="MainWindowBackgroundBrush" Color="#FF505050"/>
     <FontFamily x:Key="MainControlFontFamily">Segoe UI</FontFamily>
     <system:Double x:Key="SectionSpacing">20</system:Double>
 
@@ -26,7 +29,20 @@
                                             <Setter Property="Template">
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="Thumb">
-                                                        <Border Background="{StaticResource MainControlForegroundBrush}" CornerRadius="5" Margin="2"/>
+                                                        <Border>
+                                                            <Border.Style>
+                                                                <Style TargetType="Border">
+                                                                    <Setter Property="Background" Value="{StaticResource MainControlForegroundBrush}"/>
+                                                                    <Setter Property="CornerRadius" Value="5"/>
+                                                                    <Setter Property="Margin" Value="2"/>
+                                                                    <Style.Triggers>
+                                                                        <Trigger Property="IsEnabled" Value="False">
+                                                                            <Setter Property="Background" Value="{StaticResource MainControlForegroundDisabledBrush}"/>
+                                                                        </Trigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Border.Style>
+                                                        </Border>
                                                     </ControlTemplate>
                                                 </Setter.Value>
                                             </Setter>
@@ -70,9 +86,9 @@
                             <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="Black"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="ButtonBorder" Property="Background" Value="Transparent"/>
-                            <Setter TargetName="ButtonContent" Property="Foreground" Value="#FF3A3A3A"/>
-                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="#FF3A3A3A"/>
+                            <Setter TargetName="ButtonBorder" Property="Background" Value="{StaticResource MainControlBackgroundDisabledBrush}"/>
+                            <Setter TargetName="ButtonContent" Property="Foreground" Value="{StaticResource MainControlForegroundDisabledBrush}"/>
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{StaticResource MainControlForegroundDisabledBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -113,9 +129,9 @@
                             <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="Black"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="ButtonBorder" Property="Background" Value="Transparent"/>
-                            <Setter TargetName="ButtonContent" Property="Foreground" Value="#FF3A3A3A"/>
-                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="#FF3A3A3A"/>
+                            <Setter TargetName="ButtonBorder" Property="Background" Value="{StaticResource MainControlBackgroundDisabledBrush}"/>
+                            <Setter TargetName="ButtonContent" Property="Foreground" Value="{StaticResource MainControlForegroundDisabledBrush}"/>
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{StaticResource MainControlForegroundDisabledBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -161,6 +177,18 @@
         <Setter Property="Padding" Value="4"/>
         <Setter Property="Margin" Value="0,0,4,4"/>
         <Setter Property="FontSize" Value="11"/>
+    </Style>
+
+    <!--style for the file manager buttons-->
+    <Style x:Key="FileManagerButtonStyle" TargetType="Button" BasedOn="{StaticResource CustomButtonStyle}">
+        <Setter Property="MinWidth" Value="50"/>
+        <Setter Property="MinHeight" Value="30"/>
+        <Setter Property="Padding" Value="4"/>
+        <Setter Property="Margin" Value="4"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Background" Value="{StaticResource MainControlBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource MainControlForegroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource MainControlForegroundBrush}"/>
     </Style>
 
     <!--general style for the command pickers-->
@@ -429,7 +457,6 @@
 
     <!--styling for the prompt-->
     <Style x:Key="DarkPromptStyle" TargetType="{x:Type controls:NetAFPrompt}">
-        <Setter Property="Margin" Value="10"/>
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="FontFamily" Value="{StaticResource MainControlFontFamily}"/>
         <Setter Property="Background" Value="{StaticResource MainControlBackgroundBrush}"/>
@@ -446,6 +473,10 @@
         <Setter Property="Foreground" Value="YellowGreen"/>
         <Setter Property="FontFamily" Value="Cascadia Mono"/>
         <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Padding" Value="4"/>
+        <Style.Resources>
+            <Style TargetType="ScrollBar" BasedOn="{StaticResource CustomScrollBarStyle}"/>
+        </Style.Resources>
     </Style>
 
     <!--styling for the markup terminal-->
@@ -477,5 +508,204 @@
             <Style TargetType="ScrollBar" BasedOn="{StaticResource CustomScrollBarStyle}"/>
         </Style.Resources>
     </Style>
-    
+
+    <!--styling for expander-->
+    <Style x:Key="DarkExpanderStyle" TargetType="Expander">
+        <Setter Property="Background" Value="{StaticResource MainControlBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource MainControlForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource MainControlForegroundBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Expander">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        Background="{TemplateBinding Background}" 
+                        CornerRadius="3">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition x:Name="ContentRow" Height="0"/>
+                            </Grid.RowDefinitions>
+                            <ToggleButton x:Name="HeaderSite"
+                                      Content="{TemplateBinding Header}"
+                                      Foreground="{TemplateBinding Foreground}"
+                                      FontFamily="{TemplateBinding FontFamily}"
+                                      IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                      Padding="{TemplateBinding Padding}">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border Background="Transparent" Padding="5">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Path x:Name="Arrow"
+                                                  Data="M 0,0 L 4,4 L 8,0" 
+                                                  Stroke="{TemplateBinding Foreground}"
+                                                  StrokeThickness="2"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"
+                                                  RenderTransformOrigin="0.5,0.5"
+                                                  Margin="5,0,10,0">
+                                                    <Path.RenderTransform>
+                                                        <RotateTransform Angle="0"/>
+                                                    </Path.RenderTransform>
+                                                </Path>
+                                                <ContentPresenter Grid.Column="1" 
+                                                              VerticalAlignment="Center"
+                                                              RecognizesAccessKey="True"/>
+                                            </Grid>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter TargetName="Arrow" Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <RotateTransform Angle="180"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <ContentPresenter x:Name="ExpandSite" 
+                                          Grid.Row="1" 
+                                          Visibility="Collapsed" 
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsExpanded" Value="True">
+                            <Setter TargetName="ExpandSite" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="ContentRow" Property="Height" Value="*"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource MainControlForegroundDisabledBrush}"/>
+                            <Setter Property="Background" Value="{StaticResource MainControlBackgroundDisabledBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--styling for file manager-->
+    <Style x:Key="DarkNetAFFileManagerStyle" TargetType="{x:Type controls:NetAFFileManager}">
+        <Setter Property="NewButtonStyle">
+            <Setter.Value>
+                <Style TargetType="Button" BasedOn="{StaticResource FileManagerButtonStyle}">
+                    <Setter Property="Content" Value="New"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="DeleteButtonStyle">
+            <Setter.Value>
+                <Style TargetType="Button" BasedOn="{StaticResource FileManagerButtonStyle}">
+                    <Setter Property="Content" Value="Delete"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="SaveButtonStyle">
+            <Setter.Value>
+                <Style TargetType="Button" BasedOn="{StaticResource FileManagerButtonStyle}">
+                    <Setter Property="Content" Value="Save"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="LoadButtonStyle">
+            <Setter.Value>
+                <Style TargetType="Button" BasedOn="{StaticResource FileManagerButtonStyle}">
+                    <Setter Property="Content" Value="Load"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="StatusLabelStyle">
+            <Setter.Value>
+                <Style TargetType="Label">
+                    <Setter Property="FontFamily" Value="{StaticResource MainControlFontFamily}"/>
+                    <Setter Property="Background" Value="{StaticResource MainControlBackgroundBrush}"/>
+                    <Setter Property="Foreground" Value="{StaticResource MainControlForegroundBrush}"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="AvailableRestorePointsListBoxStyle">
+            <Setter.Value>
+                <Style TargetType="ListBox">
+                    <Setter Property="Margin" Value="4"/>
+                    <Setter Property="Foreground" Value="{StaticResource MainControlForegroundBrush}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource MainControlForegroundBrush}"/>
+                    <Setter Property="Background" Value="{StaticResource MainControlBackgroundBrush}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBox">
+                                <Border x:Name="MainBorder"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        Padding="1"
+                                        SnapsToDevicePixels="True">
+                                    <ScrollViewer Foreground="Pink" Focusable="False" Padding="{TemplateBinding Padding}">
+                                        <ScrollViewer.Resources>
+                                            <Style TargetType="ScrollBar" BasedOn="{StaticResource CustomScrollBarStyle}"/>
+                                        </ScrollViewer.Resources>
+                                        <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                    </ScrollViewer>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter TargetName="MainBorder" Property="Background" Value="{StaticResource MainControlBackgroundDisabledBrush}"/>
+                                        <Setter TargetName="MainBorder" Property="BorderBrush" Value="{StaticResource MainControlForegroundDisabledBrush}"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Resources>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Border Margin="{TemplateBinding Margin}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                                            <ContentPresenter Content="{TemplateBinding Content}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="FontFamily" Value="{StaticResource MainControlFontFamily}"/>
+                            <Setter Property="Background" Value="{StaticResource MainControlBackgroundBrush}"/>
+                            <Setter Property="Foreground" Value="{StaticResource MainControlForegroundBrush}"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource MainControlBackgroundBrush}"/>
+                            <Setter Property="Margin" Value="2"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Background" Value="{StaticResource MainControlBackgroundDisabledBrush}"/>
+                                    <Setter Property="Foreground" Value="{StaticResource MainControlForegroundDisabledBrush}"/>
+                                    <Setter Property="BorderBrush" Value="{StaticResource MainControlBackgroundDisabledBrush}"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource MainControlBackgroundBrush}"/>
+                                    <Setter Property="Foreground" Value="{StaticResource MainControlForegroundBrush}"/>
+                                    <Setter Property="BorderBrush" Value="{StaticResource MainControlForegroundBrush}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                            <Style.Resources>
+                                <Style TargetType="Label">
+                                    <Setter Property="FontFamily" Value="{StaticResource MainControlFontFamily}"/>
+                                    <Setter Property="Background" Value="{StaticResource MainControlBackgroundBrush}"/>
+                                    <Setter Property="Foreground" Value="{StaticResource MainControlForegroundBrush}"/>
+                                </Style>
+                            </Style.Resources>
+                        </Style>
+                    </Style.Resources>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

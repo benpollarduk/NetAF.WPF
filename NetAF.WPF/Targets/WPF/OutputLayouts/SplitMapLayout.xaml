@@ -22,6 +22,7 @@
                                  Grid.Column="0"/>
         <wpf:NetAFMarkupRoomMap x:Name="MapControl"  
                                  Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SplitMapLayout}, Path=RoomMapStyle, Mode=OneWay}"
-                                 Grid.Column="2"/>
+                                 Grid.Column="2">
+        </wpf:NetAFMarkupRoomMap>
     </Grid>
 </UserControl>

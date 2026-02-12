@@ -1,6 +1,5 @@
 ﻿using NetAF.Assets.Locations;
 using NetAF.Logic;
-using NetAF.Logic.Modes;
 using NetAF.Rendering;
 using NetAF.Targets.Markup.Rendering;
 using NetAF.Targets.Markup.Rendering.FrameBuilders;

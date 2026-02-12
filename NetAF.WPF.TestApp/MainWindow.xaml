@@ -7,7 +7,7 @@
         xmlns:controls="clr-namespace:NetAF.Targets.WPF.Controls;assembly=NetAF.WPF"
         xmlns:outputlayouts="clr-namespace:NetAF.Targets.WPF.OutputLayouts;assembly=NetAF.WPF"
         mc:Ignorable="d"
-        Title="NetAF.WPF.TestApp" Background="#FF505050" Height="850" Width="1000">
+        Title="NetAF.WPF.TestApp" Height="850" Width="1000">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,17 +15,23 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
+    <Grid Background="{StaticResource MainWindowBackgroundBrush}" >
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="180"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <!--<controls:NetAFMarkupTerminal x:Name="Terminal" Background="Black" Margin="10" Padding="4" Grid.Row="0"/>-->
-        <outputlayouts:SplitMapLayout x:Name="OutputLayout" Style="{StaticResource DarkSplitMapLayoutStyle}" Margin="10" Grid.Row="0"/>
-        <controls:NetAFPrompt Margin="10,0,10,10" Style="{StaticResource DarkPromptStyle}" Grid.Row="1"/>
-        <layouts:ButtonLayout x:Name="ButtonLayout" Margin="10,0,10,10" Style="{StaticResource DarkButtonLayoutStyle}" Grid.Row="2"/>
-        <controls:NetAFFileManager Margin="10,0,10,10" Grid.Row="3"/>
+        <controls:NetAFMarkupTerminal x:Name="Terminal" Style="{StaticResource DarkMarkupTerminalStyle}" Margin="10" Grid.Row="0"/>
+        <!--<outputlayouts:SplitMapLayout x:Name="OutputLayout" Style="{StaticResource DarkSplitMapLayoutStyle}" Margin="10" Grid.Row="0"/>-->
+        <Expander Header="Prompt" Style="{StaticResource DarkExpanderStyle}" Padding="6" Margin="10,0,10,10" Grid.Row="1">
+            <controls:NetAFPrompt Style="{StaticResource DarkPromptStyle}"/>
+        </Expander>
+        <Expander Header="Buttons" Style="{StaticResource DarkExpanderStyle}" MaxHeight="210" Padding="4" Margin="10,0,10,10" Grid.Row="2">
+            <layouts:ButtonLayout x:Name="ButtonLayout" Style="{StaticResource DarkButtonLayoutStyle}"/>
+        </Expander>
+        <Expander Header="Restore" Style="{StaticResource DarkExpanderStyle}" MaxHeight="250" Padding="4" Margin="10,0,10,10" Grid.Row="3">
+            <controls:NetAFFileManager Style="{StaticResource DarkNetAFFileManagerStyle}"/>
+        </Expander>
     </Grid>
 </Window>

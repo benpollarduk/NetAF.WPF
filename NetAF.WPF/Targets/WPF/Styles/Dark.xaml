@@ -203,6 +203,15 @@
                 </Style>
             </Setter.Value>
         </Setter>
+        <Setter Property="CustomCommandButtonStyle">
+            <Setter.Value>
+                <Style TargetType="Button" BasedOn="{StaticResource MediumCommandButtonStyle}">
+                    <Setter Property="Background" Value="{StaticResource MainControlBackgroundBrush}"/>
+                    <Setter Property="BorderBrush" Value="LightSteelBlue"/>
+                    <Setter Property="Foreground" Value="LightSteelBlue"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
         <Setter Property="ConversationCommandButtonStyle">
             <Setter.Value>
                 <Style TargetType="Button" BasedOn="{StaticResource MediumCommandButtonStyle}">
@@ -454,6 +463,9 @@
                 </Style>
             </Setter.Value>
         </Setter>
+        <Style.Resources>
+            <Style TargetType="ScrollBar" BasedOn="{StaticResource CustomScrollBarStyle}"/>
+        </Style.Resources>
     </Style>
 
     <!--styling for the prompt-->

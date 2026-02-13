@@ -33,30 +33,36 @@
             Grid.Column="0" 
             Grid.RowSpan="2">
         </wpf:NetAFRegionMapCommandPicker>
-        <wpf:NetAFCommandPicker x:Name="GeneralCommandPicker"
-             Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonLayout}, Path=GeneralCommandPickerStyle, Mode=OneWay}"
-             ShowPersistenceCommands="False" 
-             ShowExecutionCommands="False" 
-             ShowMovementCommands="False" 
-             ShowSceneCommands="False"
-             ShowAcknowledgeButton="False"
-             ShowConversationCommands="False"
-             ShowRegionMapCommands="False"
-             Grid.Row="0"
-             Grid.Column="2">
-        </wpf:NetAFCommandPicker>
-        <wpf:NetAFCommandPicker x:Name="SceneCommandPicker"
-             Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonLayout}, Path=SceneCommandPickerStyle, Mode=OneWay}"
-             ShowPersistenceCommands="False" 
-             ShowExecutionCommands="False" 
-             ShowMovementCommands="False"
-             ShowFrameCommands="False"
-             ShowGlobalCommands="False"
-             ShowInformationCommands="False"
-             ShowUncategorizedCommands="False"
-             ShowRegionMapCommands="False"
-             Grid.Row="1"
-             Grid.Column="2">
-        </wpf:NetAFCommandPicker>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Grid.Row="0" 
+                      Grid.Column="2">
+            <wpf:NetAFCommandPicker x:Name="GeneralCommandPicker"
+                Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonLayout}, Path=GeneralCommandPickerStyle, Mode=OneWay}"
+                ShowPersistenceCommands="False" 
+                ShowExecutionCommands="False" 
+                ShowMovementCommands="False" 
+                ShowSceneCommands="False"
+                ShowAcknowledgeButton="False"
+                ShowConversationCommands="False"
+                ShowRegionMapCommands="False">
+            </wpf:NetAFCommandPicker>
+        </ScrollViewer>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+              VerticalScrollBarVisibility="Auto"
+              Grid.Row="1" 
+              Grid.Column="2">
+            <wpf:NetAFCommandPicker x:Name="SceneCommandPicker"
+                Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonLayout}, Path=SceneCommandPickerStyle, Mode=OneWay}"
+                ShowPersistenceCommands="False" 
+                ShowExecutionCommands="False" 
+                ShowMovementCommands="False"
+                ShowFrameCommands="False"
+                ShowGlobalCommands="False"
+                ShowInformationCommands="False"
+                ShowUncategorizedCommands="False"
+                ShowRegionMapCommands="False">
+            </wpf:NetAFCommandPicker>
+        </ScrollViewer>
     </Grid>
 </UserControl>

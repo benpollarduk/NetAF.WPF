@@ -663,6 +663,7 @@
                     <Setter Property="BorderBrush" Value="{StaticResource MainControlForegroundBrush}"/>
                     <Setter Property="Background" Value="{StaticResource MainControlBackgroundBrush}"/>
                     <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="MinHeight" Value="30"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBox">

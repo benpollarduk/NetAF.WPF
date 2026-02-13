@@ -49,7 +49,6 @@
         <ListBox Name="RestorePointsListBox" 
                  ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFFileManager}, Path=AvailableRestorePoints, Mode=OneWay}" 
                  Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFFileManager}, Path=AvailableRestorePointsListBoxStyle, Mode=OneWay}" 
-                 MinHeight="30"
                  Grid.Row="0">
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type wpf:RestorePointPath}">

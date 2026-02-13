@@ -216,8 +216,8 @@
             <Setter.Value>
                 <Style TargetType="Button" BasedOn="{StaticResource MediumCommandButtonStyle}">
                     <Setter Property="Background" Value="{StaticResource MainControlBackgroundBrush}"/>
-                    <Setter Property="BorderBrush" Value="LightPink"/>
-                    <Setter Property="Foreground" Value="LightPink"/>
+                    <Setter Property="BorderBrush" Value="LightSteelBlue"/>
+                    <Setter Property="Foreground" Value="LightSteelBlue"/>
                 </Style>
             </Setter.Value>
         </Setter>

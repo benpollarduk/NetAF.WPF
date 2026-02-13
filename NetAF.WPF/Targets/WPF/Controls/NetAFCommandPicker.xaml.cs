@@ -739,11 +739,14 @@ namespace NetAF.Targets.WPF.Controls
             SelectedCommand = null;
             AvailableCommands = [];
 
-            var showCommands = game?.Mode?.Type == GameModeType.Interactive;
+            if (game == null)
+                return;
+
+            var showCommands = game.Mode?.Type == GameModeType.Interactive;
             var showAcknowledge = ShowAcknowledgeButton && (game?.Mode?.Type is GameModeType.SingleFrameInformation or GameModeType.MultipleFrameInformation);
 
             if (showCommands)
-                AvailableCommands = game?.GetContextualCommands() ?? [];
+                AvailableCommands = game.GetContextualCommands();
             else if (showAcknowledge)
                 GenerateAcknowledgeButton();
         }

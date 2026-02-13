@@ -11,7 +11,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/NetAF.WPF;component/Targets/WPF/Styles/DarkStyles.xaml"/>
+                <ResourceDictionary Source="/NetAF.WPF;component/Targets/WPF/Styles/Dark.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -23,7 +23,6 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <controls:NetAFMarkupTerminal x:Name="Terminal" Style="{StaticResource DarkMarkupTerminalStyle}" Margin="10" Grid.Row="0"/>
-        <!--<outputlayouts:SplitMapLayout x:Name="OutputLayout" Style="{StaticResource DarkSplitMapLayoutStyle}" Margin="10" Grid.Row="0"/>-->
         <Expander Header="Prompt" Style="{StaticResource DarkExpanderStyle}" Padding="6" Margin="10,0,10,10" Grid.Row="1">
             <controls:NetAFPrompt Style="{StaticResource DarkPromptStyle}"/>
         </Expander>

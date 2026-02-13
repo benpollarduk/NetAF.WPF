@@ -336,7 +336,7 @@ namespace NetAF.Targets.WPF.Controls
 
             var restorePoint = e.Parameter as RestorePointPath;
 
-            var index = AvailableRestorePoints?.ToList()?.IndexOf(restorePoint) ?? AvailableRestorePoints?.IndexOf(null) ?? 0;
+            var index = AvailableRestorePoints?.ToList().IndexOf(restorePoint) ?? AvailableRestorePoints?.IndexOf(null) ?? 0;
             var name = !string.IsNullOrEmpty(restorePoint?.RestorePoint.Name) ? restorePoint.RestorePoint.Name : game.Overworld?.CurrentRegion?.CurrentRoom?.Identifier.Name ?? "New restore point";
             var newRestorePoint = RestorePoint.Create(name, game);
             var extension = FileExtension;
@@ -344,7 +344,7 @@ namespace NetAF.Targets.WPF.Controls
             if (!extension.StartsWith('.'))
                 extension = $".{extension}";
 
-            var path = !string.IsNullOrEmpty(restorePoint?.Path) ? restorePoint?.Path : Path.Combine(GameDirectoryPath, $"{GetFileName(DateTime.Now)}{extension}");
+            var path = !string.IsNullOrEmpty(restorePoint?.Path) ? restorePoint.Path : Path.Combine(GameDirectoryPath, $"{GetFileName(DateTime.Now)}{extension}");
             var newRestorePointPath = new RestorePointPath(newRestorePoint, path ?? string.Empty);
 
             if (JsonSave.ToFile(newRestorePointPath.Path, newRestorePointPath.RestorePoint, out var message) && AvailableRestorePoints != null)

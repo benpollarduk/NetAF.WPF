@@ -6,7 +6,7 @@ using NetAF.Utilities;
 
 namespace NetAF.WPF.TestApp
 {
-    internal class ExampleGame
+    internal static class ExampleGame
     {
         internal static GameCreator Create(GameConfiguration configuration)
         {

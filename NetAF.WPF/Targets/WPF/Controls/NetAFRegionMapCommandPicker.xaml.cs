@@ -264,7 +264,7 @@ namespace NetAF.Targets.WPF.Controls
             }
             else
             {
-                var availableCommands = game?.GetContextualCommands() ?? [];
+                var availableCommands = game.GetContextualCommands() ?? [];
 
                 PanNorthButton.IsEnabled = availableCommands.Contains(Pan.NorthCommandHelp);
                 PanEastButton.IsEnabled = availableCommands.Contains(Pan.EastCommandHelp);

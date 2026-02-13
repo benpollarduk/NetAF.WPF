@@ -743,7 +743,7 @@ namespace NetAF.Targets.WPF.Controls
                 return;
 
             var showCommands = game.Mode?.Type == GameModeType.Interactive;
-            var showAcknowledge = ShowAcknowledgeButton && (game?.Mode?.Type is GameModeType.SingleFrameInformation or GameModeType.MultipleFrameInformation);
+            var showAcknowledge = ShowAcknowledgeButton && (game.Mode?.Type is GameModeType.SingleFrameInformation or GameModeType.MultipleFrameInformation);
 
             if (showCommands)
                 AvailableCommands = game.GetContextualCommands();

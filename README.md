@@ -26,7 +26,7 @@ Getting started running [NetAF](https://github.com/benpollarduk/NetAF/) in WPF i
 * Clone the repo.
 * Build and run NetAF.WPF.TestApp.
 
-<img width="986" height="842" alt="image" src="https://github.com/user-attachments/assets/22359366-25bd-4101-a0a3-0e68e488aba3" />
+![wpf-example](https://github.com/user-attachments/assets/39ba248f-5a21-414b-9ee2-75f30249528d)
 
 ## How it Works
 You need a couple of components to run a NetAF game:

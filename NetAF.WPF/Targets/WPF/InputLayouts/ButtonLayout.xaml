@@ -45,6 +45,7 @@
                 ShowSceneCommands="False"
                 ShowAcknowledgeButton="False"
                 ShowConversationCommands="False"
+                ShowCustomCommands="False"
                 ShowRegionMapCommands="False">
             </wpf:NetAFCommandPicker>
         </ScrollViewer>
@@ -60,7 +61,6 @@
                 ShowFrameCommands="False"
                 ShowGlobalCommands="False"
                 ShowInformationCommands="False"
-                ShowUncategorizedCommands="False"
                 ShowRegionMapCommands="False">
             </wpf:NetAFCommandPicker>
         </ScrollViewer>

@@ -205,15 +205,6 @@ namespace NetAF.Targets.WPF.Controls
         }
 
         /// <summary>
-        /// Get or set the style to use for the uncategorized command buttons. This is a dependency property.
-        /// </summary>
-        public Style UncategorizedCommandButtonStyle
-        {
-            get { return (Style)GetValue(UncategorizedCommandButtonStyleProperty); }
-            set { SetValue(UncategorizedCommandButtonStyleProperty, value); }
-        }
-
-        /// <summary>
         /// Get or set if the global command buttons should be shown. This is a dependency property.
         /// </summary>
         public bool ShowGlobalCommands
@@ -301,15 +292,6 @@ namespace NetAF.Targets.WPF.Controls
         {
             get { return (bool)GetValue(ShowPersistenceCommandsProperty); }
             set { SetValue(ShowPersistenceCommandsProperty, value); }
-        }
-
-        /// <summary>
-        /// Get or set if the uncategorized command buttons should be shown. This is a dependency property.
-        /// </summary>
-        public bool ShowUncategorizedCommands
-        {
-            get { return (bool)GetValue(ShowUncategorizedCommandsProperty); }
-            set { SetValue(ShowUncategorizedCommandsProperty, value); }
         }
 
         /// <summary>
@@ -415,11 +397,6 @@ namespace NetAF.Targets.WPF.Controls
         public static readonly DependencyProperty PersistenceCommandButtonStyleProperty = DependencyProperty.Register("PersistenceCommandButtonStyle", typeof(Style), typeof(NetAFCommandPicker), new PropertyMetadata(CreateButtonStyle(new SolidColorBrush(Colors.SeaGreen))));
 
         /// <summary>
-        /// Identifies the NetAFCommandPicker.UncategorizedCommandButtonStyle property.
-        /// </summary>
-        public static readonly DependencyProperty UncategorizedCommandButtonStyleProperty = DependencyProperty.Register("UncategorizedCommandButtonStyle", typeof(Style), typeof(NetAFCommandPicker), new PropertyMetadata(CreateButtonStyle(new SolidColorBrush(Colors.SeaGreen))));
-
-        /// <summary>
         /// Identifies the NetAFCommandPicker.ShowGlobalCommands property.
         /// </summary>
         public static readonly DependencyProperty ShowGlobalCommandsProperty = DependencyProperty.Register("ShowGlobalCommands", typeof(bool), typeof(NetAFCommandPicker), new PropertyMetadata(true));
@@ -468,11 +445,6 @@ namespace NetAF.Targets.WPF.Controls
         /// Identifies the NetAFCommandPicker.ShowPersistenceCommandsProperty property.
         /// </summary>
         public static readonly DependencyProperty ShowPersistenceCommandsProperty = DependencyProperty.Register("ShowPersistenceCommands", typeof(bool), typeof(NetAFCommandPicker), new PropertyMetadata(true));
-
-        /// <summary>
-        /// Identifies the NetAFCommandPicker.ShowUncategorizedCommandsProperty property.
-        /// </summary>
-        public static readonly DependencyProperty ShowUncategorizedCommandsProperty = DependencyProperty.Register("ShowUncategorizedCommands", typeof(bool), typeof(NetAFCommandPicker), new PropertyMetadata(true));
 
         /// <summary>
         /// Identifies the NetAFCommandPicker.CommandCategoryOrder property.
@@ -634,8 +606,8 @@ namespace NetAF.Targets.WPF.Controls
                 CommandCategory.Persistence => nameof(ShowPersistenceCommands),
                 CommandCategory.RegionMap => nameof(ShowRegionMapCommands),
                 CommandCategory.Scene => nameof(ShowSceneCommands),
-                CommandCategory.Uncategorized => nameof(ShowUncategorizedCommands),
-                _ => nameof(ShowUncategorizedCommands)
+                CommandCategory.Uncategorized => nameof(ShowCustomCommands),
+                _ => nameof(ShowCustomCommands)
             };
         }
 
@@ -653,8 +625,8 @@ namespace NetAF.Targets.WPF.Controls
                 CommandCategory.Persistence => nameof(PersistenceCommandButtonStyle),
                 CommandCategory.RegionMap => nameof(RegionMapCommandButtonStyle),
                 CommandCategory.Scene => nameof(SceneCommandButtonStyle),
-                CommandCategory.Uncategorized => nameof(UncategorizedCommandButtonStyle),
-                _ => nameof(UncategorizedCommandButtonStyle)
+                CommandCategory.Uncategorized => nameof(CustomCommandButtonStyle),
+                _ => nameof(CustomCommandButtonStyle)
             };
         }
 

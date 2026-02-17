@@ -95,17 +95,17 @@ namespace NetAF.Targets.WPF
             };
 
             foreach (var inline in p.Inlines)
-                para.Inlines.Add(RenderInline(inline, theme));
+                para.Inlines.Add(RenderInline(inline, theme, para));
 
             return para;
         }
 
-        private static Inline RenderInline(IInlineNode inline, FlowDocumentTheme theme)
+        private static Inline RenderInline(IInlineNode inline, FlowDocumentTheme theme, Paragraph parentParagraph)
         {
             return inline switch
             {
                 TextNode t => CreateRun(t.Text),
-                StyleSpanNode s => RenderStyleSpan(s, theme),
+                StyleSpanNode s => RenderStyleSpan(s, theme, parentParagraph),
                 _ => new Run()
             };
         }
@@ -115,19 +115,19 @@ namespace NetAF.Targets.WPF
             return new Run(text);
         }
 
-        private static Span RenderStyleSpan(StyleSpanNode s, FlowDocumentTheme theme)
+        private static Span RenderStyleSpan(StyleSpanNode s, FlowDocumentTheme theme, Paragraph parentParagraph)
         {
             var span = new Span();
 
-            ApplyStyle(span, s.Style, theme);
+            ApplyStyle(span, s.Style, theme, parentParagraph);
 
             foreach (var child in s.Inlines)
-                span.Inlines.Add(RenderInline(child, theme));
+                span.Inlines.Add(RenderInline(child, theme, parentParagraph));
 
             return span;
         }
 
-        private static void ApplyStyle(Span span, TextStyle style, FlowDocumentTheme theme)
+        private static void ApplyStyle(Span span, TextStyle style, FlowDocumentTheme theme, Paragraph parentParagraph)
         {
             if (style.Monospace)
             {
@@ -135,6 +135,12 @@ namespace NetAF.Targets.WPF
                 span.FontSize = theme.Monospace.FontSize;
                 span.Foreground = theme.Monospace.Foreground;
                 span.Background = theme.Monospace.Background;
+
+                if (parentParagraph != null)
+                {
+                    parentParagraph.LineHeight = parentParagraph.FontSize * 1.0;
+                    parentParagraph.LineStackingStrategy = LineStackingStrategy.BlockLineHeight;
+                }
             }
 
             if (style.Foreground != null)

@@ -163,7 +163,8 @@ namespace NetAF.Targets.WPF
             if (style.Underline)
                 decorations.Add(TextDecorations.Underline[0]);
 
-            span.TextDecorations = decorations;
+            if (decorations.Count > 0)
+                span.TextDecorations = decorations;
         }
 
         private static SolidColorBrush BrushFromColor(Markup.Color color)

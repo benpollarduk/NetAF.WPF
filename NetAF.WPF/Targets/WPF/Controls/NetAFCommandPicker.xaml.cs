@@ -312,6 +312,31 @@ namespace NetAF.Targets.WPF.Controls
             set { SetValue(ShowAcknowledgeButtonProperty, value); }
         }
 
+        /// <summary>
+        /// Occurs when a command is selected.
+        /// </summary>
+        public event EventHandler<CommandHelp> CommandSelected;
+
+        /// <summary>
+        /// Occurs when a command is executed.
+        /// </summary>
+        public event EventHandler<string> CommandExecuted;
+
+        /// <summary>
+        /// Occurs when a prompt is selected.
+        /// </summary>
+        public event EventHandler<Prompt> PromptSelected;
+
+        /// <summary>
+        /// Occurs when acknowledge is selected.
+        /// </summary>
+        public event EventHandler AcknowledgeSelected;
+
+        /// <summary>
+        /// Occurs when clear is selected.
+        /// </summary>
+        public event EventHandler ClearSelected;
+
         #endregion
 
         #region DependencyProperties
@@ -656,6 +681,9 @@ namespace NetAF.Targets.WPF.Controls
             if (control.AvailablePrompts == null || control.AvailablePrompts.Length == 0)
             {
                 GameExecutor.Update(newCommand.Command);
+
+                control.CommandExecuted?.Invoke(control, newCommand.Command);
+
                 control.SelectedCommand = null;
             }
         }
@@ -678,23 +706,47 @@ namespace NetAF.Targets.WPF.Controls
 
         private void CommandSelectedCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            SelectedCommand = e.Parameter as CommandHelp;
+            var commandHelp = e.Parameter as CommandHelp;
+
+            if (commandHelp == null)
+                return;
+
+            CommandSelected?.Invoke(this, commandHelp);
+            
+            SelectedCommand = commandHelp;
         }
 
         private void PromptSelectedCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            GameExecutor.Update($"{SelectedCommand?.Command ?? string.Empty} {(e.Parameter as Prompt)?.Entry}");
+            var prompt = e.Parameter as Prompt;
+
+            if (prompt == null)
+                return;
+
+            PromptSelected?.Invoke(this, prompt);
+
+            var command = $"{SelectedCommand?.Command ?? string.Empty} {prompt.Entry}";
+
+            GameExecutor.Update(command);
+
+            CommandExecuted?.Invoke(this, command);
+
             SelectedCommand = null;
         }
 
         private void ClearSelectedCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            ClearSelected?.Invoke(this, EventArgs.Empty);
+
             Update(GameExecutor.ExecutingGame);
         }
 
         private void AcknowledgeSelectedCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            AcknowledgeSelected?.Invoke(this, EventArgs.Empty);
+
             GameExecutor.Update();
+
             SelectedCommand = null;
         }
 

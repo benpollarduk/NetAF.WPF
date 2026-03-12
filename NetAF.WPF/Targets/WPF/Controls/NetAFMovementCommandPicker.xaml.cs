@@ -1,4 +1,5 @@
-﻿using NetAF.Commands.Scene;
+﻿using NetAF.Commands;
+using NetAF.Commands.Scene;
 using NetAF.Logic;
 using NetAF.Logic.Modes;
 using System.Windows;
@@ -77,6 +78,16 @@ namespace NetAF.Targets.WPF.Controls
             set { SetValue(SectionSpacingProperty, value); }
         }
 
+        /// <summary>
+        /// Occurs when a command is selected.
+        /// </summary>
+        public event EventHandler<CommandHelp> CommandSelected;
+
+        /// <summary>
+        /// Occurs when a command is executed.
+        /// </summary>
+        public event EventHandler<string> CommandExecuted;
+
         #endregion
 
         #region DependencyProperties
@@ -130,36 +141,49 @@ namespace NetAF.Targets.WPF.Controls
 
         #endregion
 
+        #region Methods
+
+        private void ExecuteCommand(CommandHelp command)
+        {
+            CommandSelected?.Invoke(this, command);
+
+            GameExecutor.Update(command.Command);
+
+            CommandExecuted?.Invoke(this, command.Command);
+        }
+
+        #endregion
+
         #region EventHandlers
 
         private void NorthSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            GameExecutor.Update(Move.NorthCommandHelp.Command);
+            ExecuteCommand(Move.NorthCommandHelp);
         }
 
         private void EastSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            GameExecutor.Update(Move.EastCommandHelp.Command);
+            ExecuteCommand(Move.EastCommandHelp);
         }
 
         private void SouthSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            GameExecutor.Update(Move.SouthCommandHelp.Command);
+            ExecuteCommand(Move.SouthCommandHelp);
         }
 
         private void WestSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            GameExecutor.Update(Move.WestCommandHelp.Command);
+            ExecuteCommand(Move.WestCommandHelp);
         }
 
         private void UpSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            GameExecutor.Update(Move.UpCommandHelp.Command);
+            ExecuteCommand(Move.UpCommandHelp);
         }
 
         private void DownSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            GameExecutor.Update(Move.DownCommandHelp.Command);
+            ExecuteCommand(Move.DownCommandHelp);
         }
 
         #endregion

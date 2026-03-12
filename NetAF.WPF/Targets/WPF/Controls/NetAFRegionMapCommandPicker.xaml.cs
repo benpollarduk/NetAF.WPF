@@ -1,4 +1,5 @@
-﻿using NetAF.Commands.Global;
+﻿using NetAF.Commands;
+using NetAF.Commands.Global;
 using NetAF.Commands.RegionMap;
 using NetAF.Logic;
 using NetAF.Logic.Modes;
@@ -114,6 +115,16 @@ namespace NetAF.Targets.WPF.Controls
             set { SetValue(SectionSpacingProperty, value); }
         }
 
+        /// <summary>
+        /// Occurs when a command is selected.
+        /// </summary>
+        public event EventHandler<CommandHelp> CommandSelected;
+
+        /// <summary>
+        /// Occurs when a command is executed.
+        /// </summary>
+        public event EventHandler<string> CommandExecuted;
+
         #endregion
 
         #region DependencyProperties
@@ -187,56 +198,69 @@ namespace NetAF.Targets.WPF.Controls
 
         #endregion
 
+        #region Methods
+
+        private void ExecuteCommand(CommandHelp command)
+        {
+            CommandSelected?.Invoke(this, command);
+
+            GameExecutor.Update(command.Command);
+
+            CommandExecuted?.Invoke(this, command.Command);
+        }
+
+        #endregion
+
         #region EventHandlers
 
         private void PanNorthSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            GameExecutor.Update(Pan.NorthCommandHelp.Command);
+            ExecuteCommand(Pan.NorthCommandHelp);
         }
 
         private void PanEastSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            GameExecutor.Update(Pan.EastCommandHelp.Command);
+            ExecuteCommand(Pan.EastCommandHelp);
         }
 
         private void PanSouthSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            GameExecutor.Update(Pan.SouthCommandHelp.Command);
+            ExecuteCommand(Pan.SouthCommandHelp);
         }
 
         private void PanWestSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            GameExecutor.Update(Pan.WestCommandHelp.Command);
+            ExecuteCommand(Pan.WestCommandHelp);
         }
 
         private void PanUpSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            GameExecutor.Update(Pan.UpCommandHelp.Command);
+            ExecuteCommand(Pan.UpCommandHelp);
         }
 
         private void PanDownSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            GameExecutor.Update(Pan.DownCommandHelp.Command);
+            ExecuteCommand(Pan.DownCommandHelp);
         }
 
         private void ZoomInSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            GameExecutor.Update(ZoomIn.CommandHelp.Command);
+            ExecuteCommand(ZoomIn.CommandHelp);
         }
 
         private void PanResetSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            GameExecutor.Update(PanReset.CommandHelp.Command);
+            ExecuteCommand(PanReset.CommandHelp);
         }
 
         private void ZoomOutSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            GameExecutor.Update(ZoomOut.CommandHelp.Command);
+            ExecuteCommand(ZoomOut.CommandHelp);
         }
 
         private void EndSelectedCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            GameExecutor.Update(End.CommandHelp.Command);
+            ExecuteCommand(End.CommandHelp);
         }
 
         #endregion

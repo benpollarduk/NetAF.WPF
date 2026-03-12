@@ -731,4 +731,136 @@
         </Setter>
     </Style>
 
+    <!--styling for check boxes-->
+    <Style x:Key="DarkCheckBoxStyle" TargetType="CheckBox">
+        <Setter Property="Foreground" Value="{StaticResource MainControlForegroundBrush}"/>
+        <Setter Property="Background" Value="{StaticResource MainControlBackgroundBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource MainControlFontFamily}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Border Width="16" Height="16" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding Foreground}" BorderThickness="1" Margin="0,0,6,0" VerticalAlignment="Center">
+                            <Path x:Name="check" Data="M 4,4 l 0,6 l 6,0 l 0,-6 z" Stroke="{TemplateBinding Foreground}" StrokeThickness="2" Visibility="Collapsed"/>
+                        </Border>
+                        <ContentPresenter VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="check" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{StaticResource MainControlForegroundDisabledBrush}"/>
+                <Setter Property="Background" Value="{StaticResource MainControlBackgroundDisabledBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--styling for radio buttons-->
+    <Style x:Key="DarkRadioButtonStyle" TargetType="RadioButton">
+        <Setter Property="Foreground" Value="{StaticResource MainControlForegroundBrush}"/>
+        <Setter Property="Background" Value="{StaticResource MainControlBackgroundBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource MainControlFontFamily}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Border Width="16" Height="16" CornerRadius="8" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding Foreground}" BorderThickness="1" Margin="0,0,6,0" VerticalAlignment="Center">
+                            <Ellipse x:Name="check" Width="8" Height="8" Stroke="{TemplateBinding Foreground}" StrokeThickness="2" Visibility="Collapsed"/>
+                        </Border>
+                        <ContentPresenter VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="check" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{StaticResource MainControlForegroundDisabledBrush}"/>
+                <Setter Property="Background" Value="{StaticResource MainControlBackgroundDisabledBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--styling for tab control-->
+    <Style x:Key="DarkTabControlStyle" TargetType="TabControl">
+        <Setter Property="Background" Value="{StaticResource MainControlBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource MainControlForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource MainControlForegroundBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="4"/>
+        <Setter Property="FontFamily" Value="{StaticResource MainControlFontFamily}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabControl">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TabPanel Grid.Row="0" Margin="2,2,2,0" Panel.ZIndex="1" IsItemsHost="True" Background="Transparent" />
+                        <Border Grid.Row="1" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter ContentSource="SelectedContent"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--styling for tab items-->
+    <Style x:Key="DarkTabItemStyle" TargetType="TabItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource MainControlForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource MainControlForegroundBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="10,5"/>
+        <Setter Property="FontFamily" Value="{StaticResource MainControlFontFamily}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Border x:Name="TabBorder" 
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            CornerRadius="3,3,0,0" 
+                            Margin="0,0,2,0">
+                        <ContentPresenter x:Name="TabContent" 
+                                          ContentSource="Header" 
+                                          HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center" 
+                                          Margin="{TemplateBinding Padding}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="TabBorder" Property="BorderThickness" Value="1,1,1,0"/>
+                            <Setter TargetName="TabBorder" Property="Background" Value="{StaticResource MainControlBackgroundBrush}"/>
+                            <Setter TargetName="TabBorder" Property="Margin" Value="0,0,2,-1"/>
+                            <Setter Property="Foreground" Value="{StaticResource MainControlForegroundBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource MainControlForegroundBrush}"/>
+                            <Setter TargetName="TabBorder" Property="Opacity" Value="0.7"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="TabBorder" Property="Opacity" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource MainControlForegroundDisabledBrush}"/>
+                            <Setter TargetName="TabBorder" Property="Background" Value="{StaticResource MainControlBackgroundDisabledBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

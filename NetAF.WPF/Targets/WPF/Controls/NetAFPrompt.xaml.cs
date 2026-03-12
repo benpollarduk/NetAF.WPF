@@ -9,6 +9,15 @@ namespace NetAF.Targets.WPF.Controls
     /// </summary>
     public partial class NetAFPrompt : UserControl
     {
+        #region Properties
+
+        /// <summary>
+        /// Occurs when a key is pressed.
+        /// </summary>
+        public event EventHandler<Key> KeyPressed;
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -25,6 +34,8 @@ namespace NetAF.Targets.WPF.Controls
 
         private void InputTextBox_PreviewKeyUp(object sender, KeyEventArgs e)
         {
+            KeyPressed?.Invoke(this, e.Key);
+
             if (e.Key != Key.Enter)
                 return;
 

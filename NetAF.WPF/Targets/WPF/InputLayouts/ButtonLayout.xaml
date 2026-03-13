@@ -25,13 +25,17 @@
             Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonLayout}, Path=MovementCommandPickerStyle, Mode=OneWay}"
             Grid.Row="0" 
             Grid.Column="0" 
-            Grid.RowSpan="2">
+            Grid.RowSpan="2"
+            CommandSelected="CommandPicker_CommandSelected"
+            CommandExecuted="CommandPicker_CommandExecuted">
         </wpf:NetAFMovementCommandPicker>
         <wpf:NetAFRegionMapCommandPicker x:Name="RegionMapCommandPicker"
             Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonLayout}, Path=RegionMapCommandPickerStyle, Mode=OneWay}"
             Grid.Row="0" 
             Grid.Column="0" 
-            Grid.RowSpan="2">
+            Grid.RowSpan="2"
+            CommandSelected="CommandPicker_CommandSelected"
+            CommandExecuted="CommandPicker_CommandExecuted">
         </wpf:NetAFRegionMapCommandPicker>
         <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                       VerticalScrollBarVisibility="Auto"
@@ -46,7 +50,12 @@
                 ShowAcknowledgeButton="False"
                 ShowConversationCommands="False"
                 ShowCustomCommands="False"
-                ShowRegionMapCommands="False">
+                ShowRegionMapCommands="False"
+                CommandSelected="CommandPicker_CommandSelected"
+                CommandExecuted="CommandPicker_CommandExecuted"
+                ClearSelected="CommandPicker_ClearSelected"
+                AcknowledgeSelected="CommandPicker_AcknowledgeSelected"
+                PromptSelected="CommandPicker_PromptSelected">
             </wpf:NetAFCommandPicker>
         </ScrollViewer>
         <ScrollViewer HorizontalScrollBarVisibility="Disabled"
@@ -61,7 +70,12 @@
                 ShowFrameCommands="False"
                 ShowGlobalCommands="False"
                 ShowInformationCommands="False"
-                ShowRegionMapCommands="False">
+                ShowRegionMapCommands="False"
+                CommandSelected="CommandPicker_CommandSelected"
+                CommandExecuted="CommandPicker_CommandExecuted"
+                ClearSelected="CommandPicker_ClearSelected"
+                AcknowledgeSelected="CommandPicker_AcknowledgeSelected"
+                PromptSelected="CommandPicker_PromptSelected">
             </wpf:NetAFCommandPicker>
         </ScrollViewer>
     </Grid>

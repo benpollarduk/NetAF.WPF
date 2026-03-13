@@ -1,4 +1,5 @@
-﻿using NetAF.Events;
+﻿using NetAF.Commands;
+using NetAF.Events;
 using NetAF.Logic;
 using NetAF.Logic.Modes;
 using System.Windows;
@@ -63,6 +64,16 @@ namespace NetAF.Targets.WPF.InputLayouts
         /// </summary>
         protected IUpdatable[] UpdatableComponents => [GeneralCommandPicker, SceneCommandPicker, MovementCommandPicker, RegionMapCommandPicker];
 
+        /// <summary>
+        /// Occurs when a button is selected.
+        /// </summary>
+        public event EventHandler ButtonSelected;
+
+        /// <summary>
+        /// Occurs when a command is executed.
+        /// </summary>
+        public event EventHandler<string> CommandExecuted;
+
         #endregion
 
         #region DependencyProperties
@@ -119,6 +130,35 @@ namespace NetAF.Targets.WPF.InputLayouts
         private void GameUpdated(GameUpdated update)
         {
             Update(update.Game);
+        }
+
+        #endregion
+
+        #region EventHandlers
+
+        private void CommandPicker_CommandSelected(object sender, CommandHelp e)
+        {
+            ButtonSelected?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void CommandPicker_CommandExecuted(object sender, string e)
+        {
+            CommandExecuted?.Invoke(this, e);
+        }
+
+        private void CommandPicker_ClearSelected(object sender, EventArgs e)
+        {
+            ButtonSelected?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void CommandPicker_AcknowledgeSelected(object sender, EventArgs e)
+        {
+            ButtonSelected?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void CommandPicker_PromptSelected(object sender, Prompt e)
+        {
+            ButtonSelected?.Invoke(this, EventArgs.Empty);
         }
 
         #endregion

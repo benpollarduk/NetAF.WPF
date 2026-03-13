@@ -180,8 +180,8 @@
         <Setter Property="FontSize" Value="11"/>
     </Style>
 
-    <!--style for the file manager buttons-->
-    <Style x:Key="FileManagerButtonStyle" TargetType="Button" BasedOn="{StaticResource CustomButtonStyle}">
+    <!--style for the default dark buttons-->
+    <Style x:Key="DefaultDarkButtonStyle" TargetType="Button" BasedOn="{StaticResource CustomButtonStyle}">
         <Setter Property="MinWidth" Value="50"/>
         <Setter Property="MinHeight" Value="30"/>
         <Setter Property="Padding" Value="4"/>
@@ -620,28 +620,28 @@
     <Style x:Key="DarkNetAFFileManagerStyle" TargetType="{x:Type controls:NetAFFileManager}">
         <Setter Property="NewButtonStyle">
             <Setter.Value>
-                <Style TargetType="Button" BasedOn="{StaticResource FileManagerButtonStyle}">
+                <Style TargetType="Button" BasedOn="{StaticResource DefaultDarkButtonStyle}">
                     <Setter Property="Content" Value="New"/>
                 </Style>
             </Setter.Value>
         </Setter>
         <Setter Property="DeleteButtonStyle">
             <Setter.Value>
-                <Style TargetType="Button" BasedOn="{StaticResource FileManagerButtonStyle}">
+                <Style TargetType="Button" BasedOn="{StaticResource DefaultDarkButtonStyle}">
                     <Setter Property="Content" Value="Delete"/>
                 </Style>
             </Setter.Value>
         </Setter>
         <Setter Property="SaveButtonStyle">
             <Setter.Value>
-                <Style TargetType="Button" BasedOn="{StaticResource FileManagerButtonStyle}">
+                <Style TargetType="Button" BasedOn="{StaticResource DefaultDarkButtonStyle}">
                     <Setter Property="Content" Value="Save"/>
                 </Style>
             </Setter.Value>
         </Setter>
         <Setter Property="LoadButtonStyle">
             <Setter.Value>
-                <Style TargetType="Button" BasedOn="{StaticResource FileManagerButtonStyle}">
+                <Style TargetType="Button" BasedOn="{StaticResource DefaultDarkButtonStyle}">
                     <Setter Property="Content" Value="Load"/>
                 </Style>
             </Setter.Value>
@@ -789,6 +789,79 @@
                 <Setter Property="Background" Value="{StaticResource MainControlBackgroundDisabledBrush}"/>
             </Trigger>
         </Style.Triggers>
+    </Style>
+
+    <!--styling for sliders-->
+    <Style x:Key="DarkSliderStyle" TargetType="Slider">
+        <Setter Property="Foreground" Value="{StaticResource MainControlForegroundBrush}"/>
+        <Setter Property="Background" Value="{StaticResource MainControlBackgroundBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Slider">
+                    <Grid VerticalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" MinHeight="24"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TickBar x:Name="TopTick" Fill="{TemplateBinding Foreground}" Height="4" Placement="Top" Grid.Row="0" Visibility="Collapsed" />
+                        <Border Grid.Row="1" Height="2" Background="{TemplateBinding Foreground}" Margin="5,0,5,0" VerticalAlignment="Center"/>
+                        <Track x:Name="PART_Track" Grid.Row="1">
+                            <Track.DecreaseRepeatButton>
+                                <RepeatButton Command="Slider.DecreaseLarge">
+                                    <RepeatButton.Template>
+                                        <ControlTemplate TargetType="RepeatButton">
+                                            <Border Background="Transparent"/>
+                                        </ControlTemplate>
+                                    </RepeatButton.Template>
+                                </RepeatButton>
+                            </Track.DecreaseRepeatButton>
+                            <Track.IncreaseRepeatButton>
+                                <RepeatButton Command="Slider.IncreaseLarge">
+                                    <RepeatButton.Template>
+                                        <ControlTemplate TargetType="RepeatButton">
+                                            <Border Background="Transparent"/>
+                                        </ControlTemplate>
+                                    </RepeatButton.Template>
+                                </RepeatButton>
+                            </Track.IncreaseRepeatButton>
+                            <Track.Thumb>
+                                <Thumb>
+                                    <Thumb.Template>
+                                        <ControlTemplate TargetType="Thumb">
+                                            <Path Data="M 0,0 L 10,0 L 5,10 Z" 
+                                                  Fill="{Binding Path=Background, RelativeSource={RelativeSource AncestorType=Slider}}" 
+                                                  Stroke="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Slider}}" 
+                                                  StrokeThickness="2"
+                                                  Margin="0,-5,0,0"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"/>
+                                        </ControlTemplate>
+                                    </Thumb.Template>
+                                </Thumb>
+                            </Track.Thumb>
+                        </Track>
+                        <TickBar x:Name="BottomTick" Fill="{TemplateBinding Foreground}" Height="4" Placement="Bottom" Grid.Row="2" Visibility="Collapsed" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="TickPlacement" Value="TopLeft">
+                            <Setter TargetName="TopTick" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="TickPlacement" Value="BottomRight">
+                            <Setter TargetName="BottomTick" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="TickPlacement" Value="Both">
+                            <Setter TargetName="TopTick" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="BottomTick" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource MainControlForegroundDisabledBrush}"/>
+                            <Setter Property="Background" Value="{StaticResource MainControlBackgroundDisabledBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!--styling for tab control-->

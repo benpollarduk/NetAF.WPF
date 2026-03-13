@@ -182,7 +182,6 @@
 
     <!--style for the default dark buttons-->
     <Style x:Key="DefaultDarkButtonStyle" TargetType="Button" BasedOn="{StaticResource CustomButtonStyle}">
-        <Setter Property="MinWidth" Value="50"/>
         <Setter Property="MinHeight" Value="30"/>
         <Setter Property="Padding" Value="4"/>
         <Setter Property="Margin" Value="4"/>
@@ -190,6 +189,11 @@
         <Setter Property="Background" Value="{StaticResource MainControlBackgroundBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource MainControlForegroundBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource MainControlForegroundBrush}"/>
+    </Style>
+
+    <!--style for the persistence dark buttons-->
+    <Style x:Key="PersistenceDarkButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultDarkButtonStyle}">
+        <Setter Property="MinWidth" Value="50"/>
     </Style>
 
     <!--general style for the command pickers-->
@@ -616,32 +620,75 @@
         </Setter>
     </Style>
 
+    <!--styling for group box-->
+    <Style x:Key="DarkGroupBoxStyle" TargetType="GroupBox">
+        <Setter Property="Background" Value="{StaticResource MainControlBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource MainControlForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource MainControlForegroundBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="FontFamily" Value="{StaticResource MainControlFontFamily}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GroupBox">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        Background="{TemplateBinding Background}" 
+                        CornerRadius="3">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Border Background="Transparent" Padding="5">
+                                <ContentPresenter ContentSource="Header" 
+                                              RecognizesAccessKey="True"
+                                              TextElement.Foreground="{TemplateBinding Foreground}"
+                                              TextElement.FontFamily="{TemplateBinding FontFamily}"
+                                              VerticalAlignment="Center"/>
+                            </Border>
+                            <ContentPresenter Grid.Row="1" 
+                                          Margin="{TemplateBinding Padding}" 
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource MainControlForegroundDisabledBrush}"/>
+                            <Setter Property="Background" Value="{StaticResource MainControlBackgroundDisabledBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!--styling for file manager-->
     <Style x:Key="DarkNetAFFileManagerStyle" TargetType="{x:Type controls:NetAFFileManager}">
         <Setter Property="NewButtonStyle">
             <Setter.Value>
-                <Style TargetType="Button" BasedOn="{StaticResource DefaultDarkButtonStyle}">
+                <Style TargetType="Button" BasedOn="{StaticResource PersistenceDarkButtonStyle}">
                     <Setter Property="Content" Value="New"/>
                 </Style>
             </Setter.Value>
         </Setter>
         <Setter Property="DeleteButtonStyle">
             <Setter.Value>
-                <Style TargetType="Button" BasedOn="{StaticResource DefaultDarkButtonStyle}">
+                <Style TargetType="Button" BasedOn="{StaticResource PersistenceDarkButtonStyle}">
                     <Setter Property="Content" Value="Delete"/>
                 </Style>
             </Setter.Value>
         </Setter>
         <Setter Property="SaveButtonStyle">
             <Setter.Value>
-                <Style TargetType="Button" BasedOn="{StaticResource DefaultDarkButtonStyle}">
+                <Style TargetType="Button" BasedOn="{StaticResource PersistenceDarkButtonStyle}">
                     <Setter Property="Content" Value="Save"/>
                 </Style>
             </Setter.Value>
         </Setter>
         <Setter Property="LoadButtonStyle">
             <Setter.Value>
-                <Style TargetType="Button" BasedOn="{StaticResource DefaultDarkButtonStyle}">
+                <Style TargetType="Button" BasedOn="{StaticResource PersistenceDarkButtonStyle}">
                     <Setter Property="Content" Value="Load"/>
                 </Style>
             </Setter.Value>

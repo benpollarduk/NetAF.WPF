@@ -206,12 +206,7 @@ namespace NetAF.Targets.WPF.Controls
         {
             InitializeComponent();
 
-            EventBus.Subscribe<GameStarted>(x =>
-            {
-                game = x.Game;
-                GameDirectoryPath = Path.Combine(SelectedDirectoryPath, game.Info.Name);
-                Update(game);
-            });
+            EventBus.Subscribe<GameStarted>(x => Setup(x.Game));
             EventBus.Subscribe<GameFinished>(_ =>
             {
                 game = null;
@@ -224,6 +219,16 @@ namespace NetAF.Targets.WPF.Controls
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Setup this control for a game.
+        /// </summary>
+        /// <param name="game">The game to set this control up for.</param>
+        public void Setup(Game game)
+        {
+            GameDirectoryPath = Path.Combine(SelectedDirectoryPath, game.Info.Name);
+            Update(game);
+        }
 
         private bool CheckDirectory(string directoryPath)
         {

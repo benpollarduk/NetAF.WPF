@@ -226,6 +226,7 @@ namespace NetAF.Targets.WPF.Controls
         /// <param name="game">The game to set this control up for.</param>
         public void Setup(Game game)
         {
+            this.game = game;
             GameDirectoryPath = Path.Combine(SelectedDirectoryPath, game.Info.Name);
             Update(game);
         }

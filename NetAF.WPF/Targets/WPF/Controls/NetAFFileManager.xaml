@@ -52,7 +52,7 @@
                  Grid.Row="0">
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type wpf:RestorePointPath}">
-                    <Border>
+                    <Border PreviewMouseDown="Border_PreviewMouseDown">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>

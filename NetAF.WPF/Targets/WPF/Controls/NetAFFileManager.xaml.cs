@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace NetAF.Targets.WPF.Controls
 {
@@ -279,6 +280,94 @@ namespace NetAF.Targets.WPF.Controls
             }
         }
 
+        private void Save(RestorePointPath? restorePoint)
+        {
+            if (restorePoint == null)
+                return;
+
+            var index = AvailableRestorePoints?.ToList().IndexOf(restorePoint) ?? AvailableRestorePoints?.IndexOf(null) ?? 0;
+            var name = !string.IsNullOrEmpty(restorePoint?.RestorePoint.Name) ? restorePoint.RestorePoint.Name : game.Overworld?.CurrentRegion?.CurrentRoom?.Identifier.Name ?? "New restore point";
+            var newRestorePoint = RestorePoint.Create(name, game);
+            var extension = FileExtension;
+
+            if (!extension.StartsWith('.'))
+                extension = $".{extension}";
+
+            var path = !string.IsNullOrEmpty(restorePoint?.Path) ? restorePoint.Path : Path.Combine(GameDirectoryPath, $"{GetFileName(DateTime.Now)}{extension}");
+            var newRestorePointPath = new RestorePointPath(newRestorePoint, path ?? string.Empty);
+
+            if (JsonSave.ToFile(newRestorePointPath.Path, newRestorePointPath.RestorePoint, out var message) && AvailableRestorePoints != null)
+            {
+                AvailableRestorePoints[index] = newRestorePointPath;
+                Status = $"Saved {newRestorePoint.Name}.";
+            }
+            else
+            {
+                Status = message;
+            }
+        }
+
+        private void Load(RestorePointPath? restorePoint)
+        {
+            if (restorePoint == null)
+                return;
+
+            try
+            {
+                game?.RestoreFrom(restorePoint.RestorePoint.Game);
+                Status = $"Loaded: {restorePoint.RestorePoint.Name}.";
+
+                // update to force frae redraw
+                GameExecutor.Update();
+            }
+            catch (Exception ex)
+            {
+                Status = $"Could not load {restorePoint.RestorePoint.Name}: {ex.Message}";
+            }
+        }
+
+        private void Delete(RestorePointPath? restorePoint)
+        {
+            if (restorePoint == null)
+                return;
+
+            try
+            {
+                File.Delete(restorePoint.Path);
+            }
+            catch (Exception ex)
+            {
+                Status = $"Couldn't delete {restorePoint.RestorePoint.Name}: {ex.Message}";
+            }
+
+            Status = $"Deleted {restorePoint.RestorePoint.Name}.";
+
+            AvailableRestorePoints?.Remove(restorePoint);
+        }
+
+        private void New()
+        {
+            var name = game?.Overworld?.CurrentRegion?.CurrentRoom?.Identifier.Name ?? "New restore point";
+            var newRestorePoint = RestorePoint.Create(name, game);
+            var extension = FileExtension;
+
+            if (!extension.StartsWith('.'))
+                extension = $".{extension}";
+
+            var path = Path.Combine(GameDirectoryPath, $"{GetFileName(DateTime.Now)}{extension}");
+            var newRestorePointPath = new RestorePointPath(newRestorePoint, path ?? string.Empty);
+
+            if (JsonSave.ToFile(newRestorePointPath.Path, newRestorePointPath.RestorePoint, out var message) && AvailableRestorePoints != null)
+            {
+                AvailableRestorePoints.Insert(0, newRestorePointPath);
+                Status = $"Created {newRestorePoint.Name}.";
+            }
+            else
+            {
+                Status = message;
+            }
+        }
+
         #endregion
 
         #region StaticMethods
@@ -335,104 +424,45 @@ namespace NetAF.Targets.WPF.Controls
 
         #region CommandCallbacks
 
-        private void SaveCommandBinding_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        private void SaveCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (game == null)
                 return;
 
-            var restorePoint = e.Parameter as RestorePointPath;
-
-            var index = AvailableRestorePoints?.ToList().IndexOf(restorePoint) ?? AvailableRestorePoints?.IndexOf(null) ?? 0;
-            var name = !string.IsNullOrEmpty(restorePoint?.RestorePoint.Name) ? restorePoint.RestorePoint.Name : game.Overworld?.CurrentRegion?.CurrentRoom?.Identifier.Name ?? "New restore point";
-            var newRestorePoint = RestorePoint.Create(name, game);
-            var extension = FileExtension;
-            
-            if (!extension.StartsWith('.'))
-                extension = $".{extension}";
-
-            var path = !string.IsNullOrEmpty(restorePoint?.Path) ? restorePoint.Path : Path.Combine(GameDirectoryPath, $"{GetFileName(DateTime.Now)}{extension}");
-            var newRestorePointPath = new RestorePointPath(newRestorePoint, path ?? string.Empty);
-
-            if (JsonSave.ToFile(newRestorePointPath.Path, newRestorePointPath.RestorePoint, out var message) && AvailableRestorePoints != null)
-            {
-                AvailableRestorePoints[index] = newRestorePointPath;
-                Status = $"Saved {newRestorePoint.Name}.";
-            }
-            else
-            {
-                Status = message;
-            }
+            Save(e.Parameter as RestorePointPath);
         }
 
-        private void LoadCommandBinding_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        private void LoadCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (game == null)
                 return;
 
-            var restorePoint = e.Parameter as RestorePointPath;
-
-            if (restorePoint == null)
-                return;
-
-            try
-            {
-                game.RestoreFrom(restorePoint.RestorePoint.Game);
-                Status = $"Loaded: {restorePoint.RestorePoint.Name}.";
-
-                // update to force frae redraw
-                GameExecutor.Update();
-            }
-            catch (Exception ex)
-            {
-                Status = $"Could not load {restorePoint.RestorePoint.Name}: {ex.Message}";
-            }
+            Load(e.Parameter as RestorePointPath);
         }
 
-        private void NewCommandBinding_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        private void NewCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            var name = game?.Overworld?.CurrentRegion?.CurrentRoom?.Identifier.Name ?? "New restore point";
-            var newRestorePoint = RestorePoint.Create(name, game);
-            var extension = FileExtension;
-
-            if (!extension.StartsWith('.'))
-                extension = $".{extension}";
-
-            var path = Path.Combine(GameDirectoryPath, $"{GetFileName(DateTime.Now)}{extension}");
-            var newRestorePointPath = new RestorePointPath(newRestorePoint, path ?? string.Empty);
-
-            if (JsonSave.ToFile(newRestorePointPath.Path, newRestorePointPath.RestorePoint, out var message) && AvailableRestorePoints != null)
-            {
-                AvailableRestorePoints.Insert(0, newRestorePointPath);
-                Status = $"Created {newRestorePoint.Name}.";
-            }
-            else
-            {
-                Status = message;
-            }
+            New();
         }
 
-        private void DeleteCommandBinding_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        private void DeleteCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (game == null)
                 return;
 
-            var restorePoint = e.Parameter as RestorePointPath;
+            Delete(e.Parameter as RestorePointPath);
+        }
 
-            if (restorePoint == null)
+        #endregion
+
+        #region EventHandlers
+
+        private void Border_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount != 2)
                 return;
 
-            try
-            {
-                File.Delete(restorePoint.Path);
-            }
-            catch (Exception ex)
-            {
-                Status = $"Couldn't delete {restorePoint.RestorePoint.Name}: {ex.Message}";
-            }
-
-            Status = $"Deleted {restorePoint.RestorePoint.Name}.";
-
-            AvailableRestorePoints?.Remove(restorePoint);
+            Load((sender as Border)?.DataContext as RestorePointPath);
         }
 
         #endregion

@@ -12,6 +12,7 @@
              Background="Transparent"
              BorderBrush="Transparent"
              BorderThickness="0"
+             VerticalContentAlignment="Center"
              Grid.Row="1" 
              PreviewKeyUp="InputTextBox_PreviewKeyUp"/>
 </UserControl>

@@ -80,24 +80,20 @@
             <Label Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFFileManager}, Path=Status, Mode=OneWay}" 
                    Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFFileManager}, Path=StatusLabelStyle, Mode=OneWay}" 
                    Grid.Column="1"/>
-            <Button Content="New" 
-                    Command="{StaticResource NewCommand}"
+            <Button Command="{StaticResource NewCommand}"
                     Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFFileManager}, Path=NewButtonStyle, Mode=OneWay}" 
                     Grid.Column="2"/>
-            <Button Content="Delete" 
-                    Command="{StaticResource DeleteCommand}"
+            <Button Command="{StaticResource DeleteCommand}"
                     Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFFileManager}, Path=DeleteButtonStyle, Mode=OneWay}" 
                     CommandParameter="{Binding ElementName=RestorePointsListBox, Path=SelectedItem, Mode=OneWay}" 
                     IsEnabled="{Binding ElementName=RestorePointsListBox, Path=SelectedItem, Mode=OneWay, Converter={StaticResource ObjectNotNullToBooleanConverter}}" 
                     Grid.Column="3"/>
-            <Button Content="Save" 
-                    Command="{StaticResource SaveCommand}"
+            <Button Command="{StaticResource SaveCommand}"
                     Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFFileManager}, Path=SaveButtonStyle, Mode=OneWay}" 
                     CommandParameter="{Binding ElementName=RestorePointsListBox, Path=SelectedItem, Mode=OneWay}" 
                     IsEnabled="{Binding ElementName=RestorePointsListBox, Path=SelectedItem, Mode=OneWay, Converter={StaticResource ObjectNotNullToBooleanConverter}}" 
                     Grid.Column="4"/>
-            <Button Content="Load" 
-                    Command="{StaticResource LoadCommand}"
+            <Button Command="{StaticResource LoadCommand}"
                     Style="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:NetAFFileManager}, Path=LoadButtonStyle, Mode=OneWay}" 
                     CommandParameter="{Binding ElementName=RestorePointsListBox, Path=SelectedItem, Mode=OneWay}" 
                     IsEnabled="{Binding ElementName=RestorePointsListBox, Path=SelectedItem, Mode=OneWay, Converter={StaticResource ObjectNotNullToBooleanConverter}}" 

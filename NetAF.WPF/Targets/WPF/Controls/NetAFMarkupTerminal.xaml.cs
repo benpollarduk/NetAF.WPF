@@ -13,6 +13,12 @@ namespace NetAF.Targets.WPF.Controls
     /// </summary>
     public partial class NetAFMarkupTerminal : UserControl, IFramePresenter
     {
+        #region Fields
+
+        private string lastFrame = string.Empty;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -73,7 +79,7 @@ namespace NetAF.Targets.WPF.Controls
         /// <summary>
         /// Identifies the NetAFMarkupTerminal.FlowDocumentTheme property.
         /// </summary>
-        public static readonly DependencyProperty FlowDocumentThemeProperty = DependencyProperty.Register("FlowDocumentTheme", typeof(FlowDocumentTheme), typeof(NetAFMarkupTerminal), new PropertyMetadata(DefaultTheme.FlowDocument));
+        public static readonly DependencyProperty FlowDocumentThemeProperty = DependencyProperty.Register("FlowDocumentTheme", typeof(FlowDocumentTheme), typeof(NetAFMarkupTerminal), new PropertyMetadata(DefaultTheme.FlowDocument, new PropertyChangedCallback(OnFlowDocumentThemeChanged)));
 
         #endregion
 
@@ -89,6 +95,27 @@ namespace NetAF.Targets.WPF.Controls
 
         #endregion
 
+
+        #region PropertyChangedCallbacks
+
+        private static void OnFlowDocumentThemeChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            var control = sender as NetAFMarkupTerminal;
+
+            if (control == null)
+                return;
+
+            if (string.IsNullOrEmpty(control.lastFrame))
+                return;
+
+            if (e.NewValue is not FlowDocumentTheme theme)
+                return;
+
+            control.Viewer.Document = FlowDocumentModelRenderer.Render(control.lastFrame, theme);
+        }
+
+        #endregion
+
         #region Implementation of IFramePresenter
 
         /// <summary>
@@ -97,6 +124,8 @@ namespace NetAF.Targets.WPF.Controls
         /// <param name="frame">The frame to write, as a string.</param>
         public void Present(string frame)
         {
+            lastFrame = frame;
+
             var flowDocument = FlowDocumentModelRenderer.Render(frame, FlowDocumentTheme);
 
             if (UseTransitions)

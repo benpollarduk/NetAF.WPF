@@ -51,7 +51,7 @@
 
   <ItemGroup>
     <PackageReference Include="LoFiEffects.WPF" Version="1.5.1" />
-    <PackageReference Include="NetAF" Version="3.13.5" />
+    <PackageReference Include="NetAF" Version="3.14.1" />
   </ItemGroup>
 
   <ItemGroup>

@@ -81,12 +81,12 @@ namespace NetAF.Targets.WPF.Controls
         /// <summary>
         /// Occurs when a command is selected.
         /// </summary>
-        public event EventHandler<CommandHelp> CommandSelected;
+        public event EventHandler<CommandHelp>? CommandSelected;
 
         /// <summary>
         /// Occurs when a command is executed.
         /// </summary>
-        public event EventHandler<string> CommandExecuted;
+        public event EventHandler<string>? CommandExecuted;
 
         #endregion
 

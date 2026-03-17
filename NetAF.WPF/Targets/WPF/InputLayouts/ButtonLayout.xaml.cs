@@ -67,12 +67,12 @@ namespace NetAF.Targets.WPF.InputLayouts
         /// <summary>
         /// Occurs when a button is selected.
         /// </summary>
-        public event EventHandler ButtonSelected;
+        public event EventHandler? ButtonSelected;
 
         /// <summary>
         /// Occurs when a command is executed.
         /// </summary>
-        public event EventHandler<string> CommandExecuted;
+        public event EventHandler<string>? CommandExecuted;
 
         #endregion
 

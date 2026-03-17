@@ -132,6 +132,26 @@ namespace NetAF.Targets.WPF.Controls
             set { SetValue(AvailableRestorePointsListBoxStyleProperty, value); }
         }
 
+        /// <summary>
+        /// Occurs when a new restore point is created.
+        /// </summary>
+        public event EventHandler<RestorePointPath>? RestorePointCreated;
+
+        /// <summary>
+        /// Occurs when a new restore point is created.
+        /// </summary>
+        public event EventHandler<RestorePointPath>? RestorePointDeleted;
+
+        /// <summary>
+        /// Occurs when a restore point is loaded.
+        /// </summary>
+        public event EventHandler<RestorePointPath>? RestorePointLoaded;
+
+        /// <summary>
+        /// Occurs when a restore point is updated.
+        /// </summary>
+        public event EventHandler<RestorePointPath>? RestorePointUpdated;
+
         #endregion
 
         #region DependencyProperties
@@ -282,7 +302,7 @@ namespace NetAF.Targets.WPF.Controls
 
         private void Save(RestorePointPath? restorePoint)
         {
-            if (restorePoint == null)
+            if (restorePoint == null || game == null)
                 return;
 
             var index = AvailableRestorePoints?.ToList().IndexOf(restorePoint) ?? AvailableRestorePoints?.IndexOf(null) ?? 0;
@@ -300,6 +320,8 @@ namespace NetAF.Targets.WPF.Controls
             {
                 AvailableRestorePoints[index] = newRestorePointPath;
                 Status = $"Saved {newRestorePoint.Name}.";
+
+                RestorePointUpdated?.Invoke(this, newRestorePointPath);
             }
             else
             {
@@ -317,8 +339,10 @@ namespace NetAF.Targets.WPF.Controls
                 game?.RestoreFrom(restorePoint.RestorePoint.Game);
                 Status = $"Loaded: {restorePoint.RestorePoint.Name}.";
 
-                // update to force frae redraw
+                // update to force frame redraw
                 GameExecutor.Update();
+
+                RestorePointLoaded?.Invoke(this, restorePoint);
             }
             catch (Exception ex)
             {
@@ -334,20 +358,24 @@ namespace NetAF.Targets.WPF.Controls
             try
             {
                 File.Delete(restorePoint.Path);
+                AvailableRestorePoints?.Remove(restorePoint);
+
+                Status = $"Deleted {restorePoint.RestorePoint.Name}.";
+
+                RestorePointDeleted?.Invoke(this, restorePoint);
             }
             catch (Exception ex)
             {
                 Status = $"Couldn't delete {restorePoint.RestorePoint.Name}: {ex.Message}";
             }
-
-            Status = $"Deleted {restorePoint.RestorePoint.Name}.";
-
-            AvailableRestorePoints?.Remove(restorePoint);
         }
 
         private void New()
         {
-            var name = game?.Overworld?.CurrentRegion?.CurrentRoom?.Identifier.Name ?? "New restore point";
+            if (game == null)
+                return;
+
+            var name = game.Overworld?.CurrentRegion?.CurrentRoom?.Identifier.Name ?? "New restore point";
             var newRestorePoint = RestorePoint.Create(name, game);
             var extension = FileExtension;
 
@@ -361,6 +389,8 @@ namespace NetAF.Targets.WPF.Controls
             {
                 AvailableRestorePoints.Insert(0, newRestorePointPath);
                 Status = $"Created {newRestorePoint.Name}.";
+
+                RestorePointCreated?.Invoke(this, newRestorePointPath);
             }
             else
             {

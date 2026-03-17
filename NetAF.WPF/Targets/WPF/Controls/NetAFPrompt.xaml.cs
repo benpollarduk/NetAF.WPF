@@ -14,7 +14,7 @@ namespace NetAF.Targets.WPF.Controls
         /// <summary>
         /// Occurs when a key is pressed.
         /// </summary>
-        public event EventHandler<Key> KeyPressed;
+        public event EventHandler<Key>? KeyPressed;
 
         #endregion
 

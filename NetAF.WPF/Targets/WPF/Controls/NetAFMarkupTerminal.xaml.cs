@@ -95,6 +95,20 @@ namespace NetAF.Targets.WPF.Controls
 
         #endregion
 
+        #region Methods
+
+        /// <summary>
+        /// Refresent the flow document.
+        /// </summary>
+        public void Refresh()
+        {
+            if (string.IsNullOrEmpty(lastFrame))
+                return;
+
+            Viewer.Document = FlowDocumentModelRenderer.Render(lastFrame, FlowDocumentTheme);
+        }
+
+        #endregion
 
         #region PropertyChangedCallbacks
 
@@ -111,7 +125,7 @@ namespace NetAF.Targets.WPF.Controls
             if (e.NewValue is not FlowDocumentTheme theme)
                 return;
 
-            control.Viewer.Document = FlowDocumentModelRenderer.Render(control.lastFrame, theme);
+            control.Refresh();
         }
 
         #endregion

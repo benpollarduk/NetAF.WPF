@@ -112,12 +112,13 @@ namespace NetAF.Targets.WPF.Controls
             if (e.Key == Key.Enter)
             {
                 var entry = InputTextBox.Text;
+                                
+                if (!string.IsNullOrWhiteSpace(entry))
+                    AddToHistory(entry);
 
-                AddToHistory(entry);
                 GameExecutor.Update(entry);
 
                 InputTextBox.Clear();
-
                 historyIndex = Math.Max(0, InputHistory.Count - 1);
             }
             else if (e.Key == Key.Up)

@@ -14,5 +14,5 @@
              BorderThickness="0"
              VerticalContentAlignment="Center"
              Grid.Row="1" 
-             PreviewKeyUp="InputTextBox_PreviewKeyUp"/>
+             PreviewKeyDown="InputTextBox_PreviewKeyDown"/>
 </UserControl>

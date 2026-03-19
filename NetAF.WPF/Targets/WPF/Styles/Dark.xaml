@@ -15,7 +15,7 @@
     <system:Double x:Key="SectionSpacing">20</system:Double>
 
     <!--styling for custom scroll bars-->
-    <Style x:Key="CustomScrollBarStyle" TargetType="ScrollBar">
+    <Style x:Key="DarkScrollBarStyle" TargetType="ScrollBar">
         <Setter Property="Width" Value="10"/>
         <Setter Property="Background" Value="{StaticResource MainControlBackgroundBrush}"/>
         <Setter Property="Template">
@@ -477,7 +477,7 @@
             </Setter.Value>
         </Setter>
         <Style.Resources>
-            <Style TargetType="ScrollBar" BasedOn="{StaticResource CustomScrollBarStyle}"/>
+            <Style TargetType="ScrollBar" BasedOn="{StaticResource DarkScrollBarStyle}"/>
         </Style.Resources>
     </Style>
 
@@ -501,7 +501,7 @@
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="Padding" Value="4"/>
         <Style.Resources>
-            <Style TargetType="ScrollBar" BasedOn="{StaticResource CustomScrollBarStyle}"/>
+            <Style TargetType="ScrollBar" BasedOn="{StaticResource DarkScrollBarStyle}"/>
         </Style.Resources>
     </Style>
 
@@ -510,7 +510,7 @@
         <Setter Property="Padding" Value="4"/>
         <Setter Property="Background" Value="Black"/>
         <Style.Resources>
-            <Style TargetType="ScrollBar" BasedOn="{StaticResource CustomScrollBarStyle}"/>
+            <Style TargetType="ScrollBar" BasedOn="{StaticResource DarkScrollBarStyle}"/>
         </Style.Resources>
     </Style>
     
@@ -531,7 +531,7 @@
             </Setter.Value>
         </Setter>
         <Style.Resources>
-            <Style TargetType="ScrollBar" BasedOn="{StaticResource CustomScrollBarStyle}"/>
+            <Style TargetType="ScrollBar" BasedOn="{StaticResource DarkScrollBarStyle}"/>
         </Style.Resources>
     </Style>
 
@@ -723,7 +723,7 @@
                                         SnapsToDevicePixels="True">
                                     <ScrollViewer Foreground="Pink" Focusable="False" Padding="{TemplateBinding Padding}">
                                         <ScrollViewer.Resources>
-                                            <Style TargetType="ScrollBar" BasedOn="{StaticResource CustomScrollBarStyle}"/>
+                                            <Style TargetType="ScrollBar" BasedOn="{StaticResource DarkScrollBarStyle}"/>
                                         </ScrollViewer.Resources>
                                         <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                                     </ScrollViewer>

@@ -159,7 +159,7 @@ namespace NetAF.Targets.WPF.Controls
         /// <summary>
         /// Identifies the NetAFFileManager.SelectedDirectoryPath property.
         /// </summary>
-        public static readonly DependencyProperty SelectedDirectoryPathProperty = DependencyProperty.Register("SelectedDirectoryPath", typeof(string), typeof(NetAFFileManager), new PropertyMetadata(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "NetAF"), new PropertyChangedCallback(OnSelectedDirectoryPathPropertyChanged)));
+        public static readonly DependencyProperty SelectedDirectoryPathProperty = DependencyProperty.Register("SelectedDirectoryPath", typeof(string), typeof(NetAFFileManager), new PropertyMetadata(RestorePointManager.RootDirectory, new PropertyChangedCallback(OnSelectedDirectoryPathPropertyChanged)));
 
         /// <summary>
         /// Identifies the NetAFFileManager.GameDirectoryPath property.
@@ -184,7 +184,7 @@ namespace NetAF.Targets.WPF.Controls
         /// <summary>
         /// Identifies the NetAFFileManager.FileExtension property.
         /// </summary>
-        public static readonly DependencyProperty FileExtensionProperty = DependencyProperty.Register("FileExtension", typeof(string), typeof(NetAFFileManager), new PropertyMetadata("netaf", OnFileExtensionPropertyChanged));
+        public static readonly DependencyProperty FileExtensionProperty = DependencyProperty.Register("FileExtension", typeof(string), typeof(NetAFFileManager), new PropertyMetadata(RestorePointManager.Extension, OnFileExtensionPropertyChanged));
 
         /// <summary>
         /// Identifies the NetAFFileManager.NewButtonStyle property.
@@ -248,7 +248,7 @@ namespace NetAF.Targets.WPF.Controls
         public void Setup(Game game)
         {
             this.game = game;
-            GameDirectoryPath = Path.Combine(SelectedDirectoryPath, game.Info.Name);
+            GameDirectoryPath = RestorePointManager.GetRestorePointDirectory(game);
             Update(game);
         }
 
@@ -268,30 +268,40 @@ namespace NetAF.Targets.WPF.Controls
             }
         }
 
-        private void PopulateRestorePoints(string directoryPath, string fileExtension)
+        private void PopulateRestorePoints()
         {
             try
             {
-                var files = Directory.GetFiles(directoryPath, $"*.{fileExtension}");
-                var sortedFiles = files.OrderByDescending(x => new FileInfo(x).LastWriteTime);
-                List<RestorePointPath> restorePoints = [];
+                var names = RestorePointManager.GetAvailableRestorePointNames(game);
 
-                foreach (var path in sortedFiles)
+                if (names.Length > 0)
                 {
-                    if (!JsonSave.FromFile(path, out var restorePoint, out var message))
+                    List<string> paths = [];
+
+                    foreach (var name in names)
+                        paths.Add(RestorePointManager.GetFilePath(game, name));
+
+                    var sortedFiles = paths.OrderByDescending(x => new FileInfo(x).LastWriteTime);
+                    List<RestorePointPath> restorePoints = [];
+
+                    foreach (var path in sortedFiles)
                     {
-                        Status = $"Could not load restore point: {Path.GetFileName(path)}: {message}";
-                        continue;
-                    }
-                    else
-                    {
-                        Status = $"Loaded {restorePoint.Name}.";
+                        if (!JsonSave.FromFile(path, out var restorePoint, out var message))
+                        {
+                            Status = $"Could not load restore point: {Path.GetFileName(path)}: {message}";
+                            continue;
+                        }
+                        else
+                        {
+                            Status = $"Loaded {restorePoint.Name}.";
+                        }
+
+                        restorePoints.Add(new RestorePointPath(restorePoint, path));
                     }
 
-                    restorePoints.Add(new RestorePointPath(restorePoint, path));
+                    AvailableRestorePoints = new ObservableCollection<RestorePointPath?>([.. restorePoints]);
                 }
 
-                AvailableRestorePoints = new ObservableCollection<RestorePointPath?>([.. restorePoints]);
                 Status = "Populated restore points.";
             }
             catch (Exception e)
@@ -420,6 +430,8 @@ namespace NetAF.Targets.WPF.Controls
 
             var newPath = e.NewValue?.ToString() ?? string.Empty;
 
+            RestorePointManager.RootDirectory = newPath;
+
             control.GameDirectoryPath = Path.Combine(newPath, control.game?.Info.Name ?? string.Empty);
         }
 
@@ -431,13 +443,7 @@ namespace NetAF.Targets.WPF.Controls
                 return;
 
             control.AvailableRestorePoints = [];
-
-            var newPath = e.NewValue?.ToString() ?? string.Empty;
-
-            if (!control.CheckDirectory(newPath))
-                return;
-
-            control.PopulateRestorePoints(newPath, control.FileExtension);
+            control.PopulateRestorePoints();
         }
 
         private static void OnFileExtensionPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
@@ -447,7 +453,8 @@ namespace NetAF.Targets.WPF.Controls
             if (control == null)
                 return;
 
-            control.PopulateRestorePoints(control.GameDirectoryPath, e.NewValue?.ToString() ?? string.Empty);
+            RestorePointManager.Extension = e.NewValue?.ToString() ?? string.Empty;
+            control.PopulateRestorePoints();
         }
 
         #endregion

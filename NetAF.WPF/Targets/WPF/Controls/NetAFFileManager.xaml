@@ -55,11 +55,11 @@
                     <Border PreviewMouseDown="Border_PreviewMouseDown">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="150"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Label Content="{Binding Path=RestorePoint.Name, Mode=OneWay}" Grid.Column="0"/>
-                            <Label Content="{Binding Path=RestorePoint.CreationTime, Mode=OneWay}" Grid.Column="1"/>
+                            <TextBlock Text="{Binding Path=RestorePoint.Name, Mode=OneWay}" TextTrimming="CharacterEllipsis" Grid.Column="0"/>
+                            <TextBlock Text="{Binding Path=RestorePoint.CreationTime, Mode=OneWay}" TextTrimming="CharacterEllipsis" Grid.Column="1"/>
                         </Grid>
                     </Border>
                 </DataTemplate>

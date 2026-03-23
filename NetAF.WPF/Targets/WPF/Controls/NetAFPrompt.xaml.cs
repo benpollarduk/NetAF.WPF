@@ -119,7 +119,7 @@ namespace NetAF.Targets.WPF.Controls
                 GameExecutor.Update(entry);
 
                 InputTextBox.Clear();
-                historyIndex = Math.Max(0, InputHistory.Count - 1);
+                historyIndex = Math.Max(0, InputHistory.Count);
             }
             else if (e.Key == Key.Up)
             {

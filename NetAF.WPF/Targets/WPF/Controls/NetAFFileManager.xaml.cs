@@ -272,15 +272,10 @@ namespace NetAF.Targets.WPF.Controls
         {
             try
             {
-                var names = RestorePointManager.GetAvailableRestorePointNames(game);
+                var paths = RestorePointManager.GetAllRestorePointPaths(game);
 
-                if (names.Length > 0)
+                if (paths.Length > 0)
                 {
-                    List<string> paths = [];
-
-                    foreach (var name in names)
-                        paths.Add(RestorePointManager.GetFilePath(game, name));
-
                     var sortedFiles = paths.OrderByDescending(x => new FileInfo(x).LastWriteTime);
                     List<RestorePointPath> restorePoints = [];
 
@@ -323,7 +318,7 @@ namespace NetAF.Targets.WPF.Controls
             if (!extension.StartsWith('.'))
                 extension = $".{extension}";
 
-            var path = !string.IsNullOrEmpty(restorePoint?.Path) ? restorePoint.Path : Path.Combine(GameDirectoryPath, $"{GetFileName(DateTime.Now)}{extension}");
+            var path = !string.IsNullOrEmpty(restorePoint?.Path) ? restorePoint.Path : RestorePointManager.CreateNewFilePath(game);
             var newRestorePointPath = new RestorePointPath(newRestorePoint, path ?? string.Empty);
 
             if (JsonSave.ToFile(newRestorePointPath.Path, newRestorePointPath.RestorePoint, out var message) && AvailableRestorePoints != null)
@@ -387,12 +382,7 @@ namespace NetAF.Targets.WPF.Controls
 
             var name = game.Overworld?.CurrentRegion?.CurrentRoom?.Identifier.Name ?? "New restore point";
             var newRestorePoint = RestorePoint.Create(name, game);
-            var extension = FileExtension;
-
-            if (!extension.StartsWith('.'))
-                extension = $".{extension}";
-
-            var path = Path.Combine(GameDirectoryPath, $"{GetFileName(DateTime.Now)}{extension}");
+            var path = RestorePointManager.CreateNewFilePath(game);
             var newRestorePointPath = new RestorePointPath(newRestorePoint, path ?? string.Empty);
 
             if (JsonSave.ToFile(newRestorePointPath.Path, newRestorePointPath.RestorePoint, out var message) && AvailableRestorePoints != null)
@@ -406,15 +396,6 @@ namespace NetAF.Targets.WPF.Controls
             {
                 Status = message;
             }
-        }
-
-        #endregion
-
-        #region StaticMethods
-
-        private static string GetFileName(DateTime dateTime)
-        {
-            return $"{dateTime.Year:D4}_{dateTime.Month:D2}_{dateTime.Day:D2}_{dateTime.Hour:D2}_{dateTime.Minute:D2}_{dateTime.Second:D2}_{dateTime.Millisecond:D3}";
         }
 
         #endregion

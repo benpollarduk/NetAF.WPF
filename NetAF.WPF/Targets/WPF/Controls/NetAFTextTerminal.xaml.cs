@@ -1,4 +1,5 @@
 ﻿using NetAF.Rendering;
+using NetAF.Targets.WPF.Themes;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,7 +11,7 @@ namespace NetAF.Targets.WPF.Controls
     /// <summary>
     /// Interaction logic for NetAFTextTerminal.xaml
     /// </summary>
-    public partial class NetAFTextTerminal : UserControl, IFramePresenter
+    public partial class NetAFTextTerminal : UserControl, IUpdatableFramePresenter
     {
         #region Properties
 
@@ -74,7 +75,7 @@ namespace NetAF.Targets.WPF.Controls
 
         #endregion
 
-        #region Implementation of IFramePresenter
+        #region Implementation of IUpdatableFramePresenter
 
         /// <summary>
         /// Present a frame.
@@ -106,6 +107,15 @@ namespace NetAF.Targets.WPF.Controls
             {
                 TextBlock.Text = frame;
             }
+        }
+
+        /// <summary>
+        /// Present an updated frame.
+        /// </summary>
+        /// <param name="frame">The udated frame to write, as a string.</param>
+        public void PresentUpdate(string frame)
+        {
+            TextBlock.Text = frame;
         }
 
         /// <summary>

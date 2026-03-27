@@ -11,7 +11,7 @@ namespace NetAF.Targets.WPF.Controls
     /// <summary>
     /// Interaction logic for NetAFMarkupTerminal.xaml
     /// </summary>
-    public partial class NetAFMarkupTerminal : UserControl, IFramePresenter
+    public partial class NetAFMarkupTerminal : UserControl, IUpdatableFramePresenter
     {
         #region Fields
 
@@ -130,7 +130,7 @@ namespace NetAF.Targets.WPF.Controls
 
         #endregion
 
-        #region Implementation of IFramePresenter
+        #region Implementation of IUpdatableFramePresenter
 
         /// <summary>
         /// Present a frame.
@@ -166,6 +166,18 @@ namespace NetAF.Targets.WPF.Controls
             {
                 Viewer.Document = flowDocument;
             }
+        }
+
+        /// <summary>
+        /// Present an updated frame.
+        /// </summary>
+        /// <param name="frame">The udated frame to write, as a string.</param>
+        public void PresentUpdate(string frame)
+        {
+            lastFrame = frame;
+
+            var flowDocument = FlowDocumentModelRenderer.Render(frame, FlowDocumentTheme);
+            Viewer.Document = flowDocument;
         }
 
         /// <summary>

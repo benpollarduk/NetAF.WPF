@@ -136,27 +136,27 @@ namespace NetAF.Targets.WPF.InputLayouts
 
         #region EventHandlers
 
-        private void CommandPicker_CommandSelected(object sender, CommandHelp e)
+        private void CommandPicker_CommandSelected(object _, CommandHelp e)
         {
             ButtonSelected?.Invoke(this, EventArgs.Empty);
         }
 
-        private void CommandPicker_CommandExecuted(object sender, string e)
+        private void CommandPicker_CommandExecuted(object _, string e)
         {
             CommandExecuted?.Invoke(this, e);
         }
 
-        private void CommandPicker_ClearSelected(object sender, EventArgs e)
+        private void CommandPicker_ClearSelected(object _, EventArgs __)
         {
             ButtonSelected?.Invoke(this, EventArgs.Empty);
         }
 
-        private void CommandPicker_AcknowledgeSelected(object sender, EventArgs e)
+        private void CommandPicker_AcknowledgeSelected(object _, EventArgs __)
         {
             ButtonSelected?.Invoke(this, EventArgs.Empty);
         }
 
-        private void CommandPicker_PromptSelected(object sender, Prompt e)
+        private void CommandPicker_PromptSelected(object _, Prompt __)
         {
             ButtonSelected?.Invoke(this, EventArgs.Empty);
         }

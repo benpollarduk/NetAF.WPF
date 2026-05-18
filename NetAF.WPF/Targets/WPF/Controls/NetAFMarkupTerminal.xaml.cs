@@ -122,7 +122,7 @@ namespace NetAF.Targets.WPF.Controls
             if (string.IsNullOrEmpty(control.lastFrame))
                 return;
 
-            if (e.NewValue is not FlowDocumentTheme theme)
+            if (!(e.NewValue is FlowDocumentTheme))
                 return;
 
             control.Refresh();

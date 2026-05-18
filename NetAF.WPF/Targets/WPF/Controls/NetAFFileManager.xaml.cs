@@ -311,7 +311,7 @@ namespace NetAF.Targets.WPF.Controls
                 return;
 
             var index = AvailableRestorePoints?.ToList().IndexOf(restorePoint) ?? AvailableRestorePoints?.IndexOf(null) ?? 0;
-            var name = !string.IsNullOrEmpty(restorePoint?.RestorePoint.Name) ? restorePoint.RestorePoint.Name : game.Overworld?.CurrentRegion?.CurrentRoom?.Identifier.Name ?? "New restore point";
+            var name = !string.IsNullOrEmpty(restorePoint.RestorePoint.Name) ? restorePoint.RestorePoint.Name : game.Overworld?.CurrentRegion?.CurrentRoom?.Identifier.Name ?? "New restore point";
             var newRestorePoint = RestorePoint.Create(name, game);
             var extension = FileExtension;
 

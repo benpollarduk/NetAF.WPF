@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <PackageReference Include="LoFiEffects.WPF" Version="10.0.0" />
-    <PackageReference Include="NetAF" Version="10.0.0" />
+    <PackageReference Include="NetAF" Version="10.0.2" />
   </ItemGroup>
 
   <ItemGroup>

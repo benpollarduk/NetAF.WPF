@@ -107,7 +107,7 @@ namespace NetAF.Targets.WPF.Controls
             {
                 var markupBuilder = new MarkupBuilder();
                 var roomBuilder = new MarkupRoomMapBuilder(markupBuilder);
-                roomBuilder.BuildRoomMap(room, ViewPoint.Create(region), KeyType.None);
+                roomBuilder.BuildRoomMap(room, ViewPoint.Create(region), new RoomMapRenderOptions { KeyType = KeyType.None });
                 markup = markupBuilder.ToString();
             }
 

@@ -1,5 +1,5 @@
 ﻿using NetAF.Commands;
-using NetAF.Commands.Scene;
+using NetAF.Commands.Movement;
 using NetAF.Logic;
 using NetAF.Logic.Modes;
 using System.Windows;

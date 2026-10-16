@@ -49,6 +49,11 @@ namespace NetAF.Targets.WPF.Themes
         public static ParagraphFontTheme Paragraph => new(Foreground, Background, 14, FontFamily, new Thickness(2));
 
         /// <summary>
+        /// Get the theme for highlight.
+        /// </summary>
+        public static HighlightFontTheme Hightlight => new(Foreground, Background, 14, FontFamily, new Thickness(2), FontWeights.Bold, FontStyles.Normal);
+
+        /// <summary>
         /// Get the theme for monospace.
         /// </summary>
         public static FontTheme Monospace => new(Foreground, Background, 14, new FontFamily("Consolas"));
@@ -56,6 +61,6 @@ namespace NetAF.Targets.WPF.Themes
         /// <summary>
         /// Get the theme for flow documents.
         /// </summary>
-        public static FlowDocumentTheme FlowDocument => new(H1, H2, H3, H4, Paragraph, Monospace);
+        public static FlowDocumentTheme FlowDocument => new(H1, H2, H3, H4, Paragraph, Hightlight, Monospace);
     }
 }

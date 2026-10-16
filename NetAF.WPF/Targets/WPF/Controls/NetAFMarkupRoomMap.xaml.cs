@@ -1,6 +1,7 @@
 ﻿using NetAF.Assets.Locations;
 using NetAF.Logic;
 using NetAF.Rendering;
+using NetAF.Targets.Console.Rendering;
 using NetAF.Targets.Markup.Rendering;
 using NetAF.Targets.Markup.Rendering.FrameBuilders;
 using NetAF.Targets.WPF.Themes;
@@ -106,7 +107,7 @@ namespace NetAF.Targets.WPF.Controls
             if (room != null)
             {
                 var markupBuilder = new MarkupBuilder();
-                var roomBuilder = new MarkupRoomMapBuilder(markupBuilder);
+                var roomBuilder = new MarkupRoomMapBuilder(markupBuilder, ConsoleMapRenderProperties.Default);
                 roomBuilder.BuildRoomMap(room, ViewPoint.Create(region), new RoomMapRenderOptions { KeyType = KeyType.None });
                 markup = markupBuilder.ToString();
             }

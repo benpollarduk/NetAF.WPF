@@ -8,8 +8,9 @@
     /// <param name="heading3">The H3 theme.</param>
     /// <param name="heading4">The H4 theme.</param>
     /// <param name="paragraph">The paragraph theme.</param>
+    /// <param name="highlight">The highlight theme.</param>
     /// <param name="monospace">The monospace theme.</param>
-    public class FlowDocumentTheme(HeaderFontTheme heading1, HeaderFontTheme heading2, HeaderFontTheme heading3, HeaderFontTheme heading4, ParagraphFontTheme paragraph, FontTheme monospace)
+    public class FlowDocumentTheme(HeaderFontTheme heading1, HeaderFontTheme heading2, HeaderFontTheme heading3, HeaderFontTheme heading4, ParagraphFontTheme paragraph, HighlightFontTheme highlight, FontTheme monospace)
     {
         #region Properties
 
@@ -39,6 +40,11 @@
         public ParagraphFontTheme Paragraph { get; set; } = paragraph;
 
         /// <summary>
+        /// Get or set the highlight theme.
+        /// </summary>
+        public HighlightFontTheme Highlight { get; set; } = highlight;
+
+        /// <summary>
         /// Get or set the monospace theme.
         /// </summary>
         public FontTheme Monospace { get; set; } = monospace;
@@ -46,7 +52,7 @@
         /// <summary>
         /// Get the largest font size from this theme.
         /// </summary>
-        public double LargestFontSize => new FontTheme[] { Heading1, Heading2, Heading3, Heading4, Paragraph, Monospace }.Max(x => x.FontSize);
+        public double LargestFontSize => new FontTheme[] { Heading1, Heading2, Heading3, Heading4, Paragraph, Highlight, Monospace }.Max(x => x.FontSize);
 
         #endregion
     }

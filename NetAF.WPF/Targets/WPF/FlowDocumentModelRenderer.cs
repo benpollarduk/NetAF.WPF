@@ -143,6 +143,16 @@ namespace NetAF.Targets.WPF
                 }
             }
 
+            if (style.Highlight)
+            {
+                span.FontFamily = theme.Highlight.FontFamily;
+                span.FontSize = theme.Highlight.FontSize;
+                span.Foreground = theme.Highlight.Foreground;
+                span.Background = theme.Highlight.Background;
+                span.FontWeight = theme.Highlight.FontWeight;
+                span.FontStyle = theme.Highlight.FontStyle;
+            }
+
             if (style.Foreground != null)
                 span.Foreground = BrushFromColor(style.Foreground);
 
